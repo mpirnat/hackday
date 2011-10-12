@@ -9,6 +9,9 @@ urlpatterns = patterns('',
     # url(r'^$', 'hackday.views.home', name='home'),
     # url(r'^hackday/', include('hackday.foo.urls')),
 
+    # Let the blog own the homepage?
+    url(r'^/*$', 'blog.views.index'),
+
     url(r'^blog/*$', 'blog.views.index'),
     url(r'^blog/(?P<entry_id>\d+)/*$', 'blog.views.entry'),
     url(r'^blog/category/(?P<slug>[\w_-]+)/*$', 'blog.views.category'),
