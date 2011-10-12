@@ -1,10 +1,11 @@
-from blog.models import Entry
+from blog.models import Entry, STATUS
 from django.http import HttpResponse
 from django.template import Context, loader
 
 
 def index(request):
-    latest_entries = Entry.objects.all().order_by('-pub_date')[:5]
+    latest_entries = Entry.objects.filter(status=STATUS.PUBLISHED).\
+            order_by('-pub_date')[:5]
 
     t = loader.get_template('blog/index.html')
     c = Context({
@@ -15,7 +16,7 @@ def index(request):
 
 
 def entry(request, entry_id):
-    entry = Entry.objects.get(pk=entry_id)
+    entry = Entry.objects.get(pk=entry_id, status=STATUS.PUBLISHED)
 
     t = loader.get_template('blog/entry.html')
     c = Context({
@@ -26,7 +27,8 @@ def entry(request, entry_id):
 
 
 def category(request, slug):
-    entries = Entry.objects.filter(categories__slug=slug)
+    entries = Entry.objects.filter(categories__slug=slug,
+            status=STATUS.PUBLISHED).order_by('pub_date')
 
     t = loader.get_template('blog/category.html')
     c = Context({
@@ -38,7 +40,8 @@ def category(request, slug):
 
 
 def tag(request, slug):
-    entries = Entry.objects.filter(tags__slug=slug)
+    entries = Entry.objects.filter(tags__slug=slug,
+            status=STATUS.PUBLISHED).order_by('pub_date')
 
     t = loader.get_template('blog/tag.html')
     c = Context({

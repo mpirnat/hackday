@@ -1,11 +1,17 @@
 from django.db import models
 
 
-STATUS_CHOICES = (
-    ('D', 'Draft'),
-    ('P', 'Published'),
-    ('X', 'Deleted'),
-)
+class STATUS(object):
+    DRAFT = 'D'
+    PUBLISHED = 'P'
+    DELETED = 'X'
+
+    CHOICES = (
+        ('D', 'Draft'),
+        ('P', 'Published'),
+        ('X', 'Deleted'),
+    )
+
 
 class Category(models.Model):
     slug = models.SlugField('category slug', unique=True, db_index=True)
@@ -30,7 +36,7 @@ class Entry(models.Model):
     slug = models.SlugField('slugified title', db_index=True,
             unique_for_date="pub_date")
     content = models.TextField('entry content')
-    status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=1, choices=STATUS.CHOICES)
 
     create_date = models.DateTimeField('date created', auto_now_add=True)
     mod_date = models.DateTimeField('date modified', auto_now=True)
