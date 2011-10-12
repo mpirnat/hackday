@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Blog: {{ entry.title }}</title>
+</head>
+<body>
+    <h3>{{ entry.title }}</h3>
+    
+    <p>Categories:
+        <ul>
+        {% for category in entry.categories.all %}
+            <li><a href="/blog/category/{{category.slug}}">{{ category.slug }}</a></li>
+        {% endfor %}
+        </ul>
+    </p>
+            
+    <p>Tags:
+        <ul>
+        {% for tag in entry.tags.all %}
+            <li><a href="/blog/tag/{{tag.slug}}">{{ tag.slug }}</a></li>
+        {% endfor %}
+        </ul>
+    </p>
+
+    <p>Status: {{ entry.status }}</p>
+    <p>Created: {{ entry.create_date }}</p>
+    <p>Modified: {{ entry.mod_date }}</p>
+    <p>Published: {{ entry.pub_date }}</p>
+    
+    <p>{{ entry.content }}</p>
+</body>
+</html>

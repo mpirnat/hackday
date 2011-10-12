@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>Blog: Tag: {{ slug }}</title>
+</head>
+<body>
+    <h3>Entries matching tag '{{ slug }}':</h3>
+    {% if entries %}
+    <ul>
+        {% for entry in entries %}
+        <li><a href="/blog/{{ entry.id }}">{{ entry.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Crickets.</p>
+    {% endif %}
+</body>
+</html>

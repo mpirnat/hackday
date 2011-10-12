@@ -1,0 +1,16 @@
+<html>
+<head>
+<title>Blog!</title>
+</head>
+<body>
+    {% if latest_entries %}
+        <ul>
+        {% for entry in latest_entries %}
+            <li><a href="/blog/{{ entry.id }}/">{{ entry.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Crickets.</p>
+    {% endif %}
+</body>
+</html>
