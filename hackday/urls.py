@@ -10,16 +10,14 @@ urlpatterns = patterns('',
     # url(r'^hackday/', include('hackday.foo.urls')),
 
     # Let the blog own the homepage?
-    url(r'^/*$', 'blog.views.index'),
+    (r'^/*$', 'blog.views.index'),
 
-    url(r'^blog/*$', 'blog.views.index'),
-    url(r'^blog/(?P<entry_id>\d+)/*$', 'blog.views.entry'),
-    url(r'^blog/category/(?P<slug>[\w_-]+)/*$', 'blog.views.category'),
-    url(r'^blog/tag/(?P<slug>[\w_-]+)/*$', 'blog.views.tag'),
+    # We have a blog!
+    (r'^blog/', include('blog.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
+    (r'^admin/', include(admin.site.urls)),
 )
