@@ -14,8 +14,8 @@ class STATUS(object):
 
 
 class Page(models.Model):
-    title = models.CharField('title of entry', max_length=255)
-    slug = models.SlugField('slugified title', db_index=True, unique=True)
+    title = models.CharField('title of page', max_length=255)
+    path = models.CharField('path of page', max_length=1024, db_index=True, unique=True)
     content = models.TextField('page content')
     status = models.CharField(max_length=1, choices=STATUS.CHOICES)
 
@@ -24,6 +24,6 @@ class Page(models.Model):
     pub_date = models.DateTimeField('date published', null=True)
 
     def __unicode__(self):
-        return self.title
+        return self.path
 
-    # TODO: models.ForeignKey on entry author
+    # TODO: models.ForeignKey on page author
