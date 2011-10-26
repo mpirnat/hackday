@@ -1,0 +1,20 @@
+<html>
+<head>
+<title>Charities: Approved Charities</title>
+</head>
+<body>
+    <h3>Approved Charities</h3>
+    {% if charities %}
+        <ul>
+        {% for charity in charities %}
+            <li><strong><a href="{{charity.url}}">{{charity.name}}</a></strong>
+                <br>
+                    <div>{{charity.description}}</div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Crickets.</p>
+    {% endif %}
+</body>
+</html>

@@ -15,6 +15,9 @@ urlpatterns = patterns('',
     # We have a blog!
     (r'^blog/', include('blog.urls')),
 
+    # List of approved charities
+    (r'^charities/?', 'charities.views.index'),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
