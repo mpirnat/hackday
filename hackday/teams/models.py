@@ -15,6 +15,17 @@ class STATUS(object):
     )
 
 
+class Category(models.Model):
+    name = models.CharField('name of category', max_length=255, unique=True)
+    slug = models.SlugField('slugified category name', db_index=True, unique=True)
+
+    create_date = models.DateTimeField('date created', auto_now_add=True)
+    mod_date = models.DateTimeField('date modified', auto_now=True)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Team(models.Model):
     name = models.CharField('name of team', max_length=255, db_index=True,
             unique=True)
@@ -30,8 +41,7 @@ class Team(models.Model):
     members = models.ManyToManyField(User,
             related_name="%(app_label)s_%(class)s_members")
 
-    # TODO: FK to Category
-#    category = models.ForeignKey(Category)
+    project_category = models.ForeignKey(Category)
     charity = models.ForeignKey(Charity)
 
     create_date = models.DateTimeField('date created', auto_now_add=True)
