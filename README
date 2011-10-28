@@ -29,7 +29,7 @@ Get a virtualenv all set up:
     mkdir tmp
     cd tmp/
     wget http://www.djangoproject.com/download/1.3.1/tarball/
-    tar zxvf Django-1.3.1.tar.gz 
+    tar zxvf Django-1.3.1.tar.gz
     cd Django-1.3.1
     python setup.py install
 
