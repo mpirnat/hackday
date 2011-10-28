@@ -125,6 +125,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'blog',
     'charities',
+    'teams',
+    'users',
     'wiki',
 )
 
