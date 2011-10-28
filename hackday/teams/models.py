@@ -31,4 +31,5 @@ class Team(models.Model):
     # TODO: FK to users for "captain"?
     # TODO: many-many to users for team members
     # TODO: FK to project category
+    # TODO: FK to charity
 

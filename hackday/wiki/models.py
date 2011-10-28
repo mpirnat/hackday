@@ -7,9 +7,9 @@ class STATUS(object):
     DELETED = 'X'
 
     CHOICES = (
-        ('D', 'Draft'),
-        ('P', 'Published'),
-        ('X', 'Deleted'),
+        (DRAFT, 'Draft'),
+        (PUBLISHED, 'Published'),
+        (DELETED, 'Deleted'),
     )
 
 

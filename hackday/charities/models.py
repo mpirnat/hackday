@@ -6,12 +6,14 @@ class STATUS(object):
     # different verbose versions for clarity/semantic meaning.
     PENDING = 'D'
     APPROVED = 'P'
-    REJECTED = 'X'
+    REJECTED = 'R'
+    DELETED = 'X'
 
     CHOICES = (
-        ('D', 'Pending Approval'),
-        ('P', 'Approved'),
-        ('X', 'Rejected'),
+        (PENDING, 'Pending Approval'),
+        (APPROVED, 'Approved'),
+        (REJECTED, 'Rejected'),
+        (DELETED, 'Deleted'),
     )
 
 

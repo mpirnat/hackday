@@ -4,12 +4,14 @@ from django.db import models
 class STATUS(object):
     DRAFT = 'D'
     PUBLISHED = 'P'
+    REVIEW = 'R'
     DELETED = 'X'
 
     CHOICES = (
-        ('D', 'Draft'),
-        ('P', 'Published'),
-        ('X', 'Deleted'),
+        (DRAFT, 'Draft'),
+        (REVIEW, 'Review'),
+        (PUBLISHED, 'Published'),
+        (DELETED, 'Deleted'),
     )
 
 
