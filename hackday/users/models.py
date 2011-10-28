@@ -40,9 +40,9 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
     description = models.TextField('user bio')
 
-    tshirt = models.ManyToManyField(Tshirt)
-    diet = models.ManyToManyField(Diet)
-    location = models.ManyToManyField(Location)
+    tshirt = models.ForeignKey(Tshirt)
+    diet = models.ForeignKey(Diet)
+    location = models.ForeignKey(Location)
 
     create_date = models.DateTimeField('date created', auto_now_add=True)
     mod_date = models.DateTimeField('date modified', auto_now=True)
