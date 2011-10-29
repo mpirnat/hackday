@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'charities',
     'teams',
     'users',
+    'voting',
     'wiki',
 )
 
