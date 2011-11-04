@@ -1,3 +1,4 @@
+from django.contrib import admin
 from voting.models import VoteCart, Vote
 from voting.moremodels import Category
 
