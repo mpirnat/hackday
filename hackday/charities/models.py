@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from assets.models import Attachment, ImageAttachment, Link
 
@@ -26,9 +27,6 @@ class Charity(models.Model):
     description = models.TextField('description of charity')
     status = models.CharField(max_length=1, choices=STATUS.CHOICES)
 
-    create_date = models.DateTimeField('date created', auto_now_add=True)
-    mod_date = models.DateTimeField('date modified', auto_now=True)
-
     attachments = models.ManyToManyField(Attachment,
             related_name="%(app_label)s_%(class)s_attachments")
     images = models.ManyToManyField(ImageAttachment,
@@ -36,7 +34,10 @@ class Charity(models.Model):
     links = models.ManyToManyField(Link,
             related_name="%(app_label)s_%(class)s_links")
 
+    suggester = models.ForeignKey(User)
+
+    create_date = models.DateTimeField('date created', auto_now_add=True)
+    mod_date = models.DateTimeField('date modified', auto_now=True)
+
     def __unicode__(self):
         return self.name
-
-    # TODO: models.ForeignKey on user who suggested charity?

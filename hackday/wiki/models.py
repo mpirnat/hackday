@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from assets.models import Attachment, ImageAttachment, Link
 
@@ -21,10 +22,6 @@ class Page(models.Model):
     content = models.TextField('page content')
     status = models.CharField(max_length=1, choices=STATUS.CHOICES)
 
-    create_date = models.DateTimeField('date created', auto_now_add=True)
-    mod_date = models.DateTimeField('date modified', auto_now=True)
-    pub_date = models.DateTimeField('date published', null=True)
-
     attachments = models.ManyToManyField(Attachment,
             related_name="%(app_label)s_%(class)s_attachments")
     images = models.ManyToManyField(ImageAttachment,
@@ -32,7 +29,11 @@ class Page(models.Model):
     links = models.ManyToManyField(Link,
             related_name="%(app_label)s_%(class)s_links")
 
+    author = models.ForeignKey(User)
+
+    create_date = models.DateTimeField('date created', auto_now_add=True)
+    mod_date = models.DateTimeField('date modified', auto_now=True)
+    pub_date = models.DateTimeField('date published', null=True)
+
     def __unicode__(self):
         return self.path
-
-    # TODO: models.ForeignKey on page author
