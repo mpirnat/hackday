@@ -1,4 +1,5 @@
 from django.db import models
+from assets.models import Attachment, ImageAttachment, Link
 
 
 class STATUS(object):
@@ -27,6 +28,13 @@ class Charity(models.Model):
 
     create_date = models.DateTimeField('date created', auto_now_add=True)
     mod_date = models.DateTimeField('date modified', auto_now=True)
+
+    attachments = models.ManyToManyField(Attachment,
+            related_name="%(app_label)s_%(class)s_attachments")
+    images = models.ManyToManyField(ImageAttachment,
+            related_name="%(app_label)s_%(class)s_images")
+    links = models.ManyToManyField(Link,
+            related_name="%(app_label)s_%(class)s_links")
 
     def __unicode__(self):
         return self.name

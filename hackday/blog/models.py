@@ -1,4 +1,5 @@
 from django.db import models
+from assets.models import Attachment, ImageAttachment, Link
 
 
 class STATUS(object):
@@ -47,10 +48,15 @@ class Entry(models.Model):
     categories = models.ManyToManyField(Category)
     tags = models.ManyToManyField(Tag)
 
+    attachments = models.ManyToManyField(Attachment,
+            related_name="%(app_label)s_%(class)s_attachments")
+    images = models.ManyToManyField(ImageAttachment,
+            related_name="%(app_label)s_%(class)s_images")
+    links = models.ManyToManyField(Link,
+            related_name="%(app_label)s_%(class)s_links")
+
     def __unicode__(self):
         return self.title
 
     # TODO: models.ForeignKey on entry author
-
-
 

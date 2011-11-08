@@ -1,4 +1,5 @@
 from django.db import models
+from assets.models import Attachment, ImageAttachment, Link
 from charities.models import Charity
 from voting.moremodels import Category
 from django.contrib.auth.models import User
@@ -19,7 +20,7 @@ class STATUS(object):
     )
 
 
-class TYPE(object):
+class PROJECT_TYPE(object):
     """
     Type of project -- 'implemented' (working code) or 'concept' (smoke and
     Powerpoint mirrors)
@@ -62,8 +63,8 @@ class Team(models.Model):
     slug = models.SlugField('slugified team name', db_index=True, unique=True)
     project = models.TextField('description of project')
 
-    type = models.CharField('type of project', max_length=1, db_index=True,
-            choices=TYPE.CHOICES)
+    project_type = models.CharField('type of project', max_length=1,
+            db_index=True, choices=PROJECT_TYPE.CHOICES)
     status = models.CharField(max_length=1, db_index=True,
             choices=STATUS.CHOICES)
 
@@ -73,6 +74,13 @@ class Team(models.Model):
             related_name="%(app_label)s_%(class)s_captain")
     members = models.ManyToManyField(User,
             related_name="%(app_label)s_%(class)s_members")
+
+    attachments = models.ManyToManyField(Attachment,
+            related_name="%(app_label)s_%(class)s_attachments")
+    images = models.ManyToManyField(ImageAttachment,
+            related_name="%(app_label)s_%(class)s_images")
+    links = models.ManyToManyField(Link,
+            related_name="%(app_label)s_%(class)s_links")
 
     category = models.ForeignKey(Category)
     charity = models.ForeignKey(Charity)
