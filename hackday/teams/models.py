@@ -62,6 +62,7 @@ class Team(models.Model):
             unique=True)
     slug = models.SlugField('slugified team name', db_index=True, unique=True)
     project = models.TextField('description of project')
+    logo = models.ImageField('team logo image', upload_to='teams')
 
     project_type = models.CharField('type of project', max_length=1,
             db_index=True, choices=PROJECT_TYPE.CHOICES)

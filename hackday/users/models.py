@@ -39,6 +39,7 @@ class UserProfile(models.Model):
 
     user = models.ForeignKey(User, unique=True)
     description = models.TextField('user bio')
+    image = models.ImageField('user image', upload_to='users')
 
     tshirt = models.ForeignKey(Tshirt)
     diet = models.ForeignKey(Diet)
