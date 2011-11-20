@@ -1,4 +1,4 @@
-from users.forms import SignUpForm
+from users.forms import SignUpForm,  SignInForm
 from users.models import User, UserProfile, Tshirt, Diet, Location
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
@@ -63,4 +63,31 @@ def sign_out(request):
 
     t = loader.get_template('users/signout.html')
     c = RequestContext(request, {})
+    return HttpResponse(t.render(c))
+
+
+def sign_in(request):
+    error_message = None
+
+    if request.method == 'POST':
+        form = SignInForm(request.POST)
+        if form.is_valid():
+            user = authenticate(username=form.cleaned_data['user_name'],
+                    password=form.cleaned_data['password'])
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect('/users')
+                else:
+                    error_message = "Account disabled"
+            else:
+                error_message = "Bad username or password"
+    else:
+        form = SignInForm()
+
+    t = loader.get_template('users/signin.html')
+    c = RequestContext(request, {
+        'form': form,
+        'error_message': error_message,
+    })
     return HttpResponse(t.render(c))

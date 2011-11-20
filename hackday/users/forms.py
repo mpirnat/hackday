@@ -17,4 +17,10 @@ class SignUpForm(forms.Form):
             queryset=Location.objects.all())
     description = forms.CharField(label='Describe Yourself',
             widget=forms.Textarea, required=False)
-  
+
+
+class SignInForm(forms.Form):
+
+    user_name = forms.CharField(label='User Name')
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+

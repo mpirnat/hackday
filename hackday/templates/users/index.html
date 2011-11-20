@@ -10,7 +10,8 @@
         <p>Welcome back, {{user.username}}!</p>
         <p><a href="/users/sign-out">Sign out</a></p>
     {% else %}
-        <p><a href="/users/sign-up">Sign up!</a></p>
+        <p>New users: <a href="/users/sign-up">Sign up!</a></p>
+        <p>Returning users: <a href="/users/sign-in">Sign in</a></p>
     {% endif %}
 
     {% if users %}
