@@ -18,6 +18,9 @@ urlpatterns = patterns('',
     # List of approved charities
     (r'^charities/?', 'charities.views.index'),
 
+    # User stuff - sign up, sign in, sign out, user profiles
+    (r'^users/?', include('users.urls')),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
