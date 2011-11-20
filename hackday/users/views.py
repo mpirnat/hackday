@@ -91,3 +91,15 @@ def sign_in(request):
         'error_message': error_message,
     })
     return HttpResponse(t.render(c))
+
+
+def profile(request, username):
+    user = User.objects.get(username=username)
+    user_profile = UserProfile.objects.get(user=user)
+
+    t = loader.get_template('users/profile.html')
+    c = RequestContext(request, {
+        'user_': user,
+        'user_profile': user_profile,
+    })
+    return HttpResponse(t.render(c))
