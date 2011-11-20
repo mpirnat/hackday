@@ -55,3 +55,12 @@ def sign_up(request):
     })
 
     return HttpResponse(t.render(c))
+
+
+def sign_out(request):
+
+    logout(request)
+
+    t = loader.get_template('users/signout.html')
+    c = RequestContext(request, {})
+    return HttpResponse(t.render(c))

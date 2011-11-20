@@ -8,6 +8,7 @@
 
     {% if user.is_authenticated %}
         <p>Welcome back, {{user.username}}!</p>
+        <p><a href="/users/sign-out">Sign out</a></p>
     {% else %}
         <p><a href="/users/sign-up">Sign up!</a></p>
     {% endif %}
