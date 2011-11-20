@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     (r'^/*$', 'blog.views.index'),
 
     # We have a blog!
-    (r'^blog/', include('blog.urls')),
+    (r'^blog/?', include('blog.urls')),
 
     # List of approved charities
     (r'^charities/?', 'charities.views.index'),
