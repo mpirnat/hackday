@@ -23,6 +23,7 @@ class SignInForm(forms.Form):
 
     user_name = forms.CharField(label='User Name')
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    next = forms.CharField(label='Next URL', widget=forms.HiddenInput)
 
 
 class UserProfileForm(forms.Form):

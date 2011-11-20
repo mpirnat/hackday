@@ -79,13 +79,17 @@ def sign_in(request):
             if user:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponseRedirect('/users')
+                    next_url = form.cleaned_data['next']
+                    if not next_url.startswith('/'):
+                        raise PermissionDenied
+                    return HttpResponseRedirect(next_url)
                 else:
                     error_message = "Account disabled"
             else:
                 error_message = "Bad username or password"
     else:
-        form = SignInForm()
+        next_url = request.GET.get('next') or '/users'
+        form = SignInForm(initial={'next': next_url})
 
     t = loader.get_template('users/signin.html')
     c = RequestContext(request, {
