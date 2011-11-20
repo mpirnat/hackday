@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Edit Profile: {{user_.username}}!</title>
+</head>
+<body>
+
+    {% if message %}
+    <p>{{message}}</p>
+    {% endif %}
+
+    <h3>Editing {{user_.username}}</h3>
+    <form action="/users/{{user_.username}}/edit" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Submit" />
+    </form>
+
+    <p><a href="/users/{{user_.username}}">Cancel</a></p>
+
+</body>
+</html>

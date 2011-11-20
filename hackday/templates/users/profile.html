@@ -15,5 +15,9 @@
     <p><strong>About Me:</strong></p>
     <p>{{user_profile.description}}</p>
 
+    {% if user.is_authenticated and user.username == user_.username %}
+    <p><a href="/users/{{user_.username}}/edit">Edit profile</a></p>
+    {% endif %}
+    <p><a href="/users">All users</a></p>
 </body>
 </html>

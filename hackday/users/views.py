@@ -1,6 +1,8 @@
-from users.forms import SignUpForm,  SignInForm
+from users.forms import SignUpForm, SignInForm, UserProfileForm
 from users.models import User, UserProfile, Tshirt, Diet, Location
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, RequestContext, loader
 
@@ -101,5 +103,55 @@ def profile(request, username):
     c = RequestContext(request, {
         'user_': user,
         'user_profile': user_profile,
+    })
+    return HttpResponse(t.render(c))
+
+
+@login_required(login_url='/users/sign-in')
+def edit_profile(request, username):
+    user = User.objects.get(username=username)
+    user_profile = UserProfile.objects.get(user=user)
+    message = None
+
+    if request.user != user:
+        raise PermissionDenied
+
+    elif request.method == 'POST':
+        form = UserProfileForm(request.POST)
+        if form.is_valid():
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.email = form.cleaned_data['email']
+
+            if form.cleaned_data['password']:
+                user.set_password(form.cleaned_data['password'])
+            
+            user_profile.tshirt = form.cleaned_data['tshirt']
+            user_profile.diet = form.cleaned_data['diet']
+            user_profile.location = form.cleaned_data['location']
+            user_profile.description = form.cleaned_data['description']
+            
+            user.save()
+            user_profile.save()
+
+            message = 'Updated profile.'
+
+    else:
+        data = {
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'email': user.email,
+                'tshirt': user_profile.tshirt,
+                'diet': user_profile.diet,
+                'location': user_profile.location,
+                'description': user_profile.description,
+        }
+        form = UserProfileForm(initial=data)
+
+    t = loader.get_template('users/edit_profile.html')
+    c = RequestContext(request, {
+        'form': form,
+        'user_': user,
+        'message': message,
     })
     return HttpResponse(t.render(c))

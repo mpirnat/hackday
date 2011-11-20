@@ -6,5 +6,5 @@ urlpatterns = patterns('users.views',
     (r'^sign-in/*$', 'sign_in'),
     (r'^sign-out/*$', 'sign_out'),
     (r'^(?P<username>\w+)/*$', 'profile'),
-    #(r'^(?P<username>\w+)/edit/*$', 'edit_profile'),
+    (r'^(?P<username>\w+)/edit/*$', 'edit_profile'),
 )
