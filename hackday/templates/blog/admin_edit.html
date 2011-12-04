@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Blog!</title>
+</head>
+<body>
+    <h3>Blog Add/Edit</h3>
+
+<ul>
+    <li><a href="/blog/admin/">Back To Blog Administration</a></li>
+</ul>
+
+<form method="POST" action="/blog/admin/add/">
+{% csrf_token %}
+<table>
+{{entry_formset}}
+<tr>
+<td><input type="submit"/></td>
+</tr>
+</table>
+</form>
+
+</body>
+</html>
