@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from assets.models import Attachment, ImageAttachment, Link
-
+from django.forms import ModelForm
 
 class STATUS(object):
     DRAFT = 'D'
@@ -60,3 +60,8 @@ class Entry(models.Model):
 
     def __unicode__(self):
         return self.title
+
+class EntryForm(ModelForm):
+    class Meta:
+        model = Entry
+
