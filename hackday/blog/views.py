@@ -2,6 +2,8 @@ from blog.models import Entry, STATUS
 from django.http import HttpResponse
 from django.template import Context, loader
 from django.forms.models import modelformset_factory
+from django.core.context_processors import csrf
+from django.template import RequestContext
 
 def index(request):
     latest_entries = Entry.objects.filter(status=STATUS.PUBLISHED).\
@@ -65,11 +67,18 @@ def admin_blog_index(request):
 
 def admin_blog_edit(request):
     entry_formset = modelformset_factory(Entry)
+    if request.method == 'POST':
+        formset = entry_formset(request.POST, request.FILES)
+        if formset.is_valid():
+            formset.save()
+            entry_formset = "Saved" # do something.
+        else:
+            formset = entry_formset()
     t = loader.get_template('blog/admin_edit.html')
-    c = Context({
+    c = RequestContext(request, {
         'entry_formset': entry_formset,
     })
-
+ 
     return HttpResponse(t.render(c))
 
 
