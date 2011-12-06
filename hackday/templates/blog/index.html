@@ -1,8 +1,9 @@
-<html>
-<head>
-<title>Blog!</title>
-</head>
-<body>
+
+{% extends 'base.html' %}    
+
+    {% block title %}Hackday: Blog{% endblock %}
+    
+    {% block content %}
     <h3>Latest Blog Entries</h3>
     {% if latest_entries %}
         <ul>
@@ -13,5 +14,5 @@
     {% else %}
         <p>Crickets.</p>
     {% endif %}
-</body>
-</html>
+    {% endblock %}
+
