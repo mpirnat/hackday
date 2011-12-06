@@ -35,3 +35,19 @@ Get a virtualenv all set up:
     python setup.py install
 
 We strive for PEP-8ness, clean code, and test coverage.
+
+Additional Packages
+-------------------
+
+Install django-debug-toolbar:
+
+    * pip install django-debug-toolbar
+
+Settings have already been added to settings.py. You will likely need to change the INTERNAL_IPS to reflect your dev system, unless you are working locally. 
+
+
+Install django-taggit:
+
+    * pip install django-taggit
+
+This is necessary otherwise blogs will break.
