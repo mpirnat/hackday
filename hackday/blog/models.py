@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from assets.models import Attachment, ImageAttachment, Link
 from django.forms import ModelForm
+from taggit.managers import TaggableManager
 
 class STATUS(object):
     DRAFT = 'D'
@@ -53,6 +54,8 @@ class Entry(models.Model):
             related_name="%(app_label)s_%(class)s_links")
 
     author = models.ForeignKey(User)
+    
+    tags = TaggableManager() 
 
     create_date = models.DateTimeField('date created', auto_now_add=True)
     mod_date = models.DateTimeField('date modified', auto_now=True)
