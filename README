@@ -16,7 +16,9 @@ We aim to address:
     * voting
     * site themes
 
-The site is built on Django 1.3 and Python 2.7.
+The site is built on Django 1.3 and Python 2.7. We strive for PEP-8ness, clean
+code, and test coverage.
+
 
 Developing
 ----------
@@ -24,32 +26,5 @@ Developing
 Get a virtualenv all set up:
 
     virtualenv --python=/Library/Frameworks/Python.framework/Versions/2.7/bin/python hackday
-    cd hackday
-    . bin/activate
-    mkdir db
-    mkdir tmp
-    cd tmp/
-    wget http://www.djangoproject.com/download/1.3.1/tarball/
-    tar zxvf Django-1.3.1.tar.gz
-    cd Django-1.3.1
-    python setup.py install
-
-We strive for PEP-8ness, clean code, and test coverage.
-
-Additional Packages
--------------------
-
-Install django-debug-toolbar:
-
-    * pip install django-debug-toolbar
-    * docs: https://github.com/robhudson/django-debug-toolbar/blob/master/README.rst
-
-Settings have already been added to settings.py. You will likely need to change the INTERNAL_IPS to reflect your dev system, unless you are working locally. 
-
-
-Install django-taggit:
-
-    * pip install django-taggit
-    * docs: http://readthedocs.org/docs/django-taggit/en/latest/getting_started.html
-
-This is necessary otherwise blogs will break.
+    source hackday/bin/activate
+    pip install -r requirements.txt
