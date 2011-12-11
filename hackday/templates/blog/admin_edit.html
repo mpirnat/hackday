@@ -1,15 +1,14 @@
-<html>
-<head>
-<title>Blog!</title>
-</head>
-<body>
+
+{% extends 'base.html' %}
+    
+{% block title %}Hackday: Blog Add/Edit{% endblock %}    
     <h3>Blog Add/Edit</h3>
 
 <ul>
     <li><a href="/blog/admin/">Back To Blog Administration</a></li>
 </ul>
 
-<form method="POST" action="/blog/admin/add/">
+<form method="POST" action=".">
 {% csrf_token %}
 <table>
 {{entry_formset}}
@@ -19,5 +18,4 @@
 </table>
 </form>
 
-</body>
-</html>
+{% endblock %}
