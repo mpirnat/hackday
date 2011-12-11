@@ -73,7 +73,7 @@ def blog_edit(request):
             formset.save()
             entry_formset = "Saved" # do something.
         else:
-            formset = entry_formset()
+            entry_formset= str(formset.errors)
     t = loader.get_template('blog/admin_edit.html')
     c = RequestContext(request, {
         'entry_formset': entry_formset,
