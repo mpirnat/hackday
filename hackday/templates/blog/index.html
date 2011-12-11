@@ -14,5 +14,12 @@
     {% else %}
         <p>Crickets.</p>
     {% endif %}
+    
+    {% if user.is_authenticated %}
+        <p><a href="/blog/add">Add a post</a></p>
+    {% else %}
+        <p><a href="/users">Sign in to write a blog post</a></p>
+    {% endif %}
+    
     {% endblock %}
 
