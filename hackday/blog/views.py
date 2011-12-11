@@ -65,7 +65,7 @@ def admin_blog_index(request):
     return HttpResponse(t.render(c))
 
 
-def admin_blog_edit(request):
+def blog_edit(request):
     entry_formset = modelformset_factory(Entry)
     if request.method == 'POST':
         formset = entry_formset(request.POST, request.FILES)
