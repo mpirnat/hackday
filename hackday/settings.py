@@ -4,6 +4,7 @@ VENV_ROOT = os.environ['VIRTUAL_ENV']
 CODE_ROOT = os.path.split(__file__)[0]
 
 DEBUG = True
+DEBUG_TOOLBAR = DEBUG
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -101,7 +102,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 INTERNAL_IPS = ('127.0.0.1',)
@@ -126,7 +126,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    'debug_toolbar',
     'taggit',
     'assets',
     'blog',
@@ -161,6 +160,10 @@ LOGGING = {
 }
 
 AUTH_PROFILE_MODULE = 'users.userprofile'
+
+if DEBUG_TOOLBAR:
+    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+    INSTALLED_APPS += ('debug_toolbar',)
 
 try:
     from settings_local import *
