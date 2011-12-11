@@ -161,3 +161,8 @@ LOGGING = {
 }
 
 AUTH_PROFILE_MODULE = 'users.userprofile'
+
+try:
+    from settings_local import *
+except ImportError:
+    pass

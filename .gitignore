@@ -5,3 +5,5 @@
 *.tmp
 *.swp
 *.swo
+hackday/settings_local.py
+hackday.db
