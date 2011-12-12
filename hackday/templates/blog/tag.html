@@ -1,9 +1,10 @@
-<html>
-<head>
-    <title>Blog: Tag: {{ slug }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
+    {% block title %}Blog: Tag: {{ slug }}{% endblock %}
+
+    {% block content %}
+
     <h3>Entries matching tag '{{ slug }}':</h3>
+    
     {% if entries %}
     <ul>
         {% for entry in entries %}
@@ -13,5 +14,5 @@
     {% else %}
     <p>Crickets.</p>
     {% endif %}
-</body>
-</html>
+
+    {% endblock %}

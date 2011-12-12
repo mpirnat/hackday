@@ -1,8 +1,8 @@
-<html>
-<head>
-    <title>Blog: Category: {{ slug }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
+    {% block title %}Blog: Category: {{ slug }}{% endblock %}
+    
+    {% block content %}
+
     <h3>Entries matching category '{{ slug }}':</h3>
     {% if entries %}
     <ul>
@@ -13,5 +13,5 @@
     {% else %}
     <p>Crickets.</p>
     {% endif %}
-</body>
-</html>
+
+    {% endblock %}

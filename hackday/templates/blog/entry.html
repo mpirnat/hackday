@@ -1,8 +1,8 @@
-<html>
-<head>
-    <title>Blog: {{ entry.title }}</title>
-</head>
-<body>
+{% extends 'base.html' %}
+    {% block title %}Blog: {{ entry.title }}{% endblock %}
+
+    {% block content %}
+
     <h3>{{ entry.title }}</h3>
     
     <p>Categories:
@@ -27,5 +27,5 @@
     <p>Published: {{ entry.pub_date }}</p>
     
     <p>{{ entry.content }}</p>
-</body>
-</html>
+
+    {% endblock %}
