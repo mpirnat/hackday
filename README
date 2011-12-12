@@ -1,3 +1,4 @@
+======================
 The "Hack Day" Web App
 ======================
 
@@ -16,40 +17,28 @@ We aim to address:
     * voting
     * site themes
 
-The site is built on Django 1.3 and Python 2.7.
+The site is built on Django 1.3 and Python 2.7. We strive for PEP-8ness, clean
+code, and test coverage.
+
 
 Developing
-----------
+==========
 
 Get a virtualenv all set up:
 
     virtualenv --python=/Library/Frameworks/Python.framework/Versions/2.7/bin/python hackday
-    cd hackday
-    . bin/activate
-    mkdir db
-    mkdir tmp
-    cd tmp/
-    wget http://www.djangoproject.com/download/1.3.1/tarball/
-    tar zxvf Django-1.3.1.tar.gz
-    cd Django-1.3.1
-    python setup.py install
-
-We strive for PEP-8ness, clean code, and test coverage.
-
-Additional Packages
--------------------
-
-Install django-debug-toolbar:
-
-    * pip install django-debug-toolbar
-    * docs: https://github.com/robhudson/django-debug-toolbar/blob/master/README.rst
-
-Settings have already been added to settings.py. You will likely need to change the INTERNAL_IPS to reflect your dev system, unless you are working locally. 
+    source hackday/bin/activate
+    pip install -r requirements.txt
 
 
-Install django-taggit:
+Re-creating Seed Data
+=====================
 
-    * pip install django-taggit
-    * docs: http://readthedocs.org/docs/django-taggit/en/latest/getting_started.html
+The seed data can be re-generated with the dumpdata command. For readability
+this is in XML cleaned up by tidy.
 
-This is necessary otherwise blogs will break.
+NOTE: There is a lot of junk in the db seed, most of which will be re-generated
+by django during the syncdb process. It is advisable to trim down the data in
+your seed to only the bare essential data that you wish to be loaded.
+
+    hackday/manage.py dumpdata --format=xml | tidy -xml -indent
