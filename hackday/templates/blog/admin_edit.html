@@ -4,11 +4,19 @@
 {% block title %}Hackday: Blog Add/Edit{% endblock %}    
     <h3>Blog Add/Edit</h3>
 
+{% block content %}
 <ul>
     <li><a href="/blog/admin/">Back To Blog Administration</a></li>
 </ul>
 
-<form method="POST" action=".">
+{% if errors %}
+    <h4>ERRORS</h4>
+    <ul>
+            <li>{{ errors }}</li>
+    </ul>
+{% endif %}
+
+<form method="POST" action="/blog/add">
 {% csrf_token %}
 <table>
 {{entry_formset}}

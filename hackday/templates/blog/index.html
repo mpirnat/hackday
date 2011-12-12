@@ -4,11 +4,15 @@
     {% block title %}Hackday: Blog{% endblock %}
     
     {% block content %}
-    <h3>Latest Blog Entries</h3>
+    <h2>Latest Blog Entries</h2>
     {% if latest_entries %}
         <ul>
         {% for entry in latest_entries %}
-            <li><a href="/blog/{{ entry.id }}/">{{ entry.title }}</a></li>
+            <li>
+                <h3><a href="/blog/{{ entry.id }}/">{{ entry.title }}</a></h3>
+                <p>{{entry.content|truncatewords:25 }}</p>
+
+                </li>
         {% endfor %}
         </ul>
     {% else %}

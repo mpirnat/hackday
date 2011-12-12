@@ -1,4 +1,4 @@
-from blog.models import Entry, STATUS
+from blog.models import Entry, EntryForm, STATUS
 from django.http import HttpResponse
 from django.template import Context, loader
 from django.forms.models import modelformset_factory
@@ -53,30 +53,27 @@ def tag(request, slug):
 
     return HttpResponse(t.render(c))
 
-def admin_blog_index(request):
-    entries = Entry.objects.\
-            order_by('-pub_date')[:20]
+def blog_edit(request, entry_id=None):
+    entry_formset = EntryForm()
+    errors = None
 
-    t = loader.get_template('blog/admin_index.html')
-    c = Context({
-        'entries': entries,
-    })
+    if request.method == 'GET':
+        entry_form = EntryForm()
+        if entry_id:
+            entry_formset = EntryForm(instance=Entry.objects.get(pk=entry_id))
 
-    return HttpResponse(t.render(c))
-
-
-def blog_edit(request):
-    entry_formset = modelformset_factory(Entry)
     if request.method == 'POST':
-        formset = entry_formset(request.POST, request.FILES)
+        formset = EntryForm(request.POST, request.FILES)
         if formset.is_valid():
             formset.save()
-            entry_formset = "Saved" # do something.
+            entry_formset = "Entry Saved" # do something.
         else:
-            formset = entry_formset()
+            errors = str(formset.errors)
+    
     t = loader.get_template('blog/admin_edit.html')
     c = RequestContext(request, {
         'entry_formset': entry_formset,
+        'errors' : errors,
     })
  
     return HttpResponse(t.render(c))
