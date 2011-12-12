@@ -47,6 +47,9 @@ class Entry(models.Model):
     def __unicode__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return "/blog/%d" % self.id 
+
 class EntryForm(ModelForm):
     class Meta:
         model = Entry

@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from hackday.blog.feeds import LatestEntriesFeed
 
 urlpatterns = patterns('blog.views',
     (r'^$', 'index'),
@@ -7,4 +8,5 @@ urlpatterns = patterns('blog.views',
     (r'^tag/(?P<slug>[\w_-]+)/*$', 'tag'),
     (r'^add/*$', 'blog_edit'),
     (r'^edit/(?P<entry_id>\d+)/*$', 'blog_edit'),
+    (r'^feed/$', LatestEntriesFeed()),
 )
