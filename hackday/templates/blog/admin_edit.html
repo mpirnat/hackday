@@ -9,6 +9,13 @@
     <li><a href="/blog/admin/">Back To Blog Administration</a></li>
 </ul>
 
+{% if errors %}
+    <h4>ERRORS</h4>
+    <ul>
+            <li>{{ errors }}</li>
+    </ul>
+{% endif %}
+
 <form method="POST" action="/blog/add">
 {% csrf_token %}
 <table>
