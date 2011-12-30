@@ -65,8 +65,12 @@ class Entry(models.Model):
     def get_absolute_url(self):
         return "/blog/%d" % self.id
 
+    class Meta:
+        verbose_name_plural = "Entries"
+
 
 class EntryForm(ModelForm):
+
     class Meta:
         model = Entry
 
