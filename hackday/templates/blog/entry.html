@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
+{% load markup %}
     {% block title %}Blog: {{ entry.title }}{% endblock %}
 
     {% block content %}
 
     <h3>{{ entry.title }}</h3>
-    
+
+    {% if entry.categories.all %}
     <p>Categories:
         <ul>
         {% for category in entry.categories.all %}
@@ -12,7 +14,9 @@
         {% endfor %}
         </ul>
     </p>
-            
+    {% endif %}
+
+    {% if entry.tags.all %}
     <p>Tags:
         <ul>
         {% for tag in entry.tags.all %}
@@ -20,12 +24,11 @@
         {% endfor %}
         </ul>
     </p>
+    {% endif %}
 
-    <p>Status: {{ entry.status }}</p>
-    <p>Created: {{ entry.create_date }}</p>
-    <p>Modified: {{ entry.mod_date }}</p>
     <p>Published: {{ entry.pub_date }}</p>
+    <p>Author: <a href="/users/{{ entry.author.username }}">{{entry.author.username}}</a></p>
     
-    <p>{{ entry.content }}</p>
+    <p>{{ entry.content|markdown:"safe" }}</p>
 
     {% endblock %}

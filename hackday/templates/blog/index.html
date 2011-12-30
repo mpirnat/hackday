@@ -1,5 +1,5 @@
-
-{% extends 'base.html' %}    
+{% extends 'base.html' %}
+{% load markup %}
 
     {% block title %}Hackday: Blog{% endblock %}
     
@@ -10,7 +10,7 @@
         {% for entry in latest_entries %}
             <li>
                 <h3><a href="/blog/{{ entry.id }}/">{{ entry.title }}</a></h3>
-                <p>{{entry.content|truncatewords:25 }}</p>
+                {{ entry.content|markdown:"safe"|truncatewords:25 }}
 
                 </li>
         {% endfor %}

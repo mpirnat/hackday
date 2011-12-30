@@ -19,11 +19,24 @@ class STATUS(object):
     )
 
 
+class FORMAT(object):
+    HTML = 'H'
+    MARKDOWN = 'MD'
+    RESTRUCTURED_TEXT = 'RST'
+
+    CHOICES = (
+        (MARKDOWN, 'Markdown'),
+    #    (RESTRUCTURED_TEXT, 'Restructured Text'),
+    #    (HTML, 'HTML'),
+    )
+
+
 class Entry(models.Model):
     title = models.CharField('title of entry', max_length=255)
     slug = models.SlugField('slugified title', db_index=True,
             unique_for_date="pub_date")
     content = models.TextField('entry content')
+    format = models.CharField(max_length=5, choices=FORMAT.CHOICES)
     status = models.CharField(max_length=1, choices=STATUS.CHOICES)
 
     attachments = models.ManyToManyField(Attachment,
@@ -38,7 +51,7 @@ class Entry(models.Model):
 
     author = models.ForeignKey(User)
     
-    tags = TaggableManager(blank=True) 
+    tags = TaggableManager(blank=True)
 
     create_date = models.DateTimeField('date created', auto_now_add=True)
     mod_date = models.DateTimeField('date modified', auto_now=True)
@@ -47,8 +60,10 @@ class Entry(models.Model):
     def __unicode__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return "/blog/%d" % self.id 
+    @property
+    def absolute_url(self):
+        return "/blog/%d" % self.id
+
 
 class EntryForm(ModelForm):
     class Meta:
