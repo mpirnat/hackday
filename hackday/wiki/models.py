@@ -15,19 +15,37 @@ class STATUS(object):
     )
 
 
+class FORMAT(object):
+    HTML = 'H'
+    MARKDOWN = 'MD'
+    RESTRUCTURED_TEXT = 'RST'
+
+    CHOICES = (
+        (MARKDOWN, 'Markdown'),
+    #    (RESTRUCTURED_TEXT, 'Restructured Text'),
+    #    (HTML, 'HTML'),
+    )
+
+
+
+
 class Page(models.Model):
     title = models.CharField('title of page', max_length=255)
     path = models.CharField('path of page', max_length=1024, db_index=True,
             unique=True)
     content = models.TextField('page content')
     status = models.CharField(max_length=1, choices=STATUS.CHOICES)
+    format = models.CharField(max_length=5, choices=FORMAT.CHOICES)
 
     attachments = models.ManyToManyField(Attachment,
-            related_name="%(app_label)s_%(class)s_attachments")
+            related_name="%(app_label)s_%(class)s_attachments",
+            blank=True)
     images = models.ManyToManyField(ImageAttachment,
-            related_name="%(app_label)s_%(class)s_images")
+            related_name="%(app_label)s_%(class)s_images",
+            blank=True)
     links = models.ManyToManyField(Link,
-            related_name="%(app_label)s_%(class)s_links")
+            related_name="%(app_label)s_%(class)s_links",
+            blank=True)
 
     author = models.ForeignKey(User)
 
