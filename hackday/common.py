@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from wiki.models import Page
 
 def get_nav_pages():
@@ -10,3 +11,18 @@ def common_env():
         'nav_pages': get_nav_pages(),
     }
     return env
+
+
+def forbidden(request):
+    env = common_env()
+    return render(request, '403.html', env)
+
+
+def not_found(request):
+    env = common_env()
+    return render(request, '404.html', env)
+
+
+def server_error(request):
+    env = common_env()
+    return render(request, '500.html', env)

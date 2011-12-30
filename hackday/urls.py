@@ -30,3 +30,8 @@ urlpatterns = patterns('',
     # Arbitrary wiki pages FTW!
     (r'^(?P<path>.*[^/])/?$', 'wiki.views.page'),
 )
+
+
+handler403 = 'common.forbidden'
+handler404 = 'common.not_found'
+handler500 = 'common.server_error'
