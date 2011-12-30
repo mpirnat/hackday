@@ -2,7 +2,7 @@ from common import common_env
 from users.forms import SignUpForm, SignInForm, UserProfileForm
 from users.models import User, UserProfile, Tshirt, Diet, Location
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -117,19 +117,19 @@ def edit_profile(request, username):
 
             if form.cleaned_data['password']:
                 user.set_password(form.cleaned_data['password'])
-            
+
             user_profile.tshirt = form.cleaned_data['tshirt']
             user_profile.diet = form.cleaned_data['diet']
             user_profile.location = form.cleaned_data['location']
             user_profile.description = form.cleaned_data['description']
-            
+
             user.save()
             user_profile.save()
 
             message = 'Updated profile.'
 
     else:
-        data = {
+        form = UserProfileForm(initial={
                 'first_name': user.first_name,
                 'last_name': user.last_name,
                 'email': user.email,
@@ -137,12 +137,11 @@ def edit_profile(request, username):
                 'diet': user_profile.diet,
                 'location': user_profile.location,
                 'description': user_profile.description,
-        }
-        form = UserProfileForm(initial=data)
+        })
 
     env = common_env()
     env['form'] = form
     env['user_'] = user
     env['message'] = message
-    
+    env['user_profile'] = user_profile
     return render(request, 'users/edit_profile.html', env)

@@ -1,3 +1,5 @@
+from hashlib import md5
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -39,7 +41,6 @@ class UserProfile(models.Model):
 
     user = models.ForeignKey(User, unique=True)
     description = models.TextField('user bio')
-    image = models.ImageField('user image', upload_to='users')
 
     tshirt = models.ForeignKey(Tshirt)
     diet = models.ForeignKey(Diet)
@@ -53,3 +54,7 @@ class UserProfile(models.Model):
             self._username = User.objects.get(id=self.user_id).username
         return self._username
 
+    @property
+    def image(self):
+        hash = md5(self.user.email.strip()).hexdigest()
+        return "http://gravatar.com/avatar/{0}".format(hash)

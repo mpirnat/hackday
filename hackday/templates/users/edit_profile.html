@@ -9,6 +9,8 @@
     {% endif %}
 
     <h3>Editing {{user_.username}}</h3>
+    <img src="{{ user_profile.image }}" />
+
     <form action="/users/{{user_.username}}/edit" method="POST">
         {% csrf_token %}
         {{form.as_p}}
