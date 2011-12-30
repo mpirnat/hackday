@@ -1,8 +1,18 @@
+<div>
+{% if user.is_authenticated %}
+    <p>Welcome back, {{user.username}}!</p>
+    <p><a href="/users/sign-out">Sign out</a></p>
+{% else %}
+    <p>New users: <a href="/users/sign-up">Sign up!</a></p>
+    <p>Returning users: <a href="/users/sign-in">Sign in</a></p>
+{% endif %}
+</div>
 
 <ul>
-    <li><a href="/blog">Blog</a></li>
-    <li><a href="/wiki">Wiki</a></li>
-    <li><a href="/charities">Charities</a></li>
-    <li><a href="/teams">Teams</a></li>
-    <li><a href="/users">Users</a></li>
+    <li><a href="/">Home</a></li>
+    {% if nav_pages %}
+        {% for page in nav_pages %}
+    <li><a href="/{{page.path}}">{{page.title}}</a></li>
+        {% endfor %}
+    {% endif %}
 </ul>

@@ -1,10 +1,7 @@
-<html>
-<head>
-<title>Sign Out!</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+    {% block title %}Sign Out!{% endblock %}
+
+    {% block content %}
     <p>You have signed out.  (Aren't you special?)</p>
-    <p><a href="/">Home</a></p>
-    <p><a href="/users">All users</a></p>
-</body>
-</html>
+    {% endblock %}

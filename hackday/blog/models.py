@@ -53,8 +53,10 @@ class Entry(models.Model):
     
     tags = TaggableManager(blank=True)
 
-    create_date = models.DateTimeField('date created', auto_now_add=True)
-    mod_date = models.DateTimeField('date modified', auto_now=True)
+    create_date = models.DateTimeField('date created', auto_now_add=True,
+            editable=False)
+    mod_date = models.DateTimeField('date modified', auto_now=True,
+            editable=False)
     pub_date = models.DateTimeField('date published', null=True, blank=True)
 
     def __unicode__(self):

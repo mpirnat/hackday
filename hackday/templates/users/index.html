@@ -1,28 +1,19 @@
-<html>
-<head>
-<title>Users!</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+    {% block title %}Users!{% endblock %}
+
+    {% block content %}
 
     <h3>Users</h3>
-
-    {% if user.is_authenticated %}
-        <p>Welcome back, {{user.username}}!</p>
-        <p><a href="/users/sign-out">Sign out</a></p>
-    {% else %}
-        <p>New users: <a href="/users/sign-up">Sign up!</a></p>
-        <p>Returning users: <a href="/users/sign-in">Sign in</a></p>
-    {% endif %}
 
     {% if users %}
     <ul>
         {% for user in users %}
-        <li><a href="/users/{{user.username}}/">{{user.first_name}} {{user.last_name}}</a></li>
+        <li><a href="/users/{{user.username}}/">{{user.full_name}}</a></li>
         {% endfor %}
     </ul>
     {% else %}
     <p>Crickets.</p>
     {% endif %}
 
-</body>
-</html>
+    {% endblock %}

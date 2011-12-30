@@ -36,6 +36,8 @@ class Page(models.Model):
     content = models.TextField('page content')
     status = models.CharField(max_length=1, choices=STATUS.CHOICES)
     format = models.CharField(max_length=5, choices=FORMAT.CHOICES)
+    navigable = models.BooleanField('in site navigation')
+    order = models.IntegerField(null=True, blank=True)
 
     attachments = models.ManyToManyField(Attachment,
             related_name="%(app_label)s_%(class)s_attachments",
@@ -49,9 +51,11 @@ class Page(models.Model):
 
     author = models.ForeignKey(User)
 
-    create_date = models.DateTimeField('date created', auto_now_add=True)
-    mod_date = models.DateTimeField('date modified', auto_now=True)
-    pub_date = models.DateTimeField('date published', null=True)
+    create_date = models.DateTimeField('date created', auto_now_add=True,
+            editable=False)
+    mod_date = models.DateTimeField('date modified', auto_now=True,
+            editable=False)
+    pub_date = models.DateTimeField('date published', null=True, blank=True)
 
     def __unicode__(self):
         return self.path

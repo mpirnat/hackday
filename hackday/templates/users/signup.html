@@ -1,9 +1,8 @@
-<html>
-<head>
-<title>Sign Up!</title>
-</head>
-<body>
+{% extends 'base.html' %}
+    
+    {% block title %}Sign Up!{% endblock %}
 
+    {% block content %}
     <h3>Sign Up</h3>
 
     <form action="/users/sign-up" method="POST">
@@ -11,6 +10,4 @@
         {{form.as_p}}
         <input type="submit" value="Submit" />
     </form>
-
-</body>
-</html>
+    {% endblock %}
