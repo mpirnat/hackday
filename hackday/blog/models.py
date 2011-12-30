@@ -31,6 +31,27 @@ class FORMAT(object):
     )
 
 
+class Category(models.Model):
+    slug = models.SlugField('category slug', unique=True, db_index=True)
+    name = models.CharField('category  name', max_length=50)
+    create_date = models.DateTimeField('date created', auto_now_add=True)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Categories"
+
+
+class Tag(models.Model):
+    slug = models.SlugField('tag slug', unique=True, db_index=True)
+    name = models.CharField('tag name', max_length=50)
+    create_date = models.DateTimeField('date created', auto_now_add=True)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Entry(models.Model):
     title = models.CharField('title of entry', max_length=255)
     slug = models.SlugField('slugified title', db_index=True,
@@ -50,8 +71,9 @@ class Entry(models.Model):
             blank=True)
 
     author = models.ForeignKey(User)
-    
-    tags = TaggableManager(blank=True)
+
+    categories = models.ManyToManyField(Category, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     create_date = models.DateTimeField('date created', auto_now_add=True,
             editable=False)
@@ -73,4 +95,3 @@ class EntryForm(ModelForm):
 
     class Meta:
         model = Entry
-
