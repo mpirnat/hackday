@@ -1,11 +1,13 @@
+from markdown import markdown
 from django.contrib.syndication.views import Feed
 from django.utils import feedgenerator
 from blog.models import Entry
 
+
 class LatestEntriesFeed(Feed):
-    title = "Hackday 2011"
+    title = "Hackday 2012"
     link = "/blog/"
-    description = "A List of Wonderful Articles from Hackday 2011"
+    description = "A List of Wonderful Articles from Hackday 2012"
 
     feed_type = feedgenerator.Rss201rev2Feed
 
@@ -16,7 +18,7 @@ class LatestEntriesFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return item.content
+        return markdown(item.content, safe_mode="replace")
 
     def item_author_name(self, item):
         return item.author.username
