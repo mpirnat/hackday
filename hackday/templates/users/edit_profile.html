@@ -1,8 +1,8 @@
-<html>
-<head>
-    <title>Edit Profile: {{user_.username}}!</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Edit Profile: {{user_.username}}!{% endblock %}
+
+{% block content %}
 
     {% if message %}
     <p>{{message}}</p>
@@ -17,5 +17,4 @@
 
     <p><a href="/users/{{user_.username}}">Cancel</a></p>
 
-</body>
-</html>
+{% endblock %}
