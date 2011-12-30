@@ -1,13 +1,14 @@
-<html>
-<head>
-    <title>User Profile: {{user_.username}}!</title>
-</head>
-<body>
+{% extends 'base.html' %}
+    {% block title %}User Profile: {{user_.username}}!{% endblock %}
+
+    {% block content %}
 
     <h3>{{user_.username}}</h3>
+
     {% if user_profile.image %}
     <p><img src="{{user_profile.image}}"></p>
     {% endif %}
+
     <p><strong>{{user_.first_name}} {{user_.last_name}}</strong></p>
     <p><strong>Email:</strong> {{user_.email}}</p>
     <p><strong>Created:</strong> {{user_profile.create_date}}</p>
@@ -18,6 +19,5 @@
     {% if user.is_authenticated and user.username == user_.username %}
     <p><a href="/users/{{user_.username}}/edit">Edit profile</a></p>
     {% endif %}
-    <p><a href="/users">All users</a></p>
-</body>
-</html>
+
+    {% endblock %}
