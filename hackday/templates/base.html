@@ -2,27 +2,47 @@
 <html>
     <head>
         <title>{% block title %}Hackday{% endblock %}</title>
-        <link rel="stylesheet" href="{{ STATIC_URL }}/css/base.css" />
-        <link rel="stylesheet" href="{{ STATIC_URL }}/css/theme.css" />
+        
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/theme.css" />
+        <style>
+		
+
+		</style>
+        
+        <script>
+		  document.createElement('article');
+		  document.createElement('aside');
+		  document.createElement('footer');
+		  document.createElement('header');
+		  document.createElement('hgroup');
+		  document.createElement('mark');
+		  document.createElement('nav');
+		  document.createElement('section');
+		</script>
+
     </head>
 
     <body id="{% block bodyid %}home{% endblock %}">
        
         <header>
-            <h1>Hackday!</h1>
+        
+            <a href="/blog" id="head-top">
+                <h1>Hackday</h1>
+                <p>A festival of Ingenuity <span>February 23 - 24</span></p>
+                <span class="x1"></span>
+            </a>
             
-            <nav>
-                {% include "nav.html" %}
-            </nav>
+            {% include "nav.html" %}
             
         </header>
 
-        
-
-        {% block content %}Content goes here{% endblock %}
+        <div id="content">
+          {% block content %}Content goes here{% endblock %}
+        </div>
         
         <footer>
-            
+            {% include "nav.html" %}
         </footer>
 
     </body>
