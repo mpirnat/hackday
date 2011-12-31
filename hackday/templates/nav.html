@@ -1,18 +1,20 @@
-<div>
-{% if user.is_authenticated %}
-    <p>Welcome back, {{user.username}}!</p>
-    <p><a href="/users/sign-out">Sign out</a></p>
-{% else %}
-    <p>New users: <a href="/users/sign-up">Sign up!</a></p>
-    <p>Returning users: <a href="/users/sign-in">Sign in</a></p>
-{% endif %}
-</div>
-
-<ul>
-    <li><a href="/">Home</a></li>
-    {% if nav_pages %}
-        {% for page in nav_pages %}
-    <li><a href="/{{page.path}}">{{page.title}}</a></li>
-        {% endfor %}
+<nav>
+    <div>
+    {% if user.is_authenticated %}
+        <p>Welcome back, {{user.username}}!</p>
+        <p><a href="/users/sign-out">Sign out</a></p>
+    {% else %}
+        <p>New users: <a href="/users/sign-up">Sign up!</a></p>
+        <p>Returning users: <a href="/users/sign-in">Sign in</a></p>
     {% endif %}
-</ul>
+    </div>
+
+    <ul>
+        <li><a href="/"><span>Home</span><strong></strong></a></li>
+        {% if nav_pages %}
+            {% for page in nav_pages %}
+        <li><a href="/{{page.path}}"><span>{{page.title}}</span></a></li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+</nav>
