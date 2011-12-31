@@ -39,7 +39,7 @@ a { outline: none; }
 = site wide
 --------------------------------------------------------------------------*/
 body{
-	background: #C9B181
+	background: #C9B181;
 	font-size:100%;
 	font-family:Verdana, sans-serif;
 	line-height:130%;
@@ -63,34 +63,5 @@ h4{}
 	zoom: 1;
 	}
 
-#error{
-	color:#ff0000;
-}
-.error{
-	color:#ff0000;
-}	
-.logo-text{
-	color:#25bbab !important;
-}
-a.button{
-	background:url(/justwink/elements/button-back.gif) repeat left top;
-	-moz-box-shadow: 0px 0px 10px rgba(0,0,0,.9);
-	-webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.9);
-	box-shadow: 0px 0px 10px rgba(0,0,0,.9);
-	color:#ffffff;
-	display:inline-block;
-	font-family:'FFFTusjBold',verdana,san-serif;
-	height:43px;
-	text-decoration:none;
-}
-a.button span{
-	background:url(/justwink/elements/button-icon.png) no-repeat 15px 8px;
-	display:inline-block;
-	height:33px;
-	padding:10px 20px 0 50px;
-}
-a:hover.button{
-	color:#000000;
-}
 a{color:#666;}
 a:hover{color:#ccc;}
