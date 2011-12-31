@@ -1,0 +1,96 @@
+/*-------------------------------------------------------------------------
+= Fancy Fonts - NOTE-there is a tracking file (JW1fontfacetrack) that must be added tpo the footer of every page that calls the rockwell fonts...
+--------------------------------------------------------------------------*/
+  @font-face{
+	  font-family: 'FFFTusjBold';
+	  src:url('../images/FFF_Tusj-webfont.eot');
+	  }
+	  @font-face{
+	  font-family: 'FFFTusjBold';
+	  src: url('../images/FFF_Tusj-webfont.eot?#iefix') format('embedded-opentype');
+	  src: url('../images/FFF_Tusj-webfont.ttf') format('truetype'),
+		   url('../images/FFF_Tusj-webfont.svg#FFFTusjBold') format('svg');
+	  font-weight: normal;
+	  font-style: normal;
+  }
+/*Web fonts © AGC, LLC*/
+
+/*-------------------------------------------------------------------------
+= general reset
+--------------------------------------------------------------------------*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, input, ins, kbd, q, s, samp,
+small, strike, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+}
+
+ol, ul{ list-style:none; }
+a { outline: none; }
+/*-------------------------------------------------------------------------
+= site wide
+--------------------------------------------------------------------------*/
+body{
+	background: #C9B181
+	font-size:100%;
+	font-family:Verdana, sans-serif;
+	line-height:130%;
+	position:relative;
+	text-align:center;
+}
+h1,h2,h3,h4{
+  font-family:'FFFTusjBold',verdana,san-serif;
+  font-weight:normal;
+  color:#6f442f;
+}
+h2{}
+h3{}
+h4{}
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+	zoom: 1;
+	}
+
+#error{
+	color:#ff0000;
+}
+.error{
+	color:#ff0000;
+}	
+.logo-text{
+	color:#25bbab !important;
+}
+a.button{
+	background:url(/justwink/elements/button-back.gif) repeat left top;
+	-moz-box-shadow: 0px 0px 10px rgba(0,0,0,.9);
+	-webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.9);
+	box-shadow: 0px 0px 10px rgba(0,0,0,.9);
+	color:#ffffff;
+	display:inline-block;
+	font-family:'FFFTusjBold',verdana,san-serif;
+	height:43px;
+	text-decoration:none;
+}
+a.button span{
+	background:url(/justwink/elements/button-icon.png) no-repeat 15px 8px;
+	display:inline-block;
+	height:33px;
+	padding:10px 20px 0 50px;
+}
+a:hover.button{
+	color:#000000;
+}
+a{color:#666;}
+a:hover{color:#ccc;}
