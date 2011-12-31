@@ -18,4 +18,9 @@
         <p>Crickets.</p>
     {% endif %}
 
+    {% if user.is_authenticated %}
+    <p>Why not <a href="/charities/suggest">suggest a charity</a> to add to the
+    list?</p>
+    {% endif %}
+
     {% endblock %}

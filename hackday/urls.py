@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     (r'^blog/?', include('blog.urls')),
 
     # List of approved charities
-    (r'^charities/?', 'charities.views.index'),
+    (r'^charities/?', include('charities.urls')),
 
     # User stuff - sign up, sign in, sign out, user profiles
     (r'^users/?', include('users.urls')),

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Suggest a Charity!{% endblock %}
+
+{% block content %}
+
+    {% if error_message %}
+    <p>{{error_message}}</p>
+    {% endif %}
+
+    <h3>Suggest a Charity</h3>
+
+    <form action="/charities/suggest" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Submit" />
+    </form>
+
+{% endblock %}

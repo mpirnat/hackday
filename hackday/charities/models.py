@@ -23,16 +23,16 @@ class Charity(models.Model):
     name = models.CharField('name of charity', max_length=255, db_index=True,
             unique=True)
     url = models.CharField('url', max_length=255)
-    tax_id = models.CharField('tax id', max_length=10)
+    tax_id = models.CharField('tax id', max_length=10, blank=True, null=True)
     description = models.TextField('description of charity')
     status = models.CharField(max_length=1, choices=STATUS.CHOICES)
 
     attachments = models.ManyToManyField(Attachment,
-            related_name="%(app_label)s_%(class)s_attachments")
+            related_name="%(app_label)s_%(class)s_attachments", blank=True)
     images = models.ManyToManyField(ImageAttachment,
-            related_name="%(app_label)s_%(class)s_images")
+            related_name="%(app_label)s_%(class)s_images", blank=True)
     links = models.ManyToManyField(Link,
-            related_name="%(app_label)s_%(class)s_links")
+            related_name="%(app_label)s_%(class)s_links", blank=True)
 
     suggester = models.ForeignKey(User)
 
