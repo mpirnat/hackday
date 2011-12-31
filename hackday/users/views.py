@@ -4,6 +4,7 @@ from users.models import User, UserProfile, Tshirt, Diet, Location
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
+from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import Context, RequestContext, loader
@@ -18,41 +19,46 @@ def index(request):
 
 
 def sign_up(request):
+    error_message = None
 
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             # Create the user
-            user = User.objects.create_user(
-                    form.cleaned_data['user_name'],
-                    form.cleaned_data['email'],
-                    form.cleaned_data['password'])
+            try:
+                user = User.objects.create_user(
+                        form.cleaned_data['user_name'],
+                        form.cleaned_data['email'],
+                        form.cleaned_data['password'])
+            except IntegrityError:
+                error_message = "That username is not available."
+            else:
+                user.first_name = form.cleaned_data['first_name']
+                user.last_name = form.cleaned_data['last_name']
+                user.save()
 
-            user.first_name = form.cleaned_data['first_name']
-            user.last_name = form.cleaned_data['last_name']
-            user.save()
+                # Create the user profile
+                user_profile = UserProfile(
+                        user=user,
+                        tshirt=form.cleaned_data['tshirt'],
+                        diet=form.cleaned_data['diet'],
+                        location=form.cleaned_data['location'],
+                        description=form.cleaned_data['description'],
+                        notify_by_email=form.cleaned_data['notify_by_email'])
+                user_profile.save()
+                
+                # Log the user in
+                user = authenticate(username=user.username,
+                        password=form.cleaned_data['password'])
+                login(request, user)
 
-            # Create the user profile
-            user_profile = UserProfile(
-                    user=user,
-                    tshirt=form.cleaned_data['tshirt'],
-                    diet=form.cleaned_data['diet'],
-                    location=form.cleaned_data['location'],
-                    description=form.cleaned_data['description'],
-                    notify_by_email=form.cleaned_data['notify_by_email'])
-            user_profile.save()
-
-            # Log the user in
-            user = authenticate(username=user.username,
-                    password=form.cleaned_data['password'])
-            login(request, user)
-
-            return HttpResponseRedirect('/users') # Redirect after POST
+                return HttpResponseRedirect('/users') # Redirect after POST
     else:
         form = SignUpForm()
 
     env = common_env()
     env['form'] = form
+    env['error_message'] = error_message
     return render(request, 'users/signup.html', env)
 
 

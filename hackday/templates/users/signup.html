@@ -6,6 +6,10 @@
     {% block content %}
     <h3>Sign Up</h3>
 
+    {% if error_message %}
+    <p>{{error_message}}</p>
+    {% endif %}
+
     <form action="/users/sign-up" method="POST">
         {% csrf_token %}
         {{form.as_p|checkbox_first}}
