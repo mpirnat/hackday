@@ -41,6 +41,7 @@ class UserProfile(models.Model):
 
     user = models.ForeignKey(User, unique=True)
     description = models.TextField('user bio')
+    notify_by_email = models.BooleanField('send posts by email')
 
     tshirt = models.ForeignKey(Tshirt)
     diet = models.ForeignKey(Diet)

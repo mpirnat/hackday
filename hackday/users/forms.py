@@ -17,6 +17,8 @@ class SignUpForm(forms.Form):
             queryset=Location.objects.all())
     description = forms.CharField(label='Describe Yourself',
             widget=forms.Textarea, required=False)
+    notify_by_email = forms.BooleanField(
+            label="Email me when there's a new post", required=False)
 
 
 class SignInForm(forms.Form):
@@ -39,6 +41,7 @@ class UserProfileForm(forms.Form):
             queryset=Location.objects.all())
     description = forms.CharField(label='Describe Yourself',
             widget=forms.Textarea, required=False)
+    notify_by_email = forms.BooleanField(
+            label="Email me when there's a new post", required=False)
     password = forms.CharField(label='Password',
             widget=forms.PasswordInput, required=False)
-

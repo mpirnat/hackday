@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load custom_filters %}
 
 {% block title %}Edit Profile: {{user_.username}}!{% endblock %}
 
@@ -13,7 +14,7 @@
 
     <form action="/users/{{user_.username}}/edit" method="POST">
         {% csrf_token %}
-        {{form.as_p}}
+        {{form.as_p|checkbox_first}}
         <input type="submit" value="Submit" />
     </form>
 

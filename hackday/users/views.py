@@ -38,7 +38,8 @@ def sign_up(request):
                     tshirt=form.cleaned_data['tshirt'],
                     diet=form.cleaned_data['diet'],
                     location=form.cleaned_data['location'],
-                    description=form.cleaned_data['description'])
+                    description=form.cleaned_data['description'],
+                    notify_by_email=form.cleaned_data['notify_by_email'])
             user_profile.save()
 
             # Log the user in
@@ -122,6 +123,7 @@ def edit_profile(request, username):
             user_profile.diet = form.cleaned_data['diet']
             user_profile.location = form.cleaned_data['location']
             user_profile.description = form.cleaned_data['description']
+            user_profile.notify_by_email = form.cleaned_data['notify_by_email']
 
             user.save()
             user_profile.save()
@@ -137,6 +139,7 @@ def edit_profile(request, username):
                 'diet': user_profile.diet,
                 'location': user_profile.location,
                 'description': user_profile.description,
+                'notify_by_email': user_profile.notify_by_email,
         })
 
     env = common_env()
