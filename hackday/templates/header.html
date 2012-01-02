@@ -1,0 +1,22 @@
+<header>
+
+    <a href="/" id="head-logo">
+        <h1>Hackday</h1>
+        <p>A festival of Ingenuity <span>February 23 - 24</span></p>
+        <span class="x1"></span>
+    </a>
+    
+    <div id="head-welcome">
+    {% if user.is_authenticated %}
+        <p>Welcome back, {{user.username}}!</p>
+        <p><a href="/users/sign-out">Sign out</a></p>
+    {% else %}
+        <p>New users: <a href="/users/sign-up">Sign up!</a></p>
+        <p>Returning users: <a href="/users/sign-in">Sign in</a></p>
+    {% endif %}
+    </div>
+    
+    
+    {% include "nav.html" %}
+    
+</header>
