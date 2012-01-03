@@ -2,9 +2,6 @@
 
     <ul class="head-navigate">
         <li><a href="/"><span>Home</span></a></li>
-    </ul>
-    
-    <ul class="head-page">
         {% if nav_pages %}
             {% for page in nav_pages %}
         <li><a href="/{{page.path}}"><span>{{page.title}}</span></a></li>

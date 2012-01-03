@@ -215,7 +215,7 @@ footer nav {display:none;} /*hide footer nav in desktop view*/
 }
 #content input[type="radio"],
 #content input[type="checkbox"]{
-	display:inline;
+	float:left;
 	text-align: left;
 	vertical-align:baseline;
 }
