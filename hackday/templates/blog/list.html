@@ -1,0 +1,31 @@
+{% load markup %}
+{% if entries.object_list %}
+    <ul>
+    {% for entry in entries.object_list %}
+        <li>
+            <h3><a href="/blog/{{ entry.id }}/">{{ entry.title }}</a></h3>
+            <p>Published: {{ entry.pub_date|date:"F d, Y," }} at {{ entry.pub_date|date:"H:i" }}</p>
+            <p>Author: <a href="/users/{{ entry.author.username }}">{{entry.author.username}}</a></p>
+            {{ entry.content|markdown:"safe" }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    {% if entries.number > 1 %}
+    <a href="?page=1">First</a>
+    {% endif %}
+
+    {% if entries.has_previous %}
+    <a href="?page={{ entries.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    {% if entries.has_next %}
+    <a href="?page={{ entries.next_page_number }}">Next</a>
+    {% endif %}
+
+    {% if entries.number < entries.paginator.num_pages %}
+    <a href="?page={{ entries.paginator.num_pages }}">Last</a>
+    {% endif %}
+{% else %}
+    <p>Crickets.</p>
+{% endif %}

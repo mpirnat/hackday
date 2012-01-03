@@ -1,23 +1,11 @@
 {% extends 'base.html' %}
-{% load markup %}
 
     {% block title %}Hackday: Blog{% endblock %}
     
     {% block content %}
     <h2>Latest Blog Entries</h2>
-    {% if latest_entries %}
-        <ul>
-        {% for entry in latest_entries %}
-            <li>
-                <h3><a href="/blog/{{ entry.id }}/">{{ entry.title }}</a></h3>
-                {{ entry.content|markdown:"safe"|truncatewords:25 }}
 
-                </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>Crickets.</p>
-    {% endif %}
-    
+    {% include 'blog/list.html' %}
+
     {% endblock %}
 

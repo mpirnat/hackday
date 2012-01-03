@@ -4,14 +4,7 @@
     {% block content %}
 
     <h3>Entries matching category '{{ slug }}':</h3>
-    {% if entries %}
-    <ul>
-        {% for entry in entries %}
-        <li><a href="/blog/{{ entry.id }}">{{ entry.title }}</a></li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p>Crickets.</p>
-    {% endif %}
+
+    {% include 'blog/list.html' %}
 
     {% endblock %}
