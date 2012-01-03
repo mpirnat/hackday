@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 
     {% block title %}Sign In!{% endblock %}
+    {% block bodyid %}page-signin{% endblock %}
 
     {% block content %}
     <h3>Sign In</h3>
 
     {% if error_message %}
-    <p>{{error_message}}</p>
+    <p class="error">{{error_message}}</p>
     {% endif %}
 
     <form action="/users/sign-in" method="POST">
