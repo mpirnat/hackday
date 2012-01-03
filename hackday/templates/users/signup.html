@@ -2,12 +2,13 @@
 {% load custom_filters %}
 
     {% block title %}Sign Up!{% endblock %}
+    {% block bodyid %}page-signup{% endblock %}
 
     {% block content %}
     <h3>Sign Up</h3>
 
     {% if error_message %}
-    <p>{{error_message}}</p>
+    <p class="error">{{error_message}}</p>
     {% endif %}
 
     <form action="/users/sign-up" method="POST">

@@ -46,6 +46,8 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
 }
 ol, ul {
 	list-style: none;
@@ -67,11 +69,6 @@ table {
 /*-------------------------------------------------------------------------
 = form setup
 --------------------------------------------------------------------------*/
-input [type="text"]
-input:radio
-input:checkbox
-input:radio
-input:radio
 /*-------------------------------------------------------------------------
 = site wide
 --------------------------------------------------------------------------*/
@@ -127,20 +124,35 @@ header:after {
 header {
 	position: relative;
 }
+header #head-logo {
+	color: #fff;
+	float: left;
+	padding: 5px 0 5px 10px;
+	text-decoration: none;
+}
 header h1 {
 	color: #fff;
-	font-size: 30px;
-	line-height: 30px;
+	font-size: 50px;
+	line-height: 50px;
 	padding: 5px;
+	text-decoration: none;
 }
 
-header p {
-	bottom: 10px;
-	position: absolute;
-	right: 10px;
+header #head-welcome {
+	float: right;
+	padding: 15px 10px 5px 0;
+}
+header #head-welcome p{
+	color: #fff;
+	text-align: right; 
+	text-decoration: none;
+}
+header #head-welcome p a{
+	color: #fff;
 }
 nav {
 	background: #999;
+	clear: both;
 }
 nav ul:after {
     clear: both;
@@ -153,7 +165,17 @@ nav ul:after {
 nav ul li {
 	float: left;
 }
+nav ul li:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+	zoom: 1;
+}
 nav ul li a {
+	display: block;
+	float: left;
 	padding: 10px;
 }
 
@@ -165,3 +187,48 @@ nav ul li a:hover {
 = footer
 --------------------------------------------------------------------------*/
 footer nav {display:none;} /*hide footer nav in desktop view*/
+
+
+/*-------------------------------------------------------------------------
+= forms
+
+--------------------------------------------------------------------------*/
+#content h2 {
+	font-size: 50px;
+	line-height: 60px;
+}
+#content h3 {
+	font-size: 40px;
+	line-height: 50px;
+}
+#content p {
+	padding: 0 0 20px 0;
+}
+#content label {
+	display:block;
+}
+#content input[type="text"],
+#content input[type="password"],
+#content textarea  {
+	display:block;
+	width: 300px;
+}
+#content input[type="radio"],
+#content input[type="checkbox"]{
+	float:left;
+	text-align: left;
+	vertical-align:baseline;
+}
+
+#content input[type="submit"]{
+	background-color: #603;
+	color: #ffffff;
+	font-size: 21px;
+	padding: 5px 20px;
+}
+
+
+#content input[type="submit"]:hover{
+	background-color: #ccc;
+	color: #603;
+}
