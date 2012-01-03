@@ -4,15 +4,31 @@ from django.http import HttpResponse
 from django.template import Context, loader
 from django.forms.models import modelformset_factory
 from django.core.context_processors import csrf
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from django.template import RequestContext
 
 
+def _get_paginated_entries(all_entries, page, page_size):
+    paginator = Paginator(all_entries, page_size)
+
+    try:
+        entries = paginator.page(page)
+    except PageNotAnInteger:
+        entries = paginator.page(1)
+    except EmptyPage:
+        entries = paginator.page(paginator.num_pages)
+
+    return entries
+
+
 def index(request):
-    latest_entries = Entry.objects.filter(status=STATUS.PUBLISHED).\
-            order_by('-pub_date')[:5]
+    all_entries = Entry.objects.filter(status=STATUS.PUBLISHED).\
+            order_by('-pub_date')
+    page = request.GET.get('page', 1)
+
     env = common_env()
-    env['latest_entries'] = latest_entries
+    env['entries'] = _get_paginated_entries(all_entries, page, 5)
     return render(request, 'blog/index.html', env)
 
 
@@ -24,19 +40,23 @@ def entry(request, entry_id):
 
 
 def category(request, slug):
-    entries = Entry.objects.filter(categories__slug=slug,
-            status=STATUS.PUBLISHED).order_by('pub_date')
+    all_entries = Entry.objects.filter(categories__slug=slug,
+            status=STATUS.PUBLISHED).order_by('-pub_date')
+    page = request.GET.get('page', 1)
+    
     env = common_env()
-    env['entries'] = entries
+    env['entries'] = _get_paginated_entries(all_entries, page, 10)
     env['slug'] = slug
     return render(request, 'blog/category.html', env)
 
 
 def tag(request, slug):
-    entries = Entry.objects.filter(tags__slug=slug,
-            status=STATUS.PUBLISHED).order_by('pub_date')
+    all_entries = Entry.objects.filter(tags__slug=slug,
+            status=STATUS.PUBLISHED).order_by('-pub_date')
+    page = request.GET.get('page', 1)
+ 
     env = common_env()
-    env['entries'] = entries
+    env['entries'] = _get_paginated_entries(all_entries, page, 10)
     env['slug'] = slug
     return render(request, 'blog/tag.html', env)
 
