@@ -19,26 +19,26 @@ urlpatterns = patterns('',
     (r'^charities/', include('charities.urls')),
 
     # User stuff - sign up, sign in, sign out, user profiles
-    (r'^users/reset-password/?$', 'django.contrib.auth.views.password_reset',
+    url(r'^users/reset-password/?$', 'django.contrib.auth.views.password_reset',
         {
             'template_name': 'users/password_reset_form.html',
             'email_template_name': 'users/password_reset_email.html',
-        }),
-    (r'^users/reset-password/requested/?$',
+        }, name='reset-password'),
+    url(r'^users/reset-password/requested/?$',
         'django.contrib.auth.views.password_reset_done',
         {
             'template_name': 'users/password_reset_done.html',
-        }),
-    (r'^users/reset-password/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/?$',
+        }, name='reset-password-done'),
+    url(r'^users/reset-password/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/?$',
         'django.contrib.auth.views.password_reset_confirm',
         {
             'template_name': 'users/password_reset_confirm.html'
-        }),
-    (r'^users/reset-password/done/?$',
+        }, name='reset-password-confirm'),
+    url(r'^users/reset-password/done/?$',
         'django.contrib.auth.views.password_reset_complete',
         {
             'template_name': 'users/password_reset_complete.html'
-        }),
+        }, name='reset-password-complete'),
 
     (r'^users/', include('users.urls')),
 
