@@ -6,7 +6,10 @@ from django.template import Context, loader
 
 
 def page(request, path):
-    page = get_object_or_404(Page, path=path, status=STATUS.PUBLISHED)
+    if request.user.is_superuser:
+        page = get_object_or_404(Page, path=path)
+    else:
+        page = get_object_or_404(Page, path=path, status=STATUS.PUBLISHED)
     env = common_env()
     env['page'] = page
     return render(request, 'wiki/page.html', env)
