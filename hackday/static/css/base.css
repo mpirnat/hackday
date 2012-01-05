@@ -233,20 +233,20 @@ footer nav {display:none;} /*hide footer nav in desktop view*/
 	color: #603;
 }
 
-#content ol {
+.rendered-content ol {
 	list-style: decimal;
 	margin-left: 4em;
 }
 
-#content ul {
+.rendered-content ul {
 	list-style: disc;
 	margin-left: 4em;
 }
 
-#content em {
+.rendered-content em {
 	font-style: italic;
 }
 
-#content strong {
+.rendered-content strong {
 	font-weight: bold;
 }

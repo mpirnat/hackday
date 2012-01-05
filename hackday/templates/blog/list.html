@@ -6,7 +6,9 @@
             <h3><a href="{% url blog-entry entry.id %}/">{{ entry.title }}</a></h3>
             <p>Published: {{ entry.pub_date|date:"F d, Y," }} at {{ entry.pub_date|date:"H:i" }}</p>
             <p>Author: <a href="{% url users-profile entry.author.username %}">{{entry.author.username}}</a></p>
+            <div class="rendered-content">
             {{ entry.content|markdown:"safe" }}
+            </div>
         </li>
     {% endfor %}
     </ul>
