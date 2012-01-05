@@ -33,7 +33,10 @@ def index(request):
 
 
 def entry(request, entry_id):
-    entry = Entry.objects.get(pk=entry_id, status=STATUS.PUBLISHED)
+    if request.user.is_superuser:
+        entry = Entry.objects.get(pk=entry_id)
+    else:
+        entry = Entry.objects.get(pk=entry_id, status=STATUS.PUBLISHED)
     env = common_env()
     env['entry'] = entry
     return render(request, 'blog/entry.html', env)
@@ -43,7 +46,7 @@ def category(request, slug):
     all_entries = Entry.objects.filter(categories__slug=slug,
             status=STATUS.PUBLISHED).order_by('-pub_date')
     page = request.GET.get('page', 1)
-    
+
     env = common_env()
     env['entries'] = _get_paginated_entries(all_entries, page, 10)
     env['slug'] = slug
@@ -54,7 +57,7 @@ def tag(request, slug):
     all_entries = Entry.objects.filter(tags__slug=slug,
             status=STATUS.PUBLISHED).order_by('-pub_date')
     page = request.GET.get('page', 1)
- 
+
     env = common_env()
     env['entries'] = _get_paginated_entries(all_entries, page, 10)
     env['slug'] = slug
@@ -77,13 +80,13 @@ def blog_edit(request, entry_id=None):
             entry_formset = "Entry Saved" # do something.
         else:
             errors = str(formset.errors)
-    
+
     t = loader.get_template('blog/admin_edit.html')
     c = RequestContext(request, {
         'entry_formset': entry_formset,
         'errors' : errors,
     })
- 
+
     return HttpResponse(t.render(c))
 
 
