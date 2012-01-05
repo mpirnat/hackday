@@ -4,7 +4,11 @@ from django.core.urlresolvers import reverse
 from assets.models import Attachment, ImageAttachment, Link
 from django.forms import ModelForm
 from taggit.managers import TaggableManager
+from django.db.models.signals import pre_save, post_save
+from django.dispatch import receiver
+from blog.notifications import BlogNotification
 
+ENTRY_STATUS = {}
 
 class STATUS(object):
     DRAFT = 'D'
@@ -96,3 +100,20 @@ class EntryForm(ModelForm):
 
     class Meta:
         model = Entry
+
+
+@receiver(pre_save, sender=Entry)
+def blog_entry_will_save(sender, instance, raw, **kwargs):
+    if instance.id:
+        db_data = Entry.objects.get(pk=instance.id)
+        ENTRY_STATUS[instance.id] = db_data.status
+
+@receiver(post_save, sender=Entry)
+def blog_entry_did_save(sender, instance, created, raw, **kwargs):
+    is_published = instance.status == STATUS.PUBLISHED
+    was_published = ENTRY_STATUS.get(instance.id) == STATUS.PUBLISHED
+
+    if is_published and not was_published:
+        notifier = BlogNotification(instance)
+        notifier.send_email()
+        notifier.send_tweet()
