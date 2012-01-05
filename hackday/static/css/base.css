@@ -232,3 +232,21 @@ footer nav {display:none;} /*hide footer nav in desktop view*/
 	background-color: #ccc;
 	color: #603;
 }
+
+#content ol {
+	list-style: decimal;
+	margin-left: 4em;
+}
+
+#content ul {
+	list-style: disc;
+	margin-left: 4em;
+}
+
+#content em {
+	font-style: italic;
+}
+
+#content strong {
+	font-weight: bold;
+}

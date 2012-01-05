@@ -10,13 +10,13 @@ urlpatterns = patterns('',
     # url(r'^hackday/', include('hackday.foo.urls')),
 
     # Let the blog own the homepage?
-    (r'^/*$', 'blog.views.index'),
+    url(r'^/*$', 'blog.views.index', name='blog-home'),
 
     # We have a blog!
-    (r'^blog/?', include('blog.urls')),
+    (r'^blog/', include('blog.urls')),
 
     # List of approved charities
-    (r'^charities/?', include('charities.urls')),
+    (r'^charities/', include('charities.urls')),
 
     # User stuff - sign up, sign in, sign out, user profiles
     (r'^users/reset-password/?$', 'django.contrib.auth.views.password_reset',
@@ -40,7 +40,7 @@ urlpatterns = patterns('',
             'template_name': 'users/password_reset_complete.html'
         }),
 
-    (r'^users/?', include('users.urls')),
+    (r'^users/', include('users.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -49,7 +49,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
     # Arbitrary wiki pages FTW!
-    (r'^(?P<path>.*[^/])/?$', 'wiki.views.page'),
+    url(r'^(?P<path>.*[^/])/?$', 'wiki.views.page', name='wiki-page'),
 )
 
 

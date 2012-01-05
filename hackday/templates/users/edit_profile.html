@@ -11,14 +11,14 @@
     {% endif %}
 
     <h3>Editing {{user_.username}}</h3>
-    <img src="{{ user_profile.image }}" />
+    <img src="{{ user_profile.image }}" /> Change your avatar at <a href="http://www.gravatar.com">gravatar.com</a>
 
-    <form action="/users/{{user_.username}}/edit" method="POST">
+    <form action="{% url users-edit-profile user_.username %}" method="POST">
         {% csrf_token %}
         {{form.as_p|checkbox_first}}
         <input type="submit" value="Submit" />
     </form>
 
-    <p><a href="/users/{{user_.username}}">Cancel</a></p>
+    <p><a href="{% url users-profile user_.username %}">Cancel</a></p>
 
 {% endblock %}

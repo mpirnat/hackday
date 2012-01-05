@@ -4,7 +4,7 @@
     {% block content %}
 
     <h3>{{user_.username}}</h3>
-    <p><img src="{{user_profile.image}}"></p>
+    <p><img src="{{user_profile.image}}"> Change your avatar at <a href="http://www.gravatar.com">gravatar.com</a></p>
     <p><strong>{{user_.first_name}} {{user_.last_name}}</strong></p>
     <p><strong>Email:</strong> {{user_.email}}</p>
     <p><strong>Created:</strong> {{user_profile.create_date}}</p>
@@ -13,7 +13,7 @@
     <p>{{user_profile.description}}</p>
 
     {% if user.is_authenticated and user.username == user_.username %}
-    <p><a href="/users/{{user_.username}}/edit">Edit profile</a></p>
+    <p><a href="{% url users-edit-profile user_.username %}">Edit profile</a></p>
     {% endif %}
 
     {% endblock %}

@@ -10,7 +10,7 @@
 
     <h3>Suggest a Charity</h3>
 
-    <form action="/charities/suggest" method="POST">
+    <form action="{% url charities-suggest %}" method="POST">
         {% csrf_token %}
         {{form.as_p}}
         <input type="submit" value="Submit" />

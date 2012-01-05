@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.urlresolvers import reverse
 from assets.models import Attachment, ImageAttachment, Link
 from django.forms import ModelForm
 from taggit.managers import TaggableManager
@@ -85,7 +86,7 @@ class Entry(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return "/blog/%d" % self.id
+        return reverse('blog-entry', args=[self.id])
 
     class Meta:
         verbose_name_plural = "Entries"

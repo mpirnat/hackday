@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from wiki.models import Page
+from wiki.models import Page, STATUS
 
 def get_nav_pages():
-    pages = Page.objects.filter(navigable=True).order_by('order', 'title')
+    pages = Page.objects.filter(status=STATUS.PUBLISHED, navigable=True).order_by('order', 'title')
     return pages
 
 
