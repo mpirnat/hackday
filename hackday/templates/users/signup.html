@@ -11,7 +11,7 @@
     <p class="error">{{error_message}}</p>
     {% endif %}
 
-    <form action="/users/sign-up" method="POST">
+    <form action="{% url users-sign-up %}" method="POST">
         {% csrf_token %}
         {{form.as_p|checkbox_first}}
         <input type="submit" value="Submit" />

@@ -1,10 +1,10 @@
 <nav>
 
     <ul class="head-navigate">
-        <li><a href="/"><span>Home</span></a></li>
+        <li><a href="{% url blog-home %}"><span>Home</span></a></li>
         {% if nav_pages %}
             {% for page in nav_pages %}
-        <li><a href="/{{page.path}}"><span>{{page.title}}</span></a></li>
+        <li><a href="{% url wiki-page page.path%}"><span>{{page.title}}</span></a></li>
             {% endfor %}
         {% endif %}
     </ul>

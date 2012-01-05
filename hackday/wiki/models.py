@@ -31,7 +31,7 @@ class FORMAT(object):
 
 class Page(models.Model):
     title = models.CharField('title of page', max_length=255)
-    path = models.CharField('path of page', max_length=1024, db_index=True,
+    path = models.CharField('path of page', max_length=255, db_index=True,
             unique=True)
     content = models.TextField('page content')
     status = models.CharField(max_length=1, choices=STATUS.CHOICES)
