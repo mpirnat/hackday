@@ -1,0 +1,8 @@
+{% load markup %}
+{{entry.author.username}} has posted a new {{site_name}} blog post:
+
+{{entry.title|safe}}
+
+{{entry.content|markdown|striptags}}
+
+{{site_domain}}{% url blog-entry entry.id %}
