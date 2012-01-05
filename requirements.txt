@@ -4,3 +4,4 @@ django-taggit
 PIL
 Markdown
 docutils
+tweepy
