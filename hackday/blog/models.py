@@ -32,7 +32,7 @@ class FORMAT(object):
 
     CHOICES = (
         (MARKDOWN, 'Markdown'),
-    #    (RESTRUCTURED_TEXT, 'Restructured Text'),
+        (RESTRUCTURED_TEXT, 'Restructured Text'),
     #    (HTML, 'HTML'),
     )
 
