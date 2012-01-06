@@ -1,5 +1,5 @@
 from common import common_env
-from blog.models import Entry, EntryForm, STATUS
+from blog.models import Entry, EntryForm, STATUS, FORMAT
 from django.http import HttpResponse
 from django.template import Context, loader
 from django.forms.models import modelformset_factory
@@ -29,6 +29,7 @@ def index(request):
 
     env = common_env()
     env['entries'] = _get_paginated_entries(all_entries, page, 5)
+    env['formats'] = FORMAT
     return render(request, 'blog/index.html', env)
 
 
@@ -39,6 +40,7 @@ def entry(request, entry_id):
         entry = Entry.objects.get(pk=entry_id, status=STATUS.PUBLISHED)
     env = common_env()
     env['entry'] = entry
+    env['formats'] = FORMAT
     return render(request, 'blog/entry.html', env)
 
 

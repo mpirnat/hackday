@@ -1,6 +1,6 @@
 # Django settings for hackday project.
 import os
-VENV_ROOT = os.environ['VIRTUAL_ENV']
+VENV_ROOT = os.environ.get('VIRTUAL_ENV', '')
 CODE_ROOT = os.path.split(__file__)[0]
 
 DEBUG = True
