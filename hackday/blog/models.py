@@ -1,3 +1,4 @@
+from common import get_short_url
 from django.contrib.auth.models import User
 from django.db import models
 from django.core.urlresolvers import reverse
@@ -91,6 +92,9 @@ class Entry(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog-entry', args=[self.id])
+
+    def short_url(self):
+        return get_short_url(self.get_absolute_url())
 
     class Meta:
         verbose_name_plural = "Entries"
