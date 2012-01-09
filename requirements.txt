@@ -5,3 +5,4 @@ PIL
 Markdown
 docutils
 tweepy
+beautifulsoup
