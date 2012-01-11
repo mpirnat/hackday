@@ -8,7 +8,7 @@
 
     <div id="head-welcome">
     {% if user.is_authenticated %}
-        <p>Welcome back, {{user.username}}!</p>
+        <p>Welcome back, <a href="{% url users-profile user.username %}">{{user.username}}</a>!</p>
         <p><a href="{% url users-sign-out %}">Sign out</a></p>
         {% if user.is_staff %}
         <p><a href="{% url admin:index %}">Admin</a> | <a href="{% url qbe_form %}">Reporting</a></p>
