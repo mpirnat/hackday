@@ -4,7 +4,9 @@ from users.models import Tshirt, Diet, Location
 
 class SignUpForm(forms.Form):
 
-    user_name = forms.CharField(label='User Name')
+    user_name = forms.SlugField(label='User Name',
+            error_messages={'required': 'Please enter a user name.',
+                            'invalid': 'Please enter a user name containing only letters, numbers, underscores, and hyphens.'})
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     first_name = forms.CharField(label='First Name')
     last_name = forms.CharField(label='Last Name')
@@ -23,7 +25,9 @@ class SignUpForm(forms.Form):
 
 class SignInForm(forms.Form):
 
-    user_name = forms.CharField(label='User Name')
+    user_name = forms.SlugField(label='User Name',
+            error_messages={'required': 'Please enter a user name.',
+                            'invalid': 'Please enter a user name containing only letters, numbers, underscores, and hyphens.'})
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
     next = forms.CharField(label='Next URL', widget=forms.HiddenInput)
 
