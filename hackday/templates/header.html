@@ -5,21 +5,21 @@
         <p>A festival of Ingenuity <span>February 23 - 24</span></p>
         <span class="x1"></span>
     </a>
-    
+
     <div id="head-welcome">
     {% if user.is_authenticated %}
-        <p>Welcome back, {{user.username}}!</p>
+        <p>Welcome back, <a href="{% url users-profile user.username %}">{{user.username}}</a>!</p>
         <p><a href="{% url users-sign-out %}">Sign out</a></p>
         {% if user.is_staff %}
-        <p><a href="{% url admin:index %}">Admin</a></p>
+        <p><a href="{% url admin:index %}">Admin</a> | <a href="{% url qbe_form %}">Reporting</a></p>
         {% endif %}
     {% else %}
         <p>New users: <a href="{% url users-sign-up %}">Sign up!</a></p>
         <p>Returning users: <a href="{% url users-sign-in %}">Sign in</a></p>
     {% endif %}
     </div>
-    
-    
+
+
     {% include "nav.html" %}
-    
+
 </header>
