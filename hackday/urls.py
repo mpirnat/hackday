@@ -48,6 +48,9 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
 
+    # django_qbe reporting
+    url(r'^reporting/', include('django_qbe.urls')),
+
     # Arbitrary wiki pages FTW!
     url(r'^(?P<path>.*[^/])/?$', 'wiki.views.page', name='wiki-page'),
 )
