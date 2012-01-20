@@ -1,6 +1,4 @@
 from django.conf.urls.defaults import patterns, include, url
-from django.views.generic import DetailView, ListView
-from teams.models import Team
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -12,7 +10,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'hackday.views.home', name='home'),
     # url(r'^hackday/', include('hackday.foo.urls')),
 
-    (r'^teams/?', ListView.as_view(model=Team)),
+    (r'^teams/?', include('teams.urls')),
 
     # Let the blog own the homepage?
     (r'^/*$', 'blog.views.index'),
