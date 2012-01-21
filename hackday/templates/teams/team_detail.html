@@ -5,46 +5,40 @@
     {% block content %}
 
     <strong>name:</strong>
-    <p>{{ team.name }}</p>
+    <p>{{team.name}}</p>
 
     {% if team.logo %}
     <strong>logo:</strong>
-    <p>url: {{ team.logo.url }}</p>
+    <p><img src="{{team.logo.url}}"></p>
     {% endif %}
 
     <strong>category:</strong>
-    <p>{{ team.category }}</p>
+    <p>{{team.category}}</p>
 
     <strong>description:</strong>
-    <p>{{ team.project }}</p>
+    <p>{{team.project}}</p>
 
     <strong>captain:</strong>
-    <p>{{ team.captain.get_full_name|default:team.captain.username }}</p>
+    <p>{{team.captain.get_full_name|default:team.captain.username}}</p>
 
     <strong>members:</strong>
     <ul>
         {% for member in team.members.all %}
-        <li>{{ member.get_full_name|default:member.username }}</li>
+        <li>{{member.get_full_name|default:member.username}}</li>
         {% endfor %}
     </ul>
 
     <br>
 
     <strong>charity:</strong>
-    <p><a href="/charities/">{{ team.charity }}</a></p>
+    <p><a href="/charities/">{{team.charity}}</a></p>
 
     {% if team.images.all %}
     <strong>images:</strong>
     <ul>
         {% for image in team.images.all %}
-        <li>
-            <ul>
-                <li>title: {{ image.title }}</li>
-                <li>height: {{ image.height }}</li>
-                <li>width: {{ image.width }}</li>
-                <li>url: {{ image.attached_file.url }}</li>
-            </ul>
-        </li>
+        <li><img src="{{image.attached_file.url}}" title="{{image.title}}"
+            width="{{image.width}}" height="{{image.height}}" /></li>
         {% endfor %}
     </ul>
     {% endif %}
@@ -66,7 +60,7 @@
     <strong>attachments</strong>
     <ul>
         {% for attachment in team.attachments.all %}
-        <li><a href={{attachment.attached_file.url}}>{{ attachment.title }}</a></li>
+        <li><a href={{attachment.attached_file.url}}>{{attachment.title}}</a></li>
         {% endfor %}
     </ul>
     {% endif %}
