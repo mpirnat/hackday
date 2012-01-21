@@ -55,10 +55,12 @@
     <strong>links</strong>
     <ul>
         {% for link in team.links.all %}
-        <li>{{ link.url }}</li>
+        <li><a href="{{link.url}}">{{link.text}}</a></li>
         {% endfor %}
     </ul>
     {% endif %}
+
+    <br>
 
     {% if team.attachments.all %}
     <strong>attachments</strong>
