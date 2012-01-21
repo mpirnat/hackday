@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+    {% block title %}Hackday: Teams{% endblock %}
+
+    {% block content %}
+    <h2>Team List</h2>
+
+    <br><br>
+
+    {% for team in team_list %}
+
+    <a href="/teams/{{ team.slug }}">{{ team.name }}</a>
+    <br>
+    captain: <span>{{ team.captain.get_full_name|default:team.captain.username }}</span>
+
+    <br><br>
+
+    {% endfor %}
+
+    {% endblock %}

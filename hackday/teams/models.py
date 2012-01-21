@@ -62,7 +62,7 @@ class Team(models.Model):
             unique=True)
     slug = models.SlugField('slugified team name', db_index=True, unique=True)
     project = models.TextField('description of project')
-    logo = models.ImageField('team logo image', upload_to='teams')
+    logo = models.ImageField('team logo image', blank=True,  upload_to='teams')
 
     project_type = models.CharField('type of project', max_length=1,
             db_index=True, choices=PROJECT_TYPE.CHOICES)
@@ -76,11 +76,11 @@ class Team(models.Model):
     members = models.ManyToManyField(User,
             related_name="%(app_label)s_%(class)s_members")
 
-    attachments = models.ManyToManyField(Attachment,
+    attachments = models.ManyToManyField(Attachment, blank=True,
             related_name="%(app_label)s_%(class)s_attachments")
-    images = models.ManyToManyField(ImageAttachment,
+    images = models.ManyToManyField(ImageAttachment, blank=True,
             related_name="%(app_label)s_%(class)s_images")
-    links = models.ManyToManyField(Link,
+    links = models.ManyToManyField(Link, blank=True,
             related_name="%(app_label)s_%(class)s_links")
 
     category = models.ForeignKey(Category)
