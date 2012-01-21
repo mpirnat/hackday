@@ -1,7 +1,8 @@
 from markdown import markdown
+from docutils.core import publish_parts
 from django.contrib.syndication.views import Feed
 from django.utils import feedgenerator
-from blog.models import Entry
+from blog.models import Entry, FORMAT
 
 
 class LatestEntriesFeed(Feed):
@@ -18,7 +19,13 @@ class LatestEntriesFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return markdown(item.content, safe_mode="replace")
+        if item.format == FORMAT.MARKDOWN:
+            return markdown(item.content, safe_mode='remove')
+        elif item.format == FORMAT.RESTRUCTURED_TEXT:
+            parts = publish_parts(source=item.content, writer_name="html4css1")
+            return parts['fragment']
+        else:
+            return item.content
 
     def item_author_name(self, item):
         return item.author.username
@@ -29,5 +36,5 @@ class LatestEntriesFeed(Feed):
     def item_pubdate(self, item):
         return item.pub_date
 
-    
+
 

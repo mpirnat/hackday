@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load markup %}
+<html                                     >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{{ site_name }} Email</title>
+</head>
+<body>
+{{entry.author.username}} has posted a new {{site_name}} blog post:
+
+<a href="{{site_domain}}{%url blog-entry entry.id %}">{{entry.title|safe}}</a>
+
+{% if entry.format == 'MD' %}
+	{{ entry.content|markdown }}
+{% endif %}
+{% if entry.format == 'RST' %}
+	{{ entry.content|restructuredtext}}
+{% endif %}
+
+{{site_domain}}{% url blog-entry entry.id %}
+</body>
+</html>

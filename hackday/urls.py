@@ -13,37 +13,37 @@ urlpatterns = patterns('',
     (r'^teams/?', include('teams.urls')),
 
     # Let the blog own the homepage?
-    (r'^/*$', 'blog.views.index'),
+    url(r'^/*$', 'blog.views.index', name='blog-home'),
 
     # We have a blog!
-    (r'^blog/?', include('blog.urls')),
+    (r'^blog/', include('blog.urls')),
 
     # List of approved charities
-    (r'^charities/?', include('charities.urls')),
+    (r'^charities/', include('charities.urls')),
 
     # User stuff - sign up, sign in, sign out, user profiles
-    (r'^users/reset-password/?$', 'django.contrib.auth.views.password_reset',
+    url(r'^users/reset-password/?$', 'django.contrib.auth.views.password_reset',
         {
             'template_name': 'users/password_reset_form.html',
             'email_template_name': 'users/password_reset_email.html',
-        }),
-    (r'^users/reset-password/requested/?$',
+        }, name='reset-password'),
+    url(r'^users/reset-password/requested/?$',
         'django.contrib.auth.views.password_reset_done',
         {
             'template_name': 'users/password_reset_done.html',
-        }),
-    (r'^users/reset-password/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/?$',
+        }, name='reset-password-done'),
+    url(r'^users/reset-password/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/?$',
         'django.contrib.auth.views.password_reset_confirm',
         {
             'template_name': 'users/password_reset_confirm.html'
-        }),
-    (r'^users/reset-password/done/?$',
+        }, name='reset-password-confirm'),
+    url(r'^users/reset-password/done/?$',
         'django.contrib.auth.views.password_reset_complete',
         {
             'template_name': 'users/password_reset_complete.html'
-        }),
+        }, name='reset-password-complete'),
 
-    (r'^users/?', include('users.urls')),
+    (r'^users/', include('users.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -51,8 +51,11 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
 
+    # django_qbe reporting
+    url(r'^reporting/', include('django_qbe.urls')),
+
     # Arbitrary wiki pages FTW!
-    (r'^(?P<path>.*[^/])/?$', 'wiki.views.page'),
+    url(r'^(?P<path>.*[^/])/?$', 'wiki.views.page', name='wiki-page'),
 )
 
 

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.urlresolvers import reverse
 from assets.models import Attachment, ImageAttachment, Link
 
 
@@ -31,7 +32,7 @@ class FORMAT(object):
 
 class Page(models.Model):
     title = models.CharField('title of page', max_length=255)
-    path = models.CharField('path of page', max_length=1024, db_index=True,
+    path = models.CharField('path of page', max_length=255, db_index=True,
             unique=True)
     content = models.TextField('page content')
     status = models.CharField(max_length=1, choices=STATUS.CHOICES)
@@ -56,6 +57,9 @@ class Page(models.Model):
     mod_date = models.DateTimeField('date modified', auto_now=True,
             editable=False)
     pub_date = models.DateTimeField('date published', null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('wiki-page', args=[self.path])
 
     def __unicode__(self):
         return self.path

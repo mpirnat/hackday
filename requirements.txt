@@ -4,3 +4,6 @@ django-taggit
 PIL
 Markdown
 docutils
+tweepy
+beautifulsoup
+https://github.com/csitko/qbe/zipball/master

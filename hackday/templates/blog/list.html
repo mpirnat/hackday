@@ -3,10 +3,17 @@
     <ul>
     {% for entry in entries.object_list %}
         <li>
-            <h3><a href="/blog/{{ entry.id }}/">{{ entry.title }}</a></h3>
+            <h3><a href="{% url blog-entry entry.id %}/">{{ entry.title }}</a></h3>
             <p>Published: {{ entry.pub_date|date:"F d, Y," }} at {{ entry.pub_date|date:"H:i" }}</p>
-            <p>Author: <a href="/users/{{ entry.author.username }}">{{entry.author.username}}</a></p>
-            {{ entry.content|markdown:"safe" }}
+            <p>Author: <a href="{% url users-profile entry.author.username %}">{{entry.author.username}}</a></p>
+            <div class="rendered-content">
+			{% if entry.format == formats.MARKDOWN %}
+				{{ entry.content|markdown }}
+			{% endif %}
+			{% if entry.format == formats.RESTRUCTURED_TEXT %}
+				{{ entry.content|restructuredtext}}
+			{% endif %}
+            </div>
         </li>
     {% endfor %}
     </ul>

@@ -1,6 +1,6 @@
 # Django settings for hackday project.
 import os
-VENV_ROOT = os.environ['VIRTUAL_ENV']
+VENV_ROOT = os.environ.get('VIRTUAL_ENV', '')
 CODE_ROOT = os.path.split(__file__)[0]
 
 DEBUG = True
@@ -66,6 +66,8 @@ STATIC_ROOT = ''
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+LOGIN_URL = '/users/sign-in'
+
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
@@ -95,6 +97,11 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.static',
+    'django.contrib.auth.context_processors.auth',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -128,6 +135,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'django.contrib.markup',
+    'django_qbe',
     'taggit',
     'assets',
     'blog',
@@ -166,6 +174,9 @@ AUTH_PROFILE_MODULE = 'users.userprofile'
 if DEBUG_TOOLBAR:
     MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
     INSTALLED_APPS += ('debug_toolbar',)
+
+QBE_ACCESS_FOR = lambda user: user.is_superuser
+QBE_ADMIN = "admin"
 
 try:
     from settings_local import *

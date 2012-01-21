@@ -4,13 +4,11 @@
     {% block title %}Wiki: {{page.title}}{% endblock %}
     
     {% block content %}
-    <h3>{{page.title}}</h3>
+    <h2>{{page.title}}</h2>
 
-    <p>Status: {{page.status}}</p>
-    <p>Created: {{page.create_date}}</p>
-    <p>Modified: {{page.mod_date}}</p>
-    <p>Published: {{page.pub_date}}</p>
+    <p>Published: {{ page.pub_date|date:"F d, Y," }} at {{ page.pub_date|date:"H:i" }}</p>
+    <p>Author: <a href="{% url users-profile page.author.username %}">{{page.author.username}}</a></p>
 
-    <div>{{page.content|markdown:"safe"}}</div>
+    <div class="rendered-content">{{page.content|markdown }}</div>
 
     {% endblock %}

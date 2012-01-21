@@ -1,6 +1,7 @@
 from common import common_env
 from users.forms import SignUpForm, SignInForm, UserProfileForm
 from users.models import User, UserProfile, Tshirt, Diet, Location
+from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
@@ -52,7 +53,7 @@ def sign_up(request):
                         password=form.cleaned_data['password'])
                 login(request, user)
 
-                return HttpResponseRedirect('/users') # Redirect after POST
+                return HttpResponseRedirect(reverse('users-profile', args=[user.username])) # Redirect after POST
     else:
         form = SignUpForm()
 
@@ -88,7 +89,7 @@ def sign_in(request):
             else:
                 error_message = "Bad username or password"
     else:
-        next_url = request.GET.get('next') or '/users'
+        next_url = request.GET.get('next') or reverse('blog-home')
         form = SignInForm(initial={'next': next_url})
 
     env = common_env()
@@ -106,7 +107,7 @@ def profile(request, username):
     return render(request, 'users/profile.html', env)
 
 
-@login_required(login_url='/users/sign-in')
+@login_required()
 def edit_profile(request, username):
     user = User.objects.get(username=username)
     user_profile = UserProfile.objects.get(user=user)

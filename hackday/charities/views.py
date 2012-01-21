@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.template import Context, loader
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
+from django.core.urlresolvers import reverse
 
 
 def index(request):
@@ -15,7 +16,7 @@ def index(request):
     return render(request, 'charities/index.html', env)
 
 
-@login_required(login_url='/users/sign-in')
+@login_required()
 def suggest(request):
     error_message = None
     env = common_env()

@@ -10,9 +10,10 @@
     <p class="error">{{error_message}}</p>
     {% endif %}
 
-    <form action="/users/sign-in" method="POST">
+    <form action="{% url users-sign-in %}" method="POST">
         {% csrf_token %}
         {{form.as_p}}
         <input type="submit" value="Submit" />
     </form>
+	<p><a href='{% url reset-password %}'>Forgot your password?</a></p>
     {% endblock %}
