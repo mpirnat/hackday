@@ -1,8 +1,10 @@
-from django.conf.urls.defaults import patterns, include, url
-from teams.views import TeamList, TeamDetail
+from django.conf.urls.defaults import patterns
+from django.views.generic import DetailView, ListView
+
+from teams.models import Team
 
 
 urlpatterns = patterns('',
-    (r'^/?$', TeamList.as_view()),
-    (r'^(?P<slug>[\w-]+)/*$', TeamDetail.as_view()),
+    (r'^/?$', ListView.as_view(model=Team)),
+    (r'^(?P<slug>[\w-]+)/*$', DetailView.as_view(model=Team)),
 )
