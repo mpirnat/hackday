@@ -1,8 +1,8 @@
 from django.conf.urls.defaults import patterns, include, url
-from django.views.generic import ListView
+from teams.views import TeamList, TeamDetail
 
-from teams.models import Team
 
-urlpatterns = patterns('teams.views',
-    (r'^/?', ListView.as_view(model=Team)),
+urlpatterns = patterns('',
+    (r'^/?$', TeamList.as_view()),
+    (r'^(?P<slug>[\w-]+)/*$', TeamDetail.as_view()),
 )

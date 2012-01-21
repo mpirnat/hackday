@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+    {% block title %}Hackday: Team Detail{% endblock %}
+
+    {% block content %}
+    <h2>{{ team.name }}</h2>
+
+    <p>{{ team.project }}</p>
+
+    {% if team.members %}
+    <ul>
+        {% for member in team.members.all %}
+        <li>{{ member.get_full_name|default:member.username }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!--
+    {% include 'blog/list.html' %}
+    -->
+
+    {% endblock %}
