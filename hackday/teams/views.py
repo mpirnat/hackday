@@ -3,7 +3,6 @@ from teams.models import Team
 
 
 class TeamList(ListView):
-    model = Team
     queryset = Team.objects.order_by('-name')
 
 
