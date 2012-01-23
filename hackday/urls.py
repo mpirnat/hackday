@@ -1,11 +1,15 @@
+from django.conf import settings
 from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.static import static
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
+# Serve uploaded media during development
+urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns = patterns('',
+urlpatterns += patterns('',
     # Examples:
     # url(r'^$', 'hackday.views.home', name='home'),
     # url(r'^hackday/', include('hackday.foo.urls')),
@@ -56,6 +60,7 @@ urlpatterns = patterns('',
 
     # Arbitrary wiki pages FTW!
     url(r'^(?P<path>.*[^/])/?$', 'wiki.views.page', name='wiki-page'),
+
 )
 
 
