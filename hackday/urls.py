@@ -4,10 +4,13 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'hackday.views.home', name='home'),
     # url(r'^hackday/', include('hackday.foo.urls')),
+
+    (r'^teams/?', include('teams.urls')),
 
     # Let the blog own the homepage?
     url(r'^/*$', 'blog.views.index', name='blog-home'),
