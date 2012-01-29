@@ -14,7 +14,7 @@ def create(request):
         team = form.save(commit=False)
         team.status = STATUS.ACTIVE
         team.creator = request.user
-        team.save(user=request.user)
+        team.save()
         form.save_m2m()
 
         return HttpResponseRedirect('/teams/' + team.slug)
