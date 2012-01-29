@@ -1,8 +1,11 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django import forms
+from django.template.defaultfilters import slugify
+
 from assets.models import Attachment, ImageAttachment, Link
 from charities.models import Charity
 from voting.moremodels import Category
-from django.contrib.auth.models import User
 
 
 class STATUS(object):
@@ -60,7 +63,9 @@ class Team(models.Model):
 
     name = models.CharField('name of team', max_length=255, db_index=True,
             unique=True)
-    slug = models.SlugField('slugified team name', db_index=True, unique=True)
+    slug = models.SlugField('slugified team name', db_index=True, unique=True,
+            editable=False)
+
     project = models.TextField('description of project')
     logo = models.ImageField('team logo image', blank=True,  upload_to='teams')
 
@@ -88,6 +93,15 @@ class Team(models.Model):
 
     create_date = models.DateTimeField('date created', auto_now_add=True)
     mod_date = models.DateTimeField('date modified', auto_now=True)
+
+
+    def save(self, *args, **kwargs):
+
+        #TODO: check if slug exists in DB
+        if not self.slug:
+            self.slug = slugify(self.name)
+
+        return super(Team, self).save()
 
     def __unicode__(self):
         return self.name
