@@ -1,3 +1,5 @@
+import time
+
 from django.contrib.auth.models import User
 from django.db import models
 from django import forms
@@ -39,6 +41,18 @@ class PROJECT_TYPE(object):
     )
 
 
+def create_unique_team_filename(instance, filename):
+    """ Return a uniqque filename for an uploaded team file.
+            -- called when saving a Team to the DB
+    """
+    filename_parts = filename.split('.')
+    return 'teams/{team_slug}/{file_prefix}-{stamp}.{file_suffix}'.format(
+            team_slug=instance.slug,
+            file_prefix='.'.join(filename_parts[:-1]),
+            stamp=time.time(),
+            file_suffix=filename_parts[-1])
+
+
 class Team(models.Model):
     """
     A team of participants that will work on a project and compete for fabulous
@@ -67,7 +81,8 @@ class Team(models.Model):
             editable=False)
 
     project = models.TextField('description of project')
-    logo = models.ImageField('team logo image', blank=True,  upload_to='teams')
+    logo = models.ImageField('team logo image', blank=True,
+            upload_to=create_unique_team_filename)
 
     project_type = models.CharField('type of project', max_length=1,
             db_index=True, choices=PROJECT_TYPE.CHOICES)
