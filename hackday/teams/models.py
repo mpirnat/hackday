@@ -111,10 +111,8 @@ class Team(models.Model):
 
 
     def save(self, *args, **kwargs):
-
         #TODO: check if slug exists in DB
-        if not self.slug:
-            self.slug = slugify(self.name)
+        self.slug = slugify(self.name)
 
         return super(Team, self).save()
 
