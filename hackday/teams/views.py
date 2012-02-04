@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from teams.forms import CreateTeamForm
@@ -17,6 +18,7 @@ def create(request):
         team.save()
         form.save_m2m()
 
-        return HttpResponseRedirect('/teams/' + team.slug)
+        return HttpResponseRedirect(reverse('teams-detail',
+            kwargs={'slug': team.slug}))
 
     return render(request, 'teams/team_form.html', {'form': form})
