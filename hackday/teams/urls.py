@@ -5,7 +5,8 @@ from teams.models import Team
 
 
 urlpatterns = patterns('teams.views',
-    (r'^/?$', ListView.as_view(model=Team)),
-    url(r'^create/?$', 'create'),
-    (r'^(?P<slug>[\w-]+)/*$', DetailView.as_view(model=Team)),
+    url(r'^/?$', ListView.as_view(model=Team), name='teams-list'),
+    url(r'^create/?$', 'create', name='teams-create'),
+    url(r'^(?P<slug>[\w-]+)/*$', DetailView.as_view(model=Team),
+        name='teams-detail'),
 )

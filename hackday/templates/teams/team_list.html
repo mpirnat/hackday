@@ -9,7 +9,7 @@
 
     {% for team in team_list %}
 
-    <a href="/teams/{{ team.slug }}">{{ team.name }}</a>
+    <a href="{% url teams-detail slug=team.slug %}">{{ team.name }}</a>
     <br>
     captain: <span>{{ team.captain.get_full_name|default:team.captain.username }}</span>
 
