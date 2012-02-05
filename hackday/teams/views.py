@@ -14,10 +14,21 @@ class TeamUpdateView(UpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(TeamUpdateView, self).dispatch(*args, **kwargs)
+        """ If user isn't a team member, redirect to team listing.
+        """
+        response = super(TeamUpdateView, self).dispatch(*args, **kwargs)
+        if not self.object.is_member(self.request.user):
+            return HttpResponseRedirect(reverse('teams-list'))
+        return response
 
-    def get_success_url(self):
-        return reverse('teams-detail', kwargs={'slug': self.object.slug})
+    def form_valid(self, form):
+        """ In case the user forgets, add the captain as a team member.
+        """
+        team = form.save()
+        team.add_captain_as_member()
+
+        return HttpResponseRedirect(reverse('teams-detail',
+            kwargs={'slug': team.slug}))
 
 
 class TeamCreateView(CreateView):
@@ -37,6 +48,7 @@ class TeamCreateView(CreateView):
         team.creator = self.request.user
         team.save()
         form.save_m2m()
+        team.add_captain_as_member()
 
         return HttpResponseRedirect(reverse('teams-detail',
             kwargs={'slug': team.slug}))
