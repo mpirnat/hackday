@@ -4,13 +4,13 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import UpdateView, CreateView
-from teams.forms import EditTeamForm
+from teams.forms import CreateTeamForm, UpdateTeamForm
 from teams.models import Team, STATUS
 
 
 class TeamUpdateView(UpdateView):
     model = Team
-    form_class = EditTeamForm
+    form_class = UpdateTeamForm
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -33,7 +33,7 @@ class TeamUpdateView(UpdateView):
 
 class TeamCreateView(CreateView):
     model = Team
-    form_class = EditTeamForm
+    form_class = CreateTeamForm
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
