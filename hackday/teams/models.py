@@ -109,14 +109,17 @@ class Team(models.Model):
     create_date = models.DateTimeField('date created', auto_now_add=True)
     mod_date = models.DateTimeField('date modified', auto_now=True)
 
-
     def save(self, *args, **kwargs):
-
-        #TODO: check if slug exists in DB
-        if not self.slug:
-            self.slug = slugify(self.name)
-
+        self.slug = slugify(self.name)  #TODO: check if slug exists in DB
         return super(Team, self).save()
+
+    def add_captain_as_member(self):
+        if not self.is_member(self.captain):
+            self.members.add(self.captain)
+            self.save()
+
+    def is_member(self, user):
+        return user in self.members.all()
 
     def __unicode__(self):
         return self.name
