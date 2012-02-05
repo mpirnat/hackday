@@ -14,7 +14,7 @@ urlpatterns += patterns('',
     # url(r'^$', 'hackday.views.home', name='home'),
     # url(r'^hackday/', include('hackday.foo.urls')),
 
-    (r'^teams/?', include('teams.urls')),
+    (r'^teams/', include('teams.urls')),
 
     # Let the blog own the homepage?
     url(r'^/*$', 'blog.views.index', name='blog-home'),
