@@ -22,6 +22,9 @@ urlpatterns += patterns('',
     # We have a blog!
     (r'^blog/', include('blog.urls')),
 
+    # We have voting!
+    (r'^vote/', include('voting.urls')),
+
     # List of approved charities
     (r'^charities/', include('charities.urls')),
 
