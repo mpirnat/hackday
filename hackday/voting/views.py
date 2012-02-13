@@ -40,8 +40,12 @@ def vote(request):
 def _insert_or_update_vote(cart, category, team):
     try:
         vote = Vote.objects.get(cart=cart, category=category)
-        vote.team = team
-        vote.save()
+        if team is None:
+            vote.delete()
+        else:
+            vote.team = team
+            vote.save()
     except:
-        vote = Vote(cart=cart, category=category, team=team)
-        vote.save()
+        if team is not None:
+            vote = Vote(cart=cart, category=category, team=team)
+            vote.save()
