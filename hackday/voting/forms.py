@@ -12,6 +12,5 @@ class VoteForm(forms.Form):
             self.fields['cat_%s' % c.id] = forms.ModelChoiceField(
                 queryset=Team.objects.filter(status=STATUS.ACTIVE).order_by("name"),
                 label=c.name,
-                empty_label="Select a team",
-                required=True)
+                empty_label="Select a team")
 
