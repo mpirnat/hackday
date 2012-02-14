@@ -99,6 +99,10 @@ def sign_in(request):
     env['error_message'] = error_message
     return render(request, 'users/signin.html', env)
 
+@login_required
+def profile_redirect(request):
+    return HttpResponseRedirect(reverse('users-profile',
+                                        args=[request.user.username]))
 
 def profile(request, username):
     user = User.objects.get(username=username)
