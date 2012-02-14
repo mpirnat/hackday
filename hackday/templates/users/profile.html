@@ -8,9 +8,11 @@
     <p><strong>{{user_.first_name}} {{user_.last_name}}</strong></p>
     <p><strong>Email:</strong> {{user_.email}}</p>
     <p><strong>Alternate Email:</strong> {{user_profile.alternate_email}}</p>
-    <p><strong>Phone:</strong> {{user_profile.phone}}</p>
-    <p><strong>Created:</strong> {{user_profile.create_date}}</p>
-    <p><strong>Location:</strong> {{user_profile.location}}</p>
+	{% if user == user_ %}
+		<p><strong>Phone:</strong> {{user_profile.phone}}</p>
+		<p><strong>Created:</strong> {{user_profile.create_date}}</p>
+    {% endif %}
+	<p><strong>Location:</strong> {{user_profile.location}}</p>
     <p><strong>About Me:</strong></p>
     <p>{{user_profile.description}}</p>
 
