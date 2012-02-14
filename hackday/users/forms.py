@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.localflavor.us import forms as us_forms
 from users.models import Tshirt, Diet, Location
 
 
@@ -11,6 +12,8 @@ class SignUpForm(forms.Form):
     first_name = forms.CharField(label='First Name')
     last_name = forms.CharField(label='Last Name')
     email = forms.EmailField(label='Email Address')
+    alternate_email = forms.EmailField(label='Alternate Email Address (voting)', required=False)
+    phone = us_forms.USPhoneNumberField(label="Mobile Phone (voting)", required=False)
     tshirt = forms.ModelChoiceField(label='T-Shirt Size',
             queryset=Tshirt.objects.all())
     diet = forms.ModelChoiceField(label='Dietary Preference',
@@ -37,6 +40,8 @@ class UserProfileForm(forms.Form):
     first_name = forms.CharField(label='First Name')
     last_name = forms.CharField(label='Last Name')
     email = forms.EmailField(label='Email Address')
+    alternate_email = forms.EmailField(label='Alternate Email Address (voting)', required=False)
+    phone = us_forms.USPhoneNumberField(label="Mobile Phone (voting)", required=False)
     tshirt = forms.ModelChoiceField(label='T-Shirt Size',
             queryset=Tshirt.objects.all())
     diet = forms.ModelChoiceField(label='Dietary Preference',
