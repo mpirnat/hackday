@@ -41,13 +41,15 @@ def sign_up(request):
                 # Create the user profile
                 user_profile = UserProfile(
                         user=user,
+                        alternate_email=form.cleaned_data['alternate_email'],
+                        phone=form.cleaned_data['phone'],
                         tshirt=form.cleaned_data['tshirt'],
                         diet=form.cleaned_data['diet'],
                         location=form.cleaned_data['location'],
                         description=form.cleaned_data['description'],
                         notify_by_email=form.cleaned_data['notify_by_email'])
                 user_profile.save()
-                
+
                 # Log the user in
                 user = authenticate(username=user.username,
                         password=form.cleaned_data['password'])
@@ -126,6 +128,8 @@ def edit_profile(request, username):
             if form.cleaned_data['password']:
                 user.set_password(form.cleaned_data['password'])
 
+            user_profile.alternate_email = form.cleaned_data['alternate_email']
+            user_profile.phone = form.cleaned_data['phone']
             user_profile.tshirt = form.cleaned_data['tshirt']
             user_profile.diet = form.cleaned_data['diet']
             user_profile.location = form.cleaned_data['location']
@@ -142,6 +146,8 @@ def edit_profile(request, username):
                 'first_name': user.first_name,
                 'last_name': user.last_name,
                 'email': user.email,
+                'alternate_email': user_profile.alternate_email,
+                'phone': user_profile.phone,
                 'tshirt': user_profile.tshirt,
                 'diet': user_profile.diet,
                 'location': user_profile.location,
