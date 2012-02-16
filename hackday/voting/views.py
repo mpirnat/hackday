@@ -1,12 +1,21 @@
 from django.shortcuts import render
 from voting.forms import VoteForm
-from voting.models import VoteCart, Vote, STATUS
+from voting.models import VoteCart, Vote, VoteStatus, STATUS
 from voting.moremodels import Category
 from django.contrib.auth.decorators import login_required
 
 @login_required
 def vote(request):
     env = {}
+
+    try:
+        online = VoteStatus.objects.all()[0].online
+    except:
+        online = False
+
+    if not online:
+        return render(request, 'voting/vote_offline.html');
+
     try:
         cart = VoteCart.objects.get(user=request.user.id)
     except:
