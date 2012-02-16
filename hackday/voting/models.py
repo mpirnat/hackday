@@ -17,6 +17,26 @@ class STATUS(object):
     )
 
 
+class VoteStatus(models.Model):
+    """ A model to allow turning voting on and off on the site
+        via the admin interface
+    """
+    online = models.BooleanField()
+
+    def __unicode__(self):
+        return self.online and "Online" or "Offline"
+
+    class Meta:
+        verbose_name_plural = "Voting status"
+
+class VoteMessage(models.Model):
+    """ A model to keep track of processed email/sms vote messages """
+
+    message_id = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.message_id
+
 class VoteCart(models.Model):
     """
     A 'shopping cart' for votes; lets us gather up all of a user's votes,
