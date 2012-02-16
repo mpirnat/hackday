@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from voting.forms import VoteForm
 from voting.models import VoteCart, Vote, VoteStatus, STATUS
-from voting.moremodels import Category
+from voting.moremodels import Category, TYPE
+from teams.models import Team, STATUS as TEAM_STATUS
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -45,6 +46,13 @@ def vote(request):
     env['form'] = form
     return render(request, 'voting/vote.html', env)
 
+def info(request):
+    categories = Category.objects.filter(type=TYPE.VOTED).order_by('id')
+    teams = Team.objects.filter(status=TEAM_STATUS.ACTIVE).order_by('id')
+
+    env = {'categories': categories,
+           'teams': teams}
+    return render(request, 'voting/info.html', env)
 
 def _insert_or_update_vote(cart, category, team):
     try:
