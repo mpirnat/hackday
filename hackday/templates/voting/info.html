@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load markup %}
+    {% block title %}Voting Information{% endblock %}
+
+    {% block content %}
+
+    <h2>Categories</h2>
+	<ul>
+	{% for category in categories %}
+		<li>{{category.id}} {{category.name}}</li>
+	{% endfor %}
+	</ul>
+
+
+    <h2>Teams</h2>
+	{% for team in teams %}
+		<h3>{{team.id}} {{team.name}}</h3>
+		<p>Category: {{team.category.name}}</p>
+		<p>Description: {{team.project}}</p>
+		<p>Members:
+			<ul>
+			{% for member in team.members.values %}
+				<li>{{member.first_name}} {{member.last_name}}</li>
+			{% endfor %}
+			</u>
+		</p>
+	{% endfor %}
+
+
+    {% endblock %}
