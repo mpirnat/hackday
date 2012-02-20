@@ -52,3 +52,19 @@ class TeamCreateView(CreateView):
 
         return HttpResponseRedirect(reverse('teams-detail',
             kwargs={'slug': team.slug}))
+
+
+def delete_team(request, team_slug):
+    try:
+        team = Team.objects.get(slug=team_slug)
+        if team.is_member(request.user):
+            team.status = STATUS.DELETED
+            team.save()
+            return HttpResponseRedirect(reverse('teams-list'))
+        else:
+            return HttpResponseRedirect(reverse('teams-detail',
+                kwargs={'slug': team_slug}))
+    except:
+        return HttpResponseRedirect(reverse('teams-detail',
+            kwargs={'slug': team_slug}))
+
