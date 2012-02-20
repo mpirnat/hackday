@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import UpdateView, CreateView
 from teams.forms import CreateTeamForm, UpdateTeamForm
-from teams.models import Team, STATUS
+from teams.models import Team, TeamCreateStatus, STATUS
 
 
 class TeamUpdateView(UpdateView):
@@ -37,7 +37,15 @@ class TeamCreateView(CreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(CreateView, self).dispatch(*args, **kwargs)
+        try:
+            online = TeamCreateStatus.objects.all()[0].online
+        except:
+            online = True
+
+        if online:
+            return super(CreateView, self).dispatch(*args, **kwargs)
+        else:
+            return render(args[0], 'teams/create_offline.html');
 
     def form_valid(self, form):
         """ Because team doesn't exist in DB yet, and creator is required,
