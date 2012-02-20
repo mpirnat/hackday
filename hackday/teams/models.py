@@ -53,6 +53,19 @@ def create_unique_team_filename(instance, filename):
             file_suffix=filename_parts[-1])
 
 
+class TeamCreateStatus(models.Model):
+    """ A model to allow turning voting on and off on the site
+        via the admin interface
+    """
+    online = models.BooleanField()
+
+    def __unicode__(self):
+        return self.online and "Online" or "Offline"
+
+    class Meta:
+        verbose_name_plural = "Team creation status"
+
+
 class Team(models.Model):
     """
     A team of participants that will work on a project and compete for fabulous
