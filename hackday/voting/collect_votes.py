@@ -8,9 +8,9 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.localflavor.us.forms import USPhoneNumberField
 from django.core.mail import send_mail
-from teams.models import Team
+from teams.models import Team, STATUS
 from users.models import UserProfile
-from voting.moremodels import Category
+from voting.moremodels import Category, TYPE
 from voting.models import VoteCart, VoteMessage, VoteStatus, STATUS
 from voting.views import _insert_or_update_vote
 
@@ -117,8 +117,8 @@ def process_votes(message, cart):
     for vote in votes:
         category_id, team_id = vote.split('-')
         try:
-            category = Category.objects.get(id=category_id)
-            team = Team.objects.get(id=team_id)
+            category = Category.objects.get(id=category_id, type=TYPE.VOTED)
+            team = Team.objects.get(id=team_id, status=STATUS.ACTIVE)
             _insert_or_update_vote(cart, category, team)
             results.append("{0} - {1}".format(category.name, team.name))
         except:
