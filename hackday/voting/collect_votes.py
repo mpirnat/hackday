@@ -100,14 +100,14 @@ def read_inbox():
 
 
 def parse_votes(message):
+    votes = []
     if message.is_multipart():
-        votes = []
-        for sub_message in message.get_payload(decode=True):
-            votes = votes.append(parse_votes(sub_message))
+        sub_messages = message.get_payload()
+        for sub_message in sub_messages:
+            votes.extend(parse_votes(sub_message))
     else:
         votes = VOTE_PATTERN.findall(message.get_payload(decode=True))
-
-    return votes
+    return list(set(votes))
 
 
 def process_votes(message, cart):
