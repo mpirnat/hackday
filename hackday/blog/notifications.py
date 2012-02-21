@@ -32,6 +32,7 @@ class BlogNotification(object):
                                          settings.DEFAULT_FROM_EMAIL,
                                          [settings.DEFAULT_FROM_EMAIL],
                                          recipients)
+        message.mixed_subtype = "related"
         try:
             body_html = self.render_template('blog/notification_email_html.html')
 
