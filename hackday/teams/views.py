@@ -3,20 +3,42 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
-from django.views.generic import UpdateView, CreateView
+from django.views.generic import CreateView
+from django.views.generic import DetailView
+from django.views.generic import ListView
+from django.views.generic import UpdateView
+
 from teams.forms import CreateTeamForm, UpdateTeamForm
-from teams.models import Team, TeamCreateStatus, STATUS
+from teams.forms import UpdateTeamForm
+from teams.models import STATUS
+from teams.models import Team
+from teams.models import TeamCreateStatus
+
+
+class TeamListView(ListView):
+    model = Team
+    queryset = Team.objects.filter(status=STATUS.ACTIVE)
+
+
+class TeamDetailView(DetailView):
+    model = Team
+    queryset = Team.objects.filter(status=STATUS.ACTIVE)
 
 
 class TeamUpdateView(UpdateView):
     model = Team
     form_class = UpdateTeamForm
+    queryset = Team.objects.filter(status=STATUS.ACTIVE)
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        """ If user isn't a team member, redirect to team listing.
+        """ If user isn't a team member (or team isn't active),
+            redirect to team listing.
         """
-        response = super(TeamUpdateView, self).dispatch(*args, **kwargs)
+        try:
+            response = super(TeamUpdateView, self).dispatch(*args, **kwargs)
+        except:
+            return HttpResponseRedirect(reverse('teams-list'))
         if not self.object.is_member(self.request.user):
             return HttpResponseRedirect(reverse('teams-list'))
         return response
@@ -37,6 +59,8 @@ class TeamCreateView(CreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        """ If team creation is disabled (via admin), redirect.
+        """
         try:
             online = TeamCreateStatus.objects.all()[0].online
         except:
