@@ -1,7 +1,10 @@
 from django.conf.urls.defaults import patterns, url
 
 from teams.models import Team, STATUS
-from teams.views import delete_team
+from teams.views import delete
+from teams.views import upload_attachment, remove_attachment
+from teams.views import upload_image, remove_image
+from teams.views import add_link, remove_link
 from teams.views import TeamCreateView
 from teams.views import TeamDetailView
 from teams.views import TeamListView
@@ -15,6 +18,23 @@ urlpatterns = patterns('teams.views',
         name='teams-edit'),
     url(r'^(?P<slug>[\w-]+)/*$', TeamDetailView.as_view(),
         name='teams-detail'),
-    url(r'^delete/(?P<team_slug>[\w-]+)/*$', delete_team,
-        name='teams-delete'),
+    url(r'^delete/(?P<slug>[\w-]+)/*$', delete, name='teams-delete'),
+    url(r'^upload-attachment/(?P<slug>[\w-]+)$',
+        upload_attachment,
+        name='teams-upload-attachment'),
+    url(r'^delete-attachment/(?P<slug>[\w-]+)/(?P<attachment_id>[\d]+)$',
+        remove_attachment,
+        name='teams-remove-attachment'),
+    url(r'^upload-image/(?P<slug>[\w-]+)$',
+        upload_image,
+        name='teams-upload-image'),
+    url(r'^delete-image/(?P<slug>[\w-]+)/(?P<attachment_id>[\d]+)$',
+        remove_image,
+        name='teams-remove-image'),
+    url(r'^add-link/(?P<slug>[\w-]+)$',
+        add_link,
+        name='teams-add-link'),
+    url(r'^delete-link/(?P<slug>[\w-]+)/(?P<attachment_id>[\d]+)$',
+        remove_link,
+        name='teams-remove-link'),
 )
