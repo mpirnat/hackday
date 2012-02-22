@@ -8,12 +8,18 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
 
-from teams.forms import CreateTeamForm, UpdateTeamForm
+from teams.forms import CreateTeamForm
 from teams.forms import UpdateTeamForm
 from teams.models import STATUS
 from teams.models import Team
 from teams.models import TeamCreateStatus
 
+from assets.models import Attachment
+from assets.models import ImageAttachment
+from assets.models import Link
+from assets.forms import AttachmentForm
+from assets.forms import ImageAttachmentForm
+from assets.forms import LinkAttachmentForm
 
 class TeamListView(ListView):
     model = Team
@@ -86,17 +92,121 @@ class TeamCreateView(CreateView):
             kwargs={'slug': team.slug}))
 
 
-def delete_team(request, team_slug):
+def delete(request, slug):
     try:
-        team = Team.objects.get(slug=team_slug)
+        team = Team.objects.get(slug=slug)
         if team.is_member(request.user):
             team.status = STATUS.DELETED
             team.save()
             return HttpResponseRedirect(reverse('teams-list'))
         else:
             return HttpResponseRedirect(reverse('teams-detail',
-                kwargs={'slug': team_slug}))
+                kwargs={'slug': slug}))
     except:
         return HttpResponseRedirect(reverse('teams-detail',
-            kwargs={'slug': team_slug}))
+            kwargs={'slug': slug}))
 
+
+def upload_attachment(request, slug):
+    env = {}
+
+    team = Team.objects.get(slug=slug)
+    if not team.is_member(request.user):
+        return HttpResponseRedirect(reverse('teams-detail',
+            kwargs={'slug': slug}))
+
+    if request.method == 'POST':
+        form = AttachmentForm(request.POST, request.FILES)
+        if form.is_valid():
+            attachment = Attachment(attached_file = form.cleaned_data['attached_file'],
+                                   title = form.cleaned_data['title'],
+                                   alt_text = form.cleaned_data['alt_text'])
+            attachment.save()
+            team.attachments.add(attachment)
+            return HttpResponseRedirect(reverse('teams-detail',
+                kwargs={'slug': slug}))
+    else:
+        form = AttachmentForm()
+
+    env['form'] = form
+    return render(request, 'teams/upload.html', env)
+
+
+def remove_attachment(request, slug, attachment_id):
+    team = Team.objects.get(slug=slug)
+    if team.is_member(request.user):
+        attachment = Attachment.objects.get(id=attachment_id)
+        team.attachments.remove(attachment)
+
+    return HttpResponseRedirect(reverse('teams-detail',
+        kwargs={'slug': slug}))
+
+
+def upload_image(request, slug):
+    env = {}
+
+    team = Team.objects.get(slug=slug)
+    if not team.is_member(request.user):
+        return HttpResponseRedirect(reverse('teams-detail',
+            kwargs={'slug': slug}))
+
+    if request.method == 'POST':
+        form = ImageAttachmentForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = ImageAttachment(attached_file = form.cleaned_data['attached_file'],
+                                    title = form.cleaned_data['title'],
+                                    alt_text = form.cleaned_data['alt_text'])
+            image.save()
+            team.images.add(image)
+            return HttpResponseRedirect(reverse('teams-detail',
+                kwargs={'slug': slug}))
+    else:
+        form = ImageAttachmentForm()
+
+    env['form'] = form
+    return render(request, 'teams/upload.html', env)
+
+
+def remove_image(request, slug, attachment_id):
+    team = Team.objects.get(slug=slug)
+    if team.is_member(request.user):
+        image = ImageAttachment.objects.get(id=attachment_id)
+        team.images.remove(image)
+
+    return HttpResponseRedirect(reverse('teams-detail',
+        kwargs={'slug': slug}))
+
+
+def add_link(request, slug):
+    env = {}
+
+    team = Team.objects.get(slug=slug)
+    if not team.is_member(request.user):
+        return HttpResponseRedirect(reverse('teams-detail',
+            kwargs={'slug': slug}))
+
+    if request.method == 'POST':
+        form = LinkAttachmentForm(request.POST)
+        if form.is_valid():
+            link = Link(url = form.cleaned_data['url'],
+                        title = form.cleaned_data['title'],
+                        text = form.cleaned_data['text'])
+            link.save()
+            team.links.add(link)
+            return HttpResponseRedirect(reverse('teams-detail',
+                kwargs={'slug': slug}))
+    else:
+        form = LinkAttachmentForm()
+
+    env['form'] = form
+    return render(request, 'teams/upload.html', env)
+
+
+def remove_link(request, slug, attachment_id):
+    team = Team.objects.get(slug=slug)
+    if team.is_member(request.user):
+        link = LinkAttachment.objects.get(id=attachment_id)
+        team.links.remove(link)
+
+    return HttpResponseRedirect(reverse('teams-detail',
+        kwargs={'slug': slug}))

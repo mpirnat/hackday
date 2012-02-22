@@ -16,3 +16,4 @@ class CreateTeamForm(BaseTeamForm):
 
 class UpdateTeamForm(BaseTeamForm):
     pass
+
