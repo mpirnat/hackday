@@ -4,7 +4,7 @@
 
     {% block content %}
 
-    <h3>{{ entry.title }}</h3>
+    <h1>{{ entry.title }}</h1>
 
     {% if entry.categories.all %}
     <p>Categories:
@@ -25,9 +25,9 @@
         </ul>
     </p>
     {% endif %}
+   <p class="ent-published">Published: {{ entry.pub_date|date:"F d, Y," }} at {{ entry.pub_date|date:"H:i" }}</p>
+    <p class="ent-author">Author: <a href="{% url users-profile entry.author.username %}">{{entry.author.username}}</a></p>
 
-    <p>Published: {{ entry.pub_date|date:"F d, Y," }} at {{ entry.pub_date|date:"H:i" }}</p>
-    <p>Author: <a href="{% url users-profile entry.author.username %}">{{entry.author.username}}</a></p>
 
     <div class="rendered-content">
 	{% if entry.format == formats.MARKDOWN %}
