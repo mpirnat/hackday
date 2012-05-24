@@ -6,9 +6,9 @@ from blog.models import Entry, FORMAT
 
 
 class LatestEntriesFeed(Feed):
-    title = "Hackday 2012"
+    title = "Hack Day Blog"
     link = "/blog/"
-    description = "A List of Wonderful Articles from Hackday 2012"
+    description = "A list of the Hack Day blog entries"
 
     feed_type = feedgenerator.Rss201rev2Feed
 
