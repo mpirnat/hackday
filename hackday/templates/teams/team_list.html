@@ -3,18 +3,23 @@
     {% block title %}Hackday: Teams{% endblock %}
 
     {% block content %}
-    <h2>Team List</h2>
+    <h1>Team List</h1>
 
-    <br><br>
+	{% if user.is_active %}
+		<p><a href="{% url teams-create %}" class="button">Create a team!</a>
+	{% endif %}
 
-    {% for team in team_list %}
+	<ul id="team-list">
+        {% for team in team_list %}
 
-    <a href="{% url teams-detail slug=team.slug %}">{{ team.name }}</a>
-    <br>
-    captain: <span>{{ team.captain.get_full_name|default:team.captain.username }}</span>
+        <li>
+        <a href="{% url teams-detail slug=team.slug %}">{{ team.name }}</a>   <span>{{ team.captain.get_full_name|default:team.captain.username }}*</span>
+        </li>
 
-    <br><br>
 
-    {% endfor %}
+        {% endfor %}
+    </ul>
+    
+    <p>* team captain</p>
 
     {% endblock %}

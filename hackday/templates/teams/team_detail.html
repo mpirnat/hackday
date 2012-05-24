@@ -1,72 +1,117 @@
 {% extends 'base.html' %}
-
+{% load markup %}
     {% block title %}Hackday: Team Detail{% endblock %}
-
     {% block content %}
+<script type="text/javascript">
+	function confirm_delete(link)
+	{
+		if (confirm('Are you sure you want to delete this?'))
+		{
+			document.location = link.href;
+		}
+	};
+</script>
 
-    <strong>name:</strong>
-    <p>{{team.name}}</p>
+    <h1>{{team.name}}</h1>
+    <div id="team-main">
+        {% if team.logo %}
+        <img src="{{team.logo.url}}" id="team-logo">
+        {% endif %}
 
-    {% if team.logo %}
-    <strong>logo:</strong>
-    <p><img src="{{team.logo.url}}"></p>
-    {% endif %}
+        <p>{{team.project|markdown:"safe"}}</p>
 
-    <strong>category:</strong>
-    <p>{{team.category}}</p>
+        {% if team.images.all %}
+        <h3>images:</h3>
+        <ul>
+            {% for image in team.images.all %}
+            <li><img src="{{image.attached_file.url}}" title="{{image.title}}" alt="{{image.alt_text}}"
+                width="{{image.width}}" height="{{image.height}}" />
+			{% for member in team.members.all %}
+				{% if member == user %}
+				<a href="{% url teams-remove-image slug=team.slug attachment_id=image.id %}" onclick="confirm_delete(this);return false;" class="delete-link">(delete)</a>
+				{% endif %}
+			{% endfor %}
+			</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
 
-    <strong>description:</strong>
-    <p>{{team.project}}</p>
+        {% if team.links.all %}
+        <h3>links</h3>
+        <ul>
+            {% for link in team.links.all %}
+            <li><a href="{{link.url}}">{{link.text}}</a>
+			{% for member in team.members.all %}
+				{% if member == user %}
+				<a href="{% url teams-remove-link slug=team.slug attachment_id=link.id%}" onclick="confirm_delete(this);return false;" class="delete-link">(delete)</a></li>
+				{% endif %}
+			{% endfor %}
+			</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
 
-    <strong>captain:</strong>
-    <p>{{team.captain.get_full_name|default:team.captain.username}}</p>
 
-    <strong>members:</strong>
-    <ul>
-        {% for member in team.members.all %}
-        <li>{{member.get_full_name|default:member.username}}</li>
-        {% endfor %}
-    </ul>
 
-    <br>
+        {% if team.attachments.all %}
+        <h3>attachments</h3>
+        <ul>
+            {% for attachment in team.attachments.all %}
+            <li><a href={{attachment.attached_file.url}}>{{attachment.title}}</a>
+			{% for member in team.members.all %}
+				{% if member == user %}
+				<a href="{% url teams-remove-attachment slug=team.slug attachment_id=attachment.id%}" onclick="confirm_delete(this);return false;" class="delete-link">(delete)</a></li>
+				{% endif %}
+			{% endfor %}
+			</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
 
-    <strong>charity:</strong>
-    <p><a href="/charities/">{{team.charity}}</a></p>
+    <div id="team-side">
+		{% for member in team.members.all %}
+			{% if member == user %}
+				<div id="edit-team" class="team-side-sec">
+					<a href="{% url teams-edit slug=team.slug %}">edit your team</a> | <a href="{% url teams-delete slug=team.slug%}" onclick="confirm_delete(this);return false;">delete your team</a>
+				</div>
+			{% endif %}
+		{% endfor %}
+    	<div id="side-category" class="team-side-sec">
+            <h3>Category</h3>
+			<p>{{team.category}}</p>
+        </div>
 
-    {% if team.images.all %}
-    <strong>images:</strong>
-    <ul>
-        {% for image in team.images.all %}
-        <li><img src="{{image.attached_file.url}}" title="{{image.title}}"
-            width="{{image.width}}" height="{{image.height}}" /></li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+    	<div id="side-members" class="team-side-sec">
+            <h3>Members</h3>
+            <ul>
+                <li class="captain"><a href="{% url users-profile team.captain.username %}">{{team.captain.get_full_name|default:team.captain.username}}*</a></li>
+                {% for member in team.members.all %}
+					{% if member != team.captain %}
+						<li><a href="{% url users-profile member.username %}">{{member.get_full_name|default:member.username}}</a></li>
+					{% endif %}
+                {% endfor %}
+            </ul>
+            <p class="asterix">*Team Captain</p>
+        </div>
+    	<div id="side-charity" class="team-side-sec">
+            <h3>Charity</h3>
+            <p><a href="{% url charities-home %}">{{team.charity}}</a></p>
+        </div>
+	{% for member in team.members.all %}
+		{% if member == user %}
+    	<div id="side-attach" class="team-side-sec">
+			<ul>
+				<li><a href="{% url teams-upload-image slug=team.slug %}">upload an image</a></li>
+				<li><a href="{% url teams-upload-attachment slug=team.slug %}">upload a file</a></li>
+				<li><a href="{% url teams-add-link slug=team.slug %}">add a link</a></li>
+			</ul>
+		</div>
+		{% endif %}
+	{% endfor %}
+    </div>
 
-    <br>
 
-    {% if team.links.all %}
-    <strong>links</strong>
-    <ul>
-        {% for link in team.links.all %}
-        <li><a href="{{link.url}}">{{link.text}}</a></li>
-        {% endfor %}
-    </ul>
-    {% endif %}
 
-    <br>
-
-    {% if team.attachments.all %}
-    <strong>attachments</strong>
-    <ul>
-        {% for attachment in team.attachments.all %}
-        <li><a href={{attachment.attached_file.url}}>{{attachment.title}}</a></li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-
-    <!--
-    {% include 'blog/list.html' %}
-    -->
 
     {% endblock %}
