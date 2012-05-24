@@ -44,3 +44,4 @@ class Charity(models.Model):
 
     class Meta:
         verbose_name_plural = "Charities"
+        ordering = ['name']
