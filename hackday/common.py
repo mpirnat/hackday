@@ -18,6 +18,10 @@ def common_env():
     return env
 
 
+def common_env_processor(request):
+        return common_env()
+
+
 def forbidden(request):
     env = common_env()
     return render(request, '403.html', env)

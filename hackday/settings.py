@@ -102,6 +102,7 @@ TEMPLATE_LOADERS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.auth.context_processors.auth',
+    'common.common_env_processor',
 )
 
 MIDDLEWARE_CLASSES = (
