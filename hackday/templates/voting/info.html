@@ -2,29 +2,77 @@
 {% load markup %}
     {% block title %}Voting Information{% endblock %}
 
+    {% block bodyid %}voteinfo{% endblock %}
     {% block content %}
 
+	<h1>Voting Info</h1>
+
+
+    <div id="vote-how">
+	<h2>How To Vote</h2>
+		<div id="vote-instr">
+        <h3>On the site </h3>
+            <ol>
+                <li><a href="{% url voting-vote %}">Click here</a> to vote on the site.</li>
+            </ol>
+
+
+        <h3>By Text or Email</h3>
+            <p>
+            <strong>Text:</strong> YOUR NUMBER HERE<br/>
+            <strong>Email:</strong> YOUR EMAIL HERE
+            </p>
+
+            <h4></h4>
+            <ol>
+                <li>Make sure the email or phone number you are sending from has been added to your <a href="{% url users-view-profile %}">account profile</a>.</li>
+                <li>Choose the number next to a category.</li>
+                <li>Choose the number next to a team.</li>
+                <li>Compose a message (email or SMS) with those two numbers in the format <em>category#</em>-<em>team#</em>.</li>
+                <li>Send your message.</li>
+                <li class="vote-note">You can submit votes for multiple categories in a single message.  Just toss a space between votes.  For example, to submit a vote for team #3 in category #7 and team #10 in category #5, your message would look like this:
+
+            <span class="vote-hi">7-3 5-10</span></li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div id="vote-cat">
     <h2>Categories</h2>
-	<ul>
-	{% for category in categories %}
-		<li>{{category.id}} {{category.name}}</li>
-	{% endfor %}
-	</ul>
+        <ol>
+        {% for category in categories %}
+            <li class="cat-list"><span class="vote-hi">{{category.id}}</span> {{category.name}}</li>
+        {% endfor %}
+        </ol>
+    </div>
 
 
-    <h2>Teams</h2>
-	{% for team in teams %}
-		<h3>{{team.id}} {{team.name}}</h3>
-		<p>Category: {{team.category.name}}</p>
-		<p>Description: {{team.project}}</p>
-		<p>Members:
-			<ul>
-			{% for member in team.members.values %}
-				<li>{{member.first_name}} {{member.last_name}}</li>
-			{% endfor %}
-			</u>
-		</p>
-	{% endfor %}
-
+    <div id="vote-team">
+        <h2>Teams</h2>
+        <ul>
+        {% for team in teams %}
+            <li class="team-list">
+                <h3><span class="vote-hi">{{team.id}}</span> {{team.name}}</h3>
+                <div>
+                    <strong>Category:</strong>
+                    {{team.category.name}}
+                </div>
+                <div>
+                    <strong>Description:</strong>
+                    {{team.project}}
+                </div>
+                <div>
+                    <strong>Members:</strong>
+                    <ul>
+                    {% for member in team.members.values %}
+                        <li>{{member.first_name}} {{member.last_name}}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
 
     {% endblock %}
