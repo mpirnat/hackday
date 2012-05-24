@@ -4,13 +4,13 @@
 
     {% block content %}
 
-    <h3>Approved Charities</h3>
+    <h1>Approved Charities</h1>
     {% if charities %}
-        <ul>
+        <ul id="charity-list">
         {% for charity in charities %}
-            <li><strong><a href="{{charity.url}}">{{charity.name}}</a></strong>
-                <br>
-                    <div>{{charity.description}}</div>
+            <li>
+                  <strong><a href="{{charity.url}}">{{charity.name}}</a></strong>
+                  <div>{{charity.description}}</div>
             </li>
         {% endfor %}
         </ul>
