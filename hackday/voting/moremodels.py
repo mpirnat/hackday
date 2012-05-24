@@ -26,14 +26,14 @@ class Category(models.Model):
 
     Categories of 'voted' type should be available for popular voting in the
     voting UI.
-    
+
     Categories of 'judged' type should NOT be available for popular voting as
     they will be decided by a panel of judges outside of the voting system.
 
     Teams should self-declare a 'judged' category to enter when the team is
     created.
     """
-    
+
     name = models.CharField('name of category', max_length=255, unique=True)
     slug = models.SlugField('slugified category name', db_index=True,
             unique=True)
@@ -49,3 +49,4 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = "Categories"
+        ordering = ['name']
