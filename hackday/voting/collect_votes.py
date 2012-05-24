@@ -122,33 +122,41 @@ def process_votes(message, cart):
             _insert_or_update_vote(cart, category, team)
             results.append("{0} - {1}".format(category.name, team.name))
         except:
-            errors.append("invalid team or category {0}-{1}".format(
+            errors.append("invalid vote {0}-{1}".format(
                 category_id, team_id))
 
     send_response(message, results, errors)
 
 
 def send_response(message, results, errors):
-    body = []
     if results:
-        body.append('Votes:')
-        body.extend(results)
+        body = "Votes: \n{0}".format(",\n".join(results))
+        email_response(body, message)
 
     if errors:
-        body.append('Errors:')
-        body.extend(errors)
+        body = "Errors: {0}".format(",\n".join(errors))
+        email_response(body, message)
 
     if not errors and not results:
-        body.append('Error: no valid votes found.')
+        body = 'Error: no valid votes found.'
+        email_response(body, message)
 
-    send_mail('HackDay Vote',
-               "\n".join(body),
+
+def email_response(body, message):
+    send_mail('HackDay Voting',
+               body,
                settings.VOTE_EMAIL_ADDRESS,
                [message.get('From')],
                fail_silently=False)
 
 
 def main():
+
+    try:
+        online = VoteStatus.objects.all()[0].online
+    except:
+        online = False
+
     messages = read_inbox()
     for message in messages:
         message_id = message.get('Message-ID')
@@ -157,7 +165,9 @@ def main():
         except:
             cart = get_cart(message.get('From'))
             if cart is None:
-                send_response(message, [], ["Sorry we couldn't find your acount."])
+                send_response(message, [], ["Sorry we couldn't find your account."])
+            elif cart and not online:
+                send_response(message, [], ["We found you, but voting is currently offline.  Try again later!"])
             else:
                 process_votes(message, cart)
 

@@ -1,9 +1,11 @@
+import math
 from django.shortcuts import render
+from django.db.models import Count
 from voting.forms import VoteForm
 from voting.models import VoteCart, Vote, VoteStatus, STATUS
 from voting.moremodels import Category, TYPE
 from teams.models import Team, STATUS as TEAM_STATUS
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 @login_required
 def vote(request):
@@ -53,6 +55,51 @@ def info(request):
     env = {'categories': categories,
            'teams': teams}
     return render(request, 'voting/info.html', env)
+
+@user_passes_test(lambda u: u.is_superuser)
+def results(request):
+    vote_results = [];
+
+    categories = Category.objects.filter(type=TYPE.VOTED).order_by('id')
+    totals = {}
+    for t in Vote.objects.values('category').annotate(total=Count('category')):
+        totals[t['category']] = t['total']
+
+    for category in categories:
+        votes = Vote.objects.filter(category=category).values('team').annotate(
+            votes=Count('id')).order_by('votes').reverse()
+
+        votes = [{'votes': v['votes'],
+                  'percentage': _get_percentage(v['votes'], totals[category.id]),
+                  'team': Team.objects.get(id=v['team'])}
+                for v in votes]
+        if 'goat' in request.GET.keys():
+            _fix_votes(votes, totals[category.id])
+
+        vote_results.append({'category': category,
+                             'votes': votes,
+                             'total': totals.get(category.id, 0)})
+
+    env = {'vote_results': vote_results}
+    return render(request, 'voting/results.html', env)
+
+def _fix_votes(votes, total):
+    for idx,vote in enumerate(votes):
+        if vote['team'].name == "Bring The Goat":
+            goat = votes[idx]
+            goat['percentage'] = 100
+            goat['votes'] = total
+            votes.remove(goat)
+            votes.insert(0, goat)
+        else:
+            votes[idx]['percentage'] = 0
+            votes[idx]['votes'] = 0
+
+
+def _get_percentage(votes, total):
+    percent = (1.0 * votes) / (1.0 * total)
+    percent = 100 * percent
+    return int(math.ceil(percent))
 
 def _insert_or_update_vote(cart, category, team):
     try:
