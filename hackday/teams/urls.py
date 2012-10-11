@@ -1,17 +1,17 @@
 from django.conf.urls.defaults import patterns, url
 
-from teams.models import Team, STATUS
-from teams.views import delete
-from teams.views import upload_attachment, remove_attachment
-from teams.views import upload_image, remove_image
-from teams.views import add_link, remove_link
-from teams.views import TeamCreateView
-from teams.views import TeamDetailView
-from teams.views import TeamListView
-from teams.views import TeamUpdateView
+from hackday.teams.models import Team, STATUS
+from hackday.teams.views import delete
+from hackday.teams.views import upload_attachment, remove_attachment
+from hackday.teams.views import upload_image, remove_image
+from hackday.teams.views import add_link, remove_link
+from hackday.teams.views import TeamCreateView
+from hackday.teams.views import TeamDetailView
+from hackday.teams.views import TeamListView
+from hackday.teams.views import TeamUpdateView
 
 
-urlpatterns = patterns('teams.views',
+urlpatterns = patterns('hackday.teams.views',
     url(r'^/?$', TeamListView.as_view(), name='teams-list'),
     url(r'^create/?$', TeamCreateView.as_view(), name='teams-create'),
     url(r'^edit/(?P<slug>[\w-]+)/*$', TeamUpdateView.as_view(),

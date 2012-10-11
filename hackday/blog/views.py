@@ -1,5 +1,5 @@
-from common import common_env
-from blog.models import Entry, EntryForm, STATUS, FORMAT
+from hackday.common import common_env
+from hackday.blog.models import Entry, EntryForm, STATUS, FORMAT
 from django.http import HttpResponse
 from django.template import Context, loader
 from django.forms.models import modelformset_factory

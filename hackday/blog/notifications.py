@@ -3,8 +3,8 @@ import os
 
 from BeautifulSoup import BeautifulSoup
 from email.MIMEImage import MIMEImage
-from common import common_env
-from users.models import User, UserProfile
+from hackday.common import common_env
+from hackday.users.models import User, UserProfile
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.template import loader, Context

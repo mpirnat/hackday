@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 
-urlpatterns = patterns('users.views',
+urlpatterns = patterns('hackday.users.views',
     url(r'^/?$', 'index', name='users-home'),
     url(r'^sign-up/?$', 'sign_up', name='users-sign-up'),
     url(r'^sign-in/?$', 'sign_in', name='users-sign-in'),

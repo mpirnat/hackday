@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from teams.models import Team
-from voting.moremodels import Category
+from hackday.teams.models import Team
+from hackday.voting.moremodels import Category
 
 
 class STATUS(object):

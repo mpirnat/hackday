@@ -1,4 +1,4 @@
-from users.models import Tshirt, Diet, Location, UserProfile
+from hackday.users.models import Tshirt, Diet, Location, UserProfile
 from django.contrib import admin
 
 admin.site.register(Tshirt)
