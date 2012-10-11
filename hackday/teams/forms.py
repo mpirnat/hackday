@@ -1,8 +1,7 @@
 from django import forms
-from users.models import User
-from teams.models import Team
-from voting.moremodels import Category, TYPE
-
+from hackday.users.models import User, UserProfile
+from hackday.teams.models import Team
+from hackday.voting.moremodels import Category, TYPE
 
 class UserChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, user):
@@ -26,7 +25,6 @@ class BaseTeamForm(forms.ModelForm):
         model = Team
         exclude = ('creator', 'images', 'attachments', 'links', 'status')
         abstract = True
-
 
 class CreateTeamForm(BaseTeamForm):
     pass

@@ -4,7 +4,7 @@ from urllib2 import urlopen, Request, HTTPError
 from urllib import quote
 from django.contrib.sites.models import Site
 from django.shortcuts import render
-from wiki.models import Page, STATUS
+from hackday.wiki.models import Page, STATUS
 
 def get_nav_pages():
     pages = Page.objects.filter(status=STATUS.PUBLISHED, navigable=True).order_by('order', 'title')
@@ -17,10 +17,8 @@ def common_env():
     }
     return env
 
-
 def common_env_processor(request):
-        return common_env()
-
+    return common_env()
 
 def forbidden(request):
     env = common_env()

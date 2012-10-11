@@ -1,13 +1,13 @@
-from common import get_short_url
+from hackday.common import get_short_url
 from django.contrib.auth.models import User
 from django.db import models
 from django.core.urlresolvers import reverse
-from assets.models import Attachment, ImageAttachment, Link
+from hackday.assets.models import Attachment, ImageAttachment, Link
 from django.forms import ModelForm
 from taggit.managers import TaggableManager
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
-from blog.notifications import BlogNotification
+from hackday.blog.notifications import BlogNotification
 
 ENTRY_STATUS = {}
 

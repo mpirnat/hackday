@@ -5,9 +5,9 @@ from django.db import models
 from django import forms
 from django.template.defaultfilters import slugify
 
-from assets.models import Attachment, ImageAttachment, Link
-from charities.models import Charity
-from voting.moremodels import Category
+from hackday.assets.models import Attachment, ImageAttachment, Link
+from hackday.charities.models import Charity
+from hackday.voting.moremodels import Category
 
 
 class STATUS(object):

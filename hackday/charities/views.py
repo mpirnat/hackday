@@ -1,6 +1,6 @@
-from common import common_env
-from charities.forms import SuggestCharityForm
-from charities.models import Charity, STATUS
+from hackday.common import common_env
+from hackday.charities.forms import SuggestCharityForm
+from hackday.charities.models import Charity, STATUS
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import Context, loader

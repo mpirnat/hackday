@@ -1,10 +1,10 @@
 import math
 from django.shortcuts import render
 from django.db.models import Count
-from voting.forms import VoteForm
-from voting.models import VoteCart, Vote, VoteStatus, STATUS
-from voting.moremodels import Category, TYPE
-from teams.models import Team, STATUS as TEAM_STATUS
+from hackday.voting.forms import VoteForm
+from hackday.voting.models import VoteCart, Vote, VoteStatus, STATUS
+from hackday.voting.moremodels import Category, TYPE
+from hackday.teams.models import Team, STATUS as TEAM_STATUS
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 @login_required

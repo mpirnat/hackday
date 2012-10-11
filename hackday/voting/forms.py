@@ -1,6 +1,6 @@
 from django import forms
-from voting.moremodels import Category, TYPE
-from teams.models import Team, STATUS
+from hackday.voting.moremodels import Category, TYPE
+from hackday.teams.models import Team, STATUS
 
 class VoteForm(forms.Form):
 
