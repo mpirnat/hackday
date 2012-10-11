@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from assets.models import Attachment, ImageAttachment, Link
+from hackday.assets.models import Attachment, ImageAttachment, Link
 
 
 class STATUS(object):

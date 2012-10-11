@@ -8,18 +8,18 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
 
-from teams.forms import CreateTeamForm
-from teams.forms import UpdateTeamForm
-from teams.models import STATUS
-from teams.models import Team
-from teams.models import TeamCreateStatus
+from hackday.teams.forms import CreateTeamForm
+from hackday.teams.forms import UpdateTeamForm
+from hackday.teams.models import STATUS
+from hackday.teams.models import Team
+from hackday.teams.models import TeamCreateStatus
 
-from assets.models import Attachment
-from assets.models import ImageAttachment
-from assets.models import Link
-from assets.forms import AttachmentForm
-from assets.forms import ImageAttachmentForm
-from assets.forms import LinkAttachmentForm
+from hackday.assets.models import Attachment
+from hackday.assets.models import ImageAttachment
+from hackday.assets.models import Link
+from hackday.assets.forms import AttachmentForm
+from hackday.assets.forms import ImageAttachmentForm
+from hackday.assets.forms import LinkAttachmentForm
 
 class TeamListView(ListView):
     model = Team

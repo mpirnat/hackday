@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.localflavor.us import forms as us_forms
-from users.models import Tshirt, Diet, Location
+from hackday.users.models import Tshirt, Diet, Location
 
 
 class SignUpForm(forms.Form):

@@ -8,11 +8,11 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.localflavor.us.forms import USPhoneNumberField
 from django.core.mail import send_mail
-from teams.models import Team, STATUS
-from users.models import UserProfile
-from voting.moremodels import Category, TYPE
-from voting.models import VoteCart, VoteMessage, VoteStatus, STATUS
-from voting.views import _insert_or_update_vote
+from hackday.teams.models import Team, STATUS
+from hackday.users.models import UserProfile
+from hackday.voting.moremodels import Category, TYPE
+from hackday.voting.models import VoteCart, VoteMessage, VoteStatus, STATUS
+from hackday.voting.views import _insert_or_update_vote
 
 
 PATTERN = re.compile(r'^.*Content-class', re.MULTILINE)

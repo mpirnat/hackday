@@ -1,5 +1,5 @@
 from django import forms
-from charities.models import Charity
+from hackday.charities.models import Charity
 
 
 class SuggestCharityForm(forms.Form):

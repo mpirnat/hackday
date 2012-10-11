@@ -14,19 +14,19 @@ urlpatterns += patterns('',
     # url(r'^$', 'hackday.views.home', name='home'),
     # url(r'^hackday/', include('hackday.foo.urls')),
 
-    (r'^teams/', include('teams.urls')),
+    (r'^teams/', include('hackday.teams.urls')),
 
     # Let the blog own the homepage?
-    url(r'^/*$', 'blog.views.index', name='blog-home'),
+    url(r'^/*$', 'hackday.blog.views.index', name='blog-home'),
 
     # We have a blog!
-    (r'^blog/', include('blog.urls')),
+    (r'^blog/', include('hackday.blog.urls')),
 
     # We have voting!
-    (r'^vote/', include('voting.urls')),
+    (r'^vote/', include('hackday.voting.urls')),
 
     # List of approved charities
-    (r'^charities/', include('charities.urls')),
+    (r'^charities/', include('hackday.charities.urls')),
 
     # User stuff - sign up, sign in, sign out, user profiles
     url(r'^users/reset-password/?$', 'django.contrib.auth.views.password_reset',
@@ -50,7 +50,7 @@ urlpatterns += patterns('',
             'template_name': 'users/password_reset_complete.html'
         }, name='reset-password-complete'),
 
-    (r'^users/', include('users.urls')),
+    (r'^users/', include('hackday.users.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -62,11 +62,11 @@ urlpatterns += patterns('',
     url(r'^reporting/', include('django_qbe.urls')),
 
     # Arbitrary wiki pages FTW!
-    url(r'^(?P<path>.*[^/])/?$', 'wiki.views.page', name='wiki-page'),
+    url(r'^(?P<path>.*[^/])/?$', 'hackday.wiki.views.page', name='wiki-page'),
 
 )
 
 
-handler403 = 'common.forbidden'
-handler404 = 'common.not_found'
-handler500 = 'common.server_error'
+handler403 = 'hackday.common.forbidden'
+handler404 = 'hackday.common.not_found'
+handler500 = 'hackday.common.server_error'

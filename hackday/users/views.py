@@ -1,6 +1,6 @@
-from common import common_env
-from users.forms import SignUpForm, SignInForm, UserProfileForm
-from users.models import User, UserProfile, Tshirt, Diet, Location
+from hackday.common import common_env
+from hackday.users.forms import SignUpForm, SignInForm, UserProfileForm
+from hackday.users.models import User, UserProfile, Tshirt, Diet, Location
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required

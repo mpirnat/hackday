@@ -1,5 +1,5 @@
-from common import common_env
-from wiki.models import Page, STATUS
+from hackday.common import common_env
+from hackday.wiki.models import Page, STATUS
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.template import Context, loader

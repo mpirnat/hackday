@@ -2,7 +2,7 @@ from markdown import markdown
 from docutils.core import publish_parts
 from django.contrib.syndication.views import Feed
 from django.utils import feedgenerator
-from blog.models import Entry, FORMAT
+from hackday.blog.models import Entry, FORMAT
 
 
 class LatestEntriesFeed(Feed):

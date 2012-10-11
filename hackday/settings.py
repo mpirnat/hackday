@@ -102,7 +102,7 @@ TEMPLATE_LOADERS = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.auth.context_processors.auth',
-    'common.common_env_processor',
+    'hackday.common.common_env_processor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -116,6 +116,9 @@ MIDDLEWARE_CLASSES = (
 INTERNAL_IPS = ('127.0.0.1',)
 
 ROOT_URLCONF = 'hackday.urls'
+
+# Python dotted path to the WSGI application used by Django's runserver.
+WSGI_APPLICATION = 'hackday.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -138,13 +141,13 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'django_qbe',
     'taggit',
-    'assets',
-    'blog',
-    'charities',
-    'teams',
-    'users',
-    'voting',
-    'wiki',
+    'hackday.assets',
+    'hackday.blog',
+    'hackday.charities',
+    'hackday.teams',
+    'hackday.users',
+    'hackday.voting',
+    'hackday.wiki',
 )
 
 # A sample logging configuration. The only tangible logging

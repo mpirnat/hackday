@@ -1,6 +1,6 @@
 from django.contrib import admin
-from voting.models import VoteCart, Vote, VoteStatus, VoteMessage
-from voting.moremodels import Category
+from hackday.voting.models import VoteCart, Vote, VoteStatus, VoteMessage
+from hackday.voting.moremodels import Category
 
 admin.site.register(Category)
 admin.site.register(VoteCart)
