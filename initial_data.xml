@@ -2,155 +2,97 @@
 <django-objects version="1.0">
   <object pk="1" model="users.tshirt">
     <field type="CharField" name="description">Men's S</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    17:59:28</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    18:00:17</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 17:59:28</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 18:00:17</field>
   </object>
   <object pk="2" model="users.tshirt">
     <field type="CharField" name="description">Men's M</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    17:59:33</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    18:00:08</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 17:59:33</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 18:00:08</field>
   </object>
   <object pk="3" model="users.tshirt">
     <field type="CharField" name="description">Men's L</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    17:59:36</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    18:00:04</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 17:59:36</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 18:00:04</field>
   </object>
   <object pk="4" model="users.tshirt">
     <field type="CharField" name="description">Men's XL</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    17:59:40</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    17:59:58</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 17:59:40</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 17:59:58</field>
   </object>
   <object pk="5" model="users.tshirt">
     <field type="CharField" name="description">Men's 2XL</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    17:59:48</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    17:59:48</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 17:59:48</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 17:59:48</field>
   </object>
   <object pk="6" model="users.tshirt">
     <field type="CharField" name="description">Men's 3XL</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    17:59:52</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    17:59:52</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 17:59:52</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 17:59:52</field>
   </object>
   <object pk="7" model="users.tshirt">
     <field type="CharField" name="description">Women's S</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    18:00:25</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    18:00:25</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 18:00:25</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 18:00:25</field>
   </object>
   <object pk="8" model="users.tshirt">
     <field type="CharField" name="description">Women's M</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    18:01:00</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    18:01:00</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 18:01:00</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 18:01:00</field>
   </object>
   <object pk="9" model="users.tshirt">
     <field type="CharField" name="description">Women's L</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    18:01:05</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    18:01:05</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 18:01:05</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 18:01:05</field>
   </object>
   <object pk="10" model="users.tshirt">
     <field type="CharField" name="description">Women's XL</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    18:01:11</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    18:01:11</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 18:01:11</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 18:01:11</field>
   </object>
   <object pk="11" model="users.tshirt">
     <field type="CharField" name="description">Women's 2XL</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    18:01:16</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    18:01:16</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 18:01:16</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 18:01:16</field>
   </object>
   <object pk="12" model="users.tshirt">
     <field type="CharField" name="description">Women's 3XL</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    18:01:21</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    18:01:21</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 18:01:21</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 18:01:21</field>
   </object>
   <object pk="1" model="users.diet">
     <field type="CharField" name="description">Vegetarian</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    17:57:42</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    17:57:42</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 17:57:42</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 17:57:42</field>
   </object>
   <object pk="2" model="users.diet">
     <field type="CharField" name="description">Meatatarian</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    17:58:55</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    17:58:55</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 17:58:55</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 17:58:55</field>
   </object>
   <object pk="3" model="users.diet">
     <field type="CharField" name="description">Omnivore</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    17:59:00</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    17:59:00</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 17:59:00</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 17:59:00</field>
   </object>
   <object pk="4" model="users.diet">
     <field type="CharField" name="description">Klingon</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    17:59:04</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    17:59:04</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 17:59:04</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 17:59:04</field>
   </object>
   <object pk="1" model="users.location">
-    <field type="CharField" name="description">WHQ,
-    Cleveland</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    18:01:47</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    18:01:47</field>
+    <field type="CharField" name="description">WHQ, Cleveland</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 18:01:47</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 18:01:47</field>
   </object>
   <object pk="2" model="users.location">
     <field type="CharField" name="description">New York</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    18:02:30</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    18:02:30</field>
+    <field type="DateTimeField" name="create_date">2011-12-11 18:02:30</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 18:02:30</field>
   </object>
   <object pk="3" model="users.location">
     <field type="CharField" name="description">Los Angeles</field>
-    <field type="DateTimeField" name="create_date">2011-12-11
-    18:02:35</field>
-    <field type="DateTimeField" name="mod_date">2011-12-11
-    18:02:35</field>
-  </object>
-  <object pk="1" model="auth.user">
-    <field type="CharField" name="username">admin</field>
-    <field type="CharField" name="first_name"></field>
-    <field type="CharField" name="last_name"></field>
-    <field type="CharField" name="email">admin@example.com</field>
-    <field type="CharField" name="password">
-    sha1$f6e5b$5a4e785f5d3c8b34bdcd28d7edb8b87468726bb8</field>
-    <field type="BooleanField" name="is_staff">True</field>
-    <field type="BooleanField" name="is_active">True</field>
-    <field type="BooleanField" name="is_superuser">True</field>
-    <field type="DateTimeField" name="last_login">2011-12-11
-    18:07:49</field>
-    <field type="DateTimeField" name="date_joined">2011-12-11
-    18:07:49</field>
-    <field to="auth.group" name="groups" rel="ManyToManyRel">
-    </field>
-    <field to="auth.permission" name="user_permissions"
-    rel="ManyToManyRel"></field>
+    <field type="DateTimeField" name="create_date">2011-12-11 18:02:35</field>
+    <field type="DateTimeField" name="mod_date">2011-12-11 18:02:35</field>
   </object>
 </django-objects>
