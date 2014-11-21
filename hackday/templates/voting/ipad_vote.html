@@ -1,0 +1,23 @@
+{% extends 'voting/base.html' %}
+{% load markup %}
+    {% block title %}Hack Day: Vote{% endblock %}
+
+    {% block content %}
+
+    <h3>Vote!</h3>
+
+    {% if error_message %}
+	    <ul class="errorlist">
+			<li>{{error_message}}</li>
+		</ul>
+	{% endif %}
+
+	<form method="POST" action="{% url voting-ipad %}">
+
+	{% csrf_token %}
+	{{form.as_p}}
+
+	<p><input type="submit" name="submit" value="Place Vote"></p>
+	</form>
+
+    {% endblock %}

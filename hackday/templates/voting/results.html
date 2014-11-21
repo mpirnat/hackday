@@ -14,9 +14,6 @@ ul.category-results-list li:first-child {
 }
 
 div.result-list-scroll {
-	height: 120px;
-	overflow-x: hidden;
-	overflow-y: scroll;
 }
 
 ol.result-list {
@@ -84,6 +81,10 @@ ol.result-list li a {
 	font-weight: bold;
 }
 
+#mainContent {
+	width: 100%;
+}
+
 </style>
 
 	<h1>Voting Results</h1>
@@ -91,7 +92,7 @@ ol.result-list li a {
 	<ul class="category-results-list">
 	{% for result in vote_results %}
 	<li>
-		<h2 style="background-color: #DFDFDF; color: #666; padding-left: 10px; margin-bottom: 15px;">{{result.category.name}} ({{result.total}} total votes)</h2>
+		<h4 style="background-color: #DFDFDF; color: #666; padding-left: 10px; margin-bottom: 15px;">{{result.category.name}} ({{result.total}} total votes)</h2>
 		<div class="result-list-scroll">
 		<ol class="result-list">
 		{% for vote in result.votes %}
@@ -108,3 +109,5 @@ ol.result-list li a {
 	</ul>
 
     {% endblock %}
+
+	{% block tweets %}{% endblock %}

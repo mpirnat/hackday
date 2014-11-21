@@ -47,6 +47,14 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+    @property
+    def is_concept(self):
+        return "concept" in self.name.lower()
+
+    @property
+    def is_implemented(self):
+        return "implementation" in self.name.lower()
+
     class Meta:
         verbose_name_plural = "Categories"
         ordering = ['name']

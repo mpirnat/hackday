@@ -1,0 +1,14 @@
+{% extends 'voting/base.html' %}
+{% load markup %}
+    {% block title %}Hack Day: Voting Complete{% endblock %}
+
+    {% block content %}
+
+    <h3>Your Vote Has Been Counted, {{user.first_name}} {{user.last_name}}!</h3>
+	<ul>
+	{% for vote in votes %}
+		<li><strong>{{vote.category.name}}:</strong> {{vote.team.name}}</li>
+	{% endfor %}
+	</ul>
+	<h2 style="margin-top: 100px; text-align: center;"><a href="{% url voting-ipad %}">Place a New Vote</a></h2>
+    {% endblock %}
