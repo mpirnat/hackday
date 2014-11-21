@@ -4,8 +4,6 @@ VENV_ROOT = os.environ.get('VIRTUAL_ENV', '')
 CODE_ROOT = os.path.split(__file__)[0]
 
 DEBUG = True
-DEBUG_TOOLBAR = DEBUG
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -200,10 +198,6 @@ AUTH_PROFILE_MODULE = 'users.userprofile'
 #TWITTER_ACCESS_TOKEN_SECRET = ''
 
 
-if DEBUG_TOOLBAR:
-    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-    INSTALLED_APPS += ('debug_toolbar',)
-
 QBE_ACCESS_FOR = lambda user: user.is_superuser
 QBE_ADMIN = "admin"
 
@@ -211,3 +205,12 @@ try:
     from settings_local import *
 except ImportError:
     pass
+
+DEBUG_TOOLBAR = DEBUG
+TEMPLATE_DEBUG = DEBUG
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+if DEBUG_TOOLBAR:
+    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+    INSTALLED_APPS += ('debug_toolbar',)
+
