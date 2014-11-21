@@ -6,9 +6,18 @@
 
     {% block content %}
     <h3>Sign Up</h3>
+	{% if ldap_enabled %}
+	    <p><h4>Use your Windows network username and password to register.</h4></p>
+	{% endif %}
+
+	{% if form.errors or error_message %}
+		<p class="errorlist">There were errors signing up.  Please correct the issues in red below.</p>
+	{% endif %}
 
     {% if error_message %}
-    <p class="error">{{error_message}}</p>
+	<ul class="errorlist">
+		<li>{{error_message}}</li>
+	</ul>
     {% endif %}
 
     <form action="{% url users-sign-up %}" method="POST">
@@ -16,4 +25,9 @@
         {{form.as_p|checkbox_first}}
         <input type="submit" value="Submit" />
     </form>
+	<a href="{% url wiki-page 'shirt-sizes' %}" style="display: none; padding-left: 10px;" id="size-info" target="_blank">sizing info</a>
+	<script type="text/javascript">
+		$('#id_tshirt').after($('#size-info'));
+		$('#size-info').css({'display': ''});
+	</script>
     {% endblock %}

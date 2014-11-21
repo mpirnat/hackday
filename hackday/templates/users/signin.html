@@ -5,15 +5,24 @@
 
     {% block content %}
     <h3>Sign In</h3>
+    {% if form.errors or error_message %}
+		<p class="errorlist">There were errors signing in.  Please correct the issues in red below.</p>
+	{% endif %}
 
     {% if error_message %}
-    <p class="error">{{error_message}}</p>
+	<ul class="errorlist">
+		<li>{{error_message}}</li>
+	</ul>
     {% endif %}
-
+	<h4>First time visiting the site for {{ site_name }}? You'll need to <a href="{% url users-sign-up %}" style="text-decoration: underline;">register</a> first.</h4>
     <form action="{% url users-sign-in %}" method="POST">
         {% csrf_token %}
         {{form.as_p}}
         <input type="submit" value="Submit" />
     </form>
-	<p><a href='{% url reset-password %}'>Forgot your password?</a></p>
+	{% if ldap_enabled %}
+		<p>Use your Windows network username and password to sign in.</p>
+	{% else %}
+		<p><a href='{% url reset-password %}'>Forgot your password?</a></p>
+	{% endif %}
     {% endblock %}

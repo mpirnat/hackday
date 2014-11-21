@@ -40,13 +40,15 @@ class Location(models.Model):
 class UserProfile(models.Model):
 
     user = models.ForeignKey(User, unique=True)
-    description = models.TextField('user bio')
-    phone = models.TextField('phone number')
-    alternate_email = models.EmailField('alternate email')
+    description = models.TextField('user bio', blank=True)
+    notes = models.TextField('profile notes', blank=True)
+    phone = models.TextField('phone number', blank=True)
+    alternate_email = models.EmailField('alternate email', blank=True)
     notify_by_email = models.BooleanField('send posts by email')
+    dinner_required = models.BooleanField('staying for dinner')
 
-    tshirt = models.ForeignKey(Tshirt)
-    diet = models.ForeignKey(Diet)
+    tshirt = models.ForeignKey(Tshirt, verbose_name="t-shirt size")
+    diet = models.ForeignKey(Diet, verbose_name="dietary choice")
     location = models.ForeignKey(Location)
 
     create_date = models.DateTimeField('date created', auto_now_add=True)
@@ -59,5 +61,5 @@ class UserProfile(models.Model):
 
     @property
     def image(self):
-        hash = md5(self.user.email.strip()).hexdigest()
+        hash = md5(self.user.email.strip().lower()).hexdigest()
         return "http://gravatar.com/avatar/{0}".format(hash)
