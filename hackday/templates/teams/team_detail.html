@@ -21,7 +21,7 @@
         <p>{{team.project|markdown:"safe"}}</p>
 
         {% if team.images.all %}
-        <h3>images:</h3>
+        <h4>images:</h4>
         <ul>
             {% for image in team.images.all %}
             <li><img src="{{image.attached_file.url}}" title="{{image.title}}" alt="{{image.alt_text}}"
@@ -37,7 +37,7 @@
         {% endif %}
 
         {% if team.links.all %}
-        <h3>links</h3>
+        <h4>links</h4>
         <ul>
             {% for link in team.links.all %}
             <li><a href="{{link.url}}">{{link.text}}</a>
@@ -54,7 +54,7 @@
 
 
         {% if team.attachments.all %}
-        <h3>attachments</h3>
+        <h4>attachments</h4>
         <ul>
             {% for attachment in team.attachments.all %}
             <li><a href={{attachment.attached_file.url}}>{{attachment.title}}</a>
@@ -69,21 +69,29 @@
         {% endif %}
     </div>
 
+    {% endblock %}
+
+	{% block tweets %}
     <div id="team-side">
 		{% for member in team.members.all %}
-			{% if member == user %}
+			{% if member == user and create_status %}
 				<div id="edit-team" class="team-side-sec">
 					<a href="{% url teams-edit slug=team.slug %}">edit your team</a> | <a href="{% url teams-delete slug=team.slug%}" onclick="confirm_delete(this);return false;">delete your team</a>
 				</div>
 			{% endif %}
+			{% if member == user and not create_status %}
+				<div id="edit-team" class="team-side-sec">
+					<a href="{% url teams-edit slug=team.slug %}">edit your team</a> | <a href="#" onClick="alert('Contact AGIHackDay@ag.com to delete your team');return false;">delete your team</a>
+				</div>
+			{% endif %}
 		{% endfor %}
     	<div id="side-category" class="team-side-sec">
-            <h3>Category</h3>
+            <h4>Category</h4>
 			<p>{{team.category}}</p>
         </div>
 
     	<div id="side-members" class="team-side-sec">
-            <h3>Members</h3>
+            <h4>Members</h4>
             <ul>
                 <li class="captain"><a href="{% url users-profile team.captain.username %}">{{team.captain.get_full_name|default:team.captain.username}}*</a></li>
                 {% for member in team.members.all %}
@@ -94,10 +102,12 @@
             </ul>
             <p class="asterix">*Team Captain</p>
         </div>
+		<!--
     	<div id="side-charity" class="team-side-sec">
-            <h3>Charity</h3>
+            <h4>Charity</h4>
             <p><a href="{% url charities-home %}">{{team.charity}}</a></p>
         </div>
+		-->
 	{% for member in team.members.all %}
 		{% if member == user %}
     	<div id="side-attach" class="team-side-sec">
@@ -110,8 +120,7 @@
 		{% endif %}
 	{% endfor %}
     </div>
+	{% endblock %}
 
 
 
-
-    {% endblock %}

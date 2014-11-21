@@ -5,7 +5,7 @@
     {% block content %}
     <h1>Team List</h1>
 
-	{% if user.is_active %}
+	{% if user.is_active and create_status %}
 		<p><a href="{% url teams-create %}" class="button">Create a team!</a>
 	{% endif %}
 
@@ -19,7 +19,7 @@
 
         {% endfor %}
     </ul>
-    
+
     <p>* team captain</p>
 
     {% endblock %}

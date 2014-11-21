@@ -47,7 +47,7 @@ def create_unique_team_filename(instance, filename):
     """
     filename_parts = filename.split('.')
     return 'teams/{team_slug}/{file_prefix}-{stamp}.{file_suffix}'.format(
-            team_slug=instance.slug,
+            team_slug=instance.slug[:75],
             file_prefix='.'.join(filename_parts[:-1]),
             stamp=time.time(),
             file_suffix=filename_parts[-1])
@@ -121,6 +121,14 @@ class Team(models.Model):
 
     create_date = models.DateTimeField('date created', auto_now_add=True)
     mod_date = models.DateTimeField('date modified', auto_now=True)
+
+    @property
+    def is_concept(self):
+        return self.project_type == PROJECT_TYPE.CONCEPT
+
+    @property
+    def is_implemented(self):
+        return self.project_type == PROJECT_TYPE.IMPLEMENTED
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)  #TODO: check if slug exists in DB

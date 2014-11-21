@@ -25,11 +25,28 @@ class TeamListView(ListView):
     model = Team
     queryset = Team.objects.filter(status=STATUS.ACTIVE)
 
+    def get_context_data(self, **kwargs):
+        context = super(TeamListView, self).get_context_data(**kwargs)
+        try:
+            online = TeamCreateStatus.objects.all()[0].online
+        except:
+            online = True
+        context["create_status"] = online
+        return context
+
 
 class TeamDetailView(DetailView):
     model = Team
     queryset = Team.objects.filter(status=STATUS.ACTIVE)
 
+    def get_context_data(self, **kwargs):
+        context = super(TeamDetailView, self).get_context_data(**kwargs)
+        try:
+            online = TeamCreateStatus.objects.all()[0].online
+        except:
+            online = True
+        context["create_status"] = online
+        return context
 
 class TeamUpdateView(UpdateView):
     model = Team
@@ -205,7 +222,7 @@ def add_link(request, slug):
 def remove_link(request, slug, attachment_id):
     team = Team.objects.get(slug=slug)
     if team.is_member(request.user):
-        link = LinkAttachment.objects.get(id=attachment_id)
+        link = Link.objects.get(id=attachment_id)
         team.links.remove(link)
 
     return HttpResponseRedirect(reverse('teams-detail',
