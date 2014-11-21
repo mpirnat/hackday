@@ -52,6 +52,8 @@ urlpatterns += patterns('',
 
     (r'^users/', include('hackday.users.urls')),
 
+    url(r'^rsvp/', 'hackday.messaging.views.rsvp', name='rsvp'),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
