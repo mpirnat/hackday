@@ -1,7 +1,7 @@
 django==1.4.5
 django-debug-toolbar
 django-taggit
-PIL
+Pillow
 Markdown
 docutils
 tweepy
@@ -9,3 +9,4 @@ beautifulsoup
 https://github.com/versae/qbe/archive/0.2.0.tar.gz
 python-ldap==2.4.10
 requests==2.2.1
+python-memcached
