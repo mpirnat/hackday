@@ -81,7 +81,8 @@
     <field type="DateTimeField" name="mod_date">2011-12-11 17:59:04</field>
   </object>
   <object pk="1" model="users.location">
-    <field type="CharField" name="description">WHQ, Cleveland</field>
+    <field type="CharField" name="description">WHQ,
+    Cleveland</field>
     <field type="DateTimeField" name="create_date">2011-12-11 18:01:47</field>
     <field type="DateTimeField" name="mod_date">2011-12-11 18:01:47</field>
   </object>
@@ -94,5 +95,19 @@
     <field type="CharField" name="description">Los Angeles</field>
     <field type="DateTimeField" name="create_date">2011-12-11 18:02:35</field>
     <field type="DateTimeField" name="mod_date">2011-12-11 18:02:35</field>
+  </object>
+  <object pk="1" model="auth.user">
+    <field type="CharField" name="username">admin</field>
+    <field type="CharField" name="first_name"></field>
+    <field type="CharField" name="last_name"></field>
+    <field type="CharField" name="email">admin@example.com</field>
+    <field type="CharField" name="password">sha1$f6e5b$5a4e785f5d3c8b34bdcd28d7edb8b87468726bb8</field>
+    <field type="BooleanField" name="is_staff">True</field>
+    <field type="BooleanField" name="is_active">True</field>
+    <field type="BooleanField" name="is_superuser">True</field>
+    <field type="DateTimeField" name="last_login">2011-12-11 18:07:49</field>
+    <field type="DateTimeField" name="date_joined">2011-12-11 18:07:49</field>
+    <field to="auth.group" name="groups" rel="ManyToManyRel"></field>
+    <field to="auth.permission" name="user_permissions" rel="ManyToManyRel"></field>
   </object>
 </django-objects>
