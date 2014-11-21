@@ -117,7 +117,7 @@ class Team(models.Model):
             related_name="%(app_label)s_%(class)s_links")
 
     category = models.ForeignKey(Category)
-#    charity = models.ForeignKey(Charity)
+    charity = models.ForeignKey(Charity)
 
     create_date = models.DateTimeField('date created', auto_now_add=True)
     mod_date = models.DateTimeField('date modified', auto_now=True)
