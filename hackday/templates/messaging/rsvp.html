@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+    {% block title %}Hack Day: RSVP{% endblock %}
+    {% block bodyid %}page-rsvp{% endblock %}
+
+    {% block content %}
+	<div style="width: 1000px;"></div>
+	{% if saved or updated %}
+		<h3>Thank You!<h3>
+		{% if saved %}
+			<h4>Your RSVP has been saved.<h4>
+		{% else %}
+			<h4>Your RSVP has been updated.<h4>
+		{% endif %}
+	{% else %}
+		<h4>RSVP to attend Hack Day Presentations on March 22, 2013</h4>
+		{% if form.errors %}
+			<p class="errorlist">There were errors saving your RSVP.  Please correct the issues in red below.</p>
+		{% endif %}
+
+		<form action="{% url rsvp %}" method="POST">
+			{% csrf_token %}
+			{{form.as_p}}
+			<input type="submit" value="RSVP" />
+		</form>
+	{% endif %}
+    {% endblock %}
+	{% block tweets %}
+	{% endblock %}
