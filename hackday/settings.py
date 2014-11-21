@@ -103,6 +103,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.auth.context_processors.auth',
     'hackday.common.common_env_processor',
+    'hackday.twitter.tweets',
+    'hackday.messaging.context_processors.random_message',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -146,6 +148,7 @@ INSTALLED_APPS = (
     'hackday.charities',
     'hackday.teams',
     'hackday.users',
+    'hackday.messaging',
     'hackday.voting',
     'hackday.wiki',
 )
@@ -174,6 +177,28 @@ LOGGING = {
 }
 
 AUTH_PROFILE_MODULE = 'users.userprofile'
+
+# uncomment and update the following lines to enable LDAP authentication
+#AUTHENTICATION_BACKENDS = (
+#    'hackday.auth.backend.ActiveDirectoryBackend',
+#)
+#AD_DNS_NAME = 'adserver.somecompany.com'
+#AD_LDAP_PORT = 3269
+#AD_DOMAIN_MAP = [
+#    ('domain', 'dc=ldap,dc=search,dc=string'),
+#]
+#AD_CERT_FILE = 'Auth.cer'
+
+# set to enable urban airship push notifications for blog posts
+#URBAN_AIRSHIP_KEY = ''
+#URBAN_AIRSHIP_SECRET = ''
+
+# set to display tweets on site and send twitter blog post notifications
+#TWITTER_CONSUMER_KEY = ''
+#TWITTER_CONSUMER_SECRET = ''
+#TWITTER_ACCESS_TOKEN = ''
+#TWITTER_ACCESS_TOKEN_SECRET = ''
+
 
 if DEBUG_TOOLBAR:
     MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
