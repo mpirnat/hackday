@@ -1,11 +1,13 @@
+import json
 from hackday.common import common_env
 from hackday.blog.models import Entry, EntryForm, STATUS, FORMAT
+from django.core import serializers
 from django.http import HttpResponse
 from django.template import Context, loader
 from django.forms.models import modelformset_factory
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 
 
@@ -30,18 +32,33 @@ def index(request):
     env = common_env()
     env['entries'] = _get_paginated_entries(all_entries, page, 5)
     env['formats'] = FORMAT
-    return render(request, 'blog/index.html', env)
+
+    if request.GET.get('format', '') == 'json':
+        return HttpResponse(serializers.serialize('json', all_entries), mimetype="application/json")
+    else:
+        return render(request, 'blog/index.html', env)
 
 
 def entry(request, entry_id):
-    if request.user.is_superuser:
+    if request.user.has_perm('blog.add_entry'):
+        entry = Entry.objects.get(pk=entry_id)
+    else:
+        entry = get_object_or_404(Entry, pk=entry_id, status=STATUS.PUBLISHED)
+    env = common_env()
+    env['entry'] = entry
+    env['formats'] = FORMAT
+    return render(request, 'blog/entry.html', env)
+
+
+def email(request, entry_id):
+    if request.user.has_perm('blog.add_entry'):
         entry = Entry.objects.get(pk=entry_id)
     else:
         entry = Entry.objects.get(pk=entry_id, status=STATUS.PUBLISHED)
     env = common_env()
     env['entry'] = entry
     env['formats'] = FORMAT
-    return render(request, 'blog/entry.html', env)
+    return render(request, 'blog/notification_email_html.html', env)
 
 
 def category(request, slug):

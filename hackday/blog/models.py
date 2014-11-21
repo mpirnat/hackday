@@ -33,7 +33,7 @@ class FORMAT(object):
     CHOICES = (
         (MARKDOWN, 'Markdown'),
         (RESTRUCTURED_TEXT, 'Restructured Text'),
-    #    (HTML, 'HTML'),
+        (HTML, 'HTML'),
     )
 
 
@@ -121,3 +121,5 @@ def blog_entry_did_save(sender, instance, created, raw, **kwargs):
         notifier = BlogNotification(instance)
         notifier.send_email()
         notifier.send_tweet()
+        notifier.send_push()
+

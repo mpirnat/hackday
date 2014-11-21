@@ -1,5 +1,7 @@
 import tweepy
 import os
+import json
+import requests
 
 from BeautifulSoup import BeautifulSoup
 from email.MIMEImage import MIMEImage
@@ -21,7 +23,6 @@ class BlogNotification(object):
                         'site_name': self.site.name}
 
     def send_email(self):
-        project_path = os.path.dirname(os.path.normpath(os.sys.modules[settings.SETTINGS_MODULE].__file__))
         profiles = UserProfile.objects.filter(notify_by_email=True)
         recipients = [p.user.email for p in profiles]
 
@@ -46,20 +47,31 @@ class BlogNotification(object):
             body_html = str(soup)
 
             for filename, file_id in images.items():
-                image_file = open(project_path + filename, 'rb')
-                msg_image = MIMEImage(image_file.read())
-                image_file.close()
-                msg_image.add_header('Content-ID', '<{0}>'.format(file_id))
-                message.attach(msg_image)
+                image_file = self._file_finder(filename)
+                if image_file:
+                    msg_image = MIMEImage(image_file.read())
+                    image_file.close()
+                    msg_image.add_header('Content-ID', '<{0}>'.format(file_id))
+                    message.attach(msg_image)
 
             message.attach_alternative(body_html, "text/html")
 
         except Exception, e:
+            raise e
             # if we can't load the html template or related images,
             # don't send the HTML version
             pass
 
         message.send()
+
+    def _file_finder(self, filename):
+        filename = filename.replace(settings.STATIC_URL, '').lstrip('/')
+        for static_dir in settings.STATICFILES_DIRS:
+            image_path = os.path.join(static_dir, filename)
+            if os.path.exists(image_path):
+                return open(image_path, 'rb')
+
+        return None
 
     def _image_finder(self, tag):
         return (tag.name == u'img')
@@ -80,6 +92,31 @@ class BlogNotification(object):
         except tweepy.TweepError:
             pass # avoid errors from duplicate posts during testing
 
+    def send_push(self):
+        if not hasattr(settings, 'URBAN_AIRSHIP_SECRET'):
+            return;
+
+        key = settings.URBAN_AIRSHIP_KEY
+        secret = settings.URBAN_AIRSHIP_SECRET
+        url = 'https://go.urbanairship.com/api/push/'
+
+        update = self.render_template('blog/notification_push.html')
+        notification = {'audience': "all",
+                        'device_types': "all",
+                        'notification': {
+                            "alert": update,
+                            "ios": {"sound": "default"},
+                            }
+                        }
+
+        try:
+            response = requests.post(url,
+                 data=json.dumps(notification),
+                 auth=(key, secret),
+                 headers={'Content-Type': 'application/json',
+                          'Accept': "application/vnd.urbanairship+json; version=3"})
+        except:
+            pass #don't worry if the push didn't send
 
     def render_template(self, template):
         t = loader.get_template(template)

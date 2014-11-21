@@ -1,54 +1,42 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-{% load markup %}
-<html                                     >
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>{{ site_name }} Email</title>
-</head>
-
-<body>
-<center>
-<table cellpadding="0" cellspacing="0" border="0"  width="100%" bgcolor="#000000">
-<tr>
-<td width="100%" bgcolor="#000000">
-<center>
-<table cellpadding="0" cellspacing="0" border="0"  width="650" bgcolor="#000000">
-<tr>
-<td width="650" bgcolor="#000000" colspan="51"><img src="{{ STATIC_URL }}/images/email/top4.gif" height="152" width="650" border="0"/></td>
-</tr>
-<tr>
-<td width="46" style="background-color:#000000;" bgcolor="#000000"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="46" border="0"/></td><td width="1" bgcolor="#333333"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#404040"><img src="{{ STATIC_URL }}/images/email/space.gif" height="20" width="1" border="0"/></td><td width="1" bgcolor="#4a4a4a"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#5a5a5a"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#666666"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#737373"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#7b7b7b"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#8c8c8c"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#999999"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#A5A5A4"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#b5b5b5"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#bdbdbd"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#cccccc"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#d6d6d6"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#e6e6e6"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#efefef"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#f7f7f7"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#f7f7f7"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#e6e6e6"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#d6d6d6"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#cccccc"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#bdbdbd"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#b5b5b5"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#A5A5A4"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="502" bgcolor="#ffffff" style="background:#ffffff;">
-
-<table cellpadding="0" cellspacing="0" border="0"  width="502" style="background:#fffff;">
-<tr>
-<td width="21"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="21" border="0"/></td><td width="460" align="left" style="color:#000000;background:#ffffff;"><font face="Times New Roman, Times, serif" size="3" color="#000000">
-{{entry.author.username}} has posted a new {{site_name}} blog post:
-
-<a href="{{site_domain}}{%url blog-entry entry.id %}">{{entry.title|safe}}</a>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> <html
+xmlns="http://www.w3.org/1999/xhtml"> <head> <meta http-equiv="Content-Type"
+content="text/html; charset=utf-8" /> <title> {{ site_name }} Email </title>
+</head> <body bgcolor="#000000" alink="#ca1F26" link="#ca1F26" vlink="#ca1F26"> <p> {% load markup %} </p> <center> <table cellpadding="0"
+cellspacing="0" border="0" width="100%" bgcolor="#000000"> <tr> <td
+width="100%" bgcolor="#000000"> <center> <table cellpadding="0"
+cellspacing="0" border="0" width="590" bgcolor="#000000"> <tr> <td
+colspan="3"> <img src="{{ STATIC_URL }}/images/email/space.gif"
+height="50" width="590" border="0" /> </td> </tr> <tr> <td width="590"
+bgcolor="#000000" colspan="51"> <img
+src="{{ STATIC_URL }}/images/email/header.gif" height="245"
+width="504" border="0" /> </td> </tr> <tr> <td width="590" bgcolor="#00000"
+colspan="51" height="15"> </td> </tr><tr> <td width="590" bgcolor="#CA2027"
+colspan="51" height="1"> </td> </tr><tr> <td width="60"
+style="background-color:#000000;" bgcolor="#000000"> <img
+src="{{ STATIC_URL }}/images/email/space.gif" height="1"
+width="60" border="0" /> </td> <td width="470" bgcolor="#000000"
+style="background:#000000;"> <table cellpadding="0" cellspacing="0"
+border="0" width="470" style="background:#fffff;"> <tr> <td width="460"
+style="background-color:#000000;" bgcolor="#000000"> <img
+src="{{ STATIC_URL }}/images/email/space.gif" height="20"
+width="460" border="0" /> </td> </tr> <tr> <td width="460" align="left"
+style="color:#FFFFFF;background:#000000;"> <font face="Arial,Helvetica,
+sans-serif" size="3" color="#FFF">{{entry.author.get_full_name}} has posted a new
+{{site_name}} blog post: <a href="{{site_domain}}{%url blog-entry entry.id %}">{{entry.title|safe}}</a>
 {% if entry.format == 'MD' %}
-    {{ entry.content|markdown }}
+	{{ entry.content|markdown }}
 {% endif %}
 {% if entry.format == 'RST' %}
 	{{ entry.content|restructuredtext}}
 {% endif %}
-
-{{site_domain}}{% url blog-entry entry.id %}
-</font>
-</td><td width="21" ><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="21" border="0"/></td>
-</tr>
-</table>
-<img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="501" border="0"/>
-
-</td><td width="1" bgcolor="#333333"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#404040"><img src="{{ STATIC_URL }}/images/email/space.gif" height="20" width="1" border="0"/></td><td width="1" bgcolor="#4a4a4a"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#5a5a5a"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#666666"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#737373"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#7b7b7b"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#8c8c8c"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#999999"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#A5A5A4"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#b5b5b5"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#bdbdbd"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#cccccc"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#d6d6d6"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#e6e6e6"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#efefef"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#f7f7f7"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#f7f7f7"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#e6e6e6"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#d6d6d6"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#cccccc"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#bdbdbd"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#b5b5b5"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="1" bgcolor="#A5A5A4"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="1" border="0"/></td><td width="54" bgcolor="#000000"><img src="{{ STATIC_URL }}/images/email/space.gif" height="1" width="54" border="0"/></td>
-</tr>
-<tr><td width="650" bgcolor="#000000" colspan="51"><img src="{{ STATIC_URL }}/images/email/bottom4.gif" height="147" width="650" border="0"/></td></tr>
-</table>
-</center>
-
-</td></tr>
-</table>
-</center>
-
-</body>
-</html>
+{{site_domain}}{% url blog-entry entry.id %}</font> </td> </tr> <tr> <td
+width="460" style="background-color:#000000;" bgcolor="#000000"> <img
+src="{{ STATIC_URL }}/images/email/space.gif" height="20"
+width="460" border="0" /> </td> </tr> </table> </td> <td width="60"
+bgcolor="#000000"> <img
+src="{{ STATIC_URL }}/images/email/space.gif" height="1"
+width="60" border="0" /> </td> </tr> <tr> <td colspan="3"><img
+src="{{ STATIC_URL }}/images/email/space.gif" height="50"
+width="590" border="0" /> </td> </tr> </table> </center> </td> </tr> </table>
+</center> </body> </html>
