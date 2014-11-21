@@ -1,43 +1,124 @@
 <!DOCTYPE html>
 <html>
+    {% load static %}
     <head>
-        <title>{% block title %}Hackday{% endblock %}</title>
+        <title>
+            {% block title %}Hackday{% endblock %}
+        </title>
         <meta name="viewport" content="width=device-width, minimum-scale=1.0,  user-scalable=yes">
-
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css"/>
         <link rel="stylesheet" href="{{ STATIC_URL }}css/theme.css" />
         <style>
 
+        </style>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
 
-		</style>
-
-        <script>
-		  document.createElement('article');
-		  document.createElement('aside');
-		  document.createElement('footer');
-		  document.createElement('header');
-		  document.createElement('hgroup');
-		  document.createElement('mark');
-		  document.createElement('nav');
-		  document.createElement('section');
+		<!-- Magnific Popup core CSS file -->
+		<link rel="stylesheet" href="{{STATIC_URL}}/magnific-popup/magnific-popup.css">
+		<!-- Magnific Popup core JS file -->
+		<script src="{{STATIC_URL}}/magnific-popup/jquery.magnific-popup.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				  $('.twitter-image').magnificPopup({type:'image'});
+			});
 		</script>
 
+	    <link href='//fonts.googleapis.com/css?family=Economica:700italic,700|Alegreya+Sans:400,500' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="{{STATIC_URL}}js/messages.js"></script>
+        <script>
+            document.createElement('article');
+            document.createElement('aside');
+            document.createElement('footer');
+            document.createElement('header');
+            document.createElement('hgroup');
+            document.createElement('mark');
+            document.createElement('nav');
+            document.createElement('section');
+        </script>
+		<style type="text/css" media="print">
+			body,h1,h2,h3,h4 {color: black;}
+            #vote-team .team-members strong,#vote-team strong, #vote-how li.vote-note .vote-hi,.vote-hi {color: black; font-weight: bold;}
+			#tweets {display: none;}
+		    #mainContent {width: auto; float: none; margin: 0px; padding: 2em;}
+			#headerWrap {display: none;}
+			#wrapper {width: 100%; float:none;}
+			#content {float: none;}
+            .page-break {page-break-before: always; border-top: 0px !important;}
+			#vote-team h3,#rss-link{display: none;}
+			#vote-team h2 {font-size: 200%; display: block !important;}
+            #vote-team {font-size: 75%;}
+			#vote-team .team-members div p {display: inline;}
+			#vote-team li {page-break-inside: avoid; border-top: 0px; border-bottom: solid black 1px;}
+		</style>
     </head>
+    <body id="{% block bodyid %}home{% endblock %}">
+        <span id="body-x1">
+        </span>
+        <span id="body-x2">
+        </span>
+        <span id="body-x3">
+        </span>
 
-    <body id="{% block bodyid %}home{% endblock %}"><span id="body-x1"></span><span id="body-x2"></span><span id="body-x3"></span>
-
-       {% include "header.html" %}
-
-
-        <div id="content"><span id="content-x1"></span><span id="content-x2"></span><span id="content-x3"></span>
-          {% block content %}Content goes here{% endblock %}
+            {% include "header.html" %}
+        <div id="wrapper">
+            <div id="content">
+                <span id="content-x1">
+                </span>
+                <span id="content-x2">
+                </span>
+                <span id="content-x3">
+                </span>
+                <div id="mainContent">
+                    {% block content %}Content goes here{% endblock %}
+                </div>
+                <div id="tweets">
+				{% block tweets %}
+                    <h3>
+                        HackTweets
+                    </h3>
+                    <div id="tweetsContent">
+					<ul class="tweet_list">
+                    {% for tweet in tweets %}
+                        <li class="{% if forloop.first %}tweet_first{% endif %} {% cycle 'tweet_even' 'tweet_odd' %}">
+                        {% if tweet.retweeted %}
+                            <img class="tweet_image" src="{{tweet.retweeted_status.author.profile_image_url_https}}">
+                            <span class="tweet_text">{{tweet.retweeted_status.text|urlize}}</span>
+                            <span class="tweet_retweet">&#8635; Retweeted from @{{tweet.retweeted_status.author.screen_name}}</span>
+                        {% else %}
+                            <img class="tweet_image" src="{{tweet.author.profile_image_url_https}}">
+                            <span class="tweet_text">{{tweet.text|urlize}}</span>
+                        {% endif %}
+						{% if 'media' in tweet.entities %}
+						{% for media in tweet.entities.media %}
+							{% if media.type == 'photo' %}
+							<a class="twitter-image" href="{{media.media_url_https}}:large"><img src="{{media.media_url_https}}:thumb" style="display:block; margin: 0px auto;"></a>
+							{% endif %}
+						{% endfor %}
+						{% endif %}
+                        <div class="clearfix"></div>
+                        </li>
+                    {% endfor %}
+					</ul>
+                    </div>
+				{% endblock %}
+                </div>
+            </div>
+            <footer>
+                {% include "nav.html" %}
+            </footer>
+            <p>
+                <a id="rss-link" href="{% url blog-feed %}">RSS feed</a>
+            </p>
         </div>
-
-        <footer>
-            {% include "nav.html" %}
-        </footer>
-
-        <p><a href="{% url blog-feed %}">RSS feed</a></p>
-
+		{% if random_message %}
+		<div id="hidden-message" style="display: none;border-radius: 5px; position: relative; color: #ccffff; text-align: center; font-size: 50px; line-height: 1.25em; font-weight: bold; background-color: #fff; overflow: hidden;">
+			<div style="background-image: url({{ STATIC_URL }}images/hidden.gif); opacity: .7; width: 6000px; height: 6000px; position: absolute; top: 0px; left: 0px;"></div>
+			{{random_message}}
+		</div>
+		<script type="text/javascript">
+			place_message();
+		</script>
+		{% endif %}
     </body>
+
 </html>

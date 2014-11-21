@@ -1,25 +1,29 @@
 <header>
+    <div id="headerWrap">
+        <a href="{% url blog-home %}" id="head-logo">
+            <h1>Hack Day</h1>
+            <p class="tagline">A Clever Tag Line</p>
+            <span class="x1"></span>
+        </a>
 
-    <a href="{% url blog-home %}" id="head-logo">
-        <h1>Hack Day</h1>
-        <p>A Clever Tag Line</p>
-        <span class="x1"></span>
-    </a>
-
-    <div id="head-welcome">
-    {% if user.is_authenticated %}
-        <p>Welcome back, <a href="{% url users-profile user.username %}">{{user.username}}</a>!</p>
-        <p><a href="{% url users-sign-out %}">Sign out</a></p>
-        {% if user.is_staff %}
-        <p><a href="{% url admin:index %}">Admin</a> | <a href="{% url qbe_form %}">Reporting</a></p>
+        <div id="head-welcome">
+        {% if user.is_authenticated %}
+            <p>Welcome back, <a href="{% url users-profile user.username %}">{{user.username}}</a></p>
+            <p><a href="{% url users-sign-out %}">Sign out</a>
+            {% if user.is_staff or user.is_superuser %}
+            | <a href="{% url admin:index %}">Admin</a>
+			{% if user.is_superuser %}
+				| <a href="{% url qbe_form %}">Reporting</a>
+			{% endif %}
+            {% endif %}
+            </p>
+        {% else %}
+            <p>New users: <a href="{% url users-sign-up %}">Sign up!</a></p>
+            <p>Returning users: <a href="{% url users-sign-in %}">Sign in</a></p>
         {% endif %}
-    {% else %}
-        <p>New users: <a href="{% url users-sign-up %}">Sign up!</a></p>
-        <p>Returning users: <a href="{% url users-sign-in %}">Sign in</a></p>
-    {% endif %}
+        </div>
+
+
+        {% include "nav.html" %}
     </div>
-
-
-    {% include "nav.html" %}
-
 </header>
