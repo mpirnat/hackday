@@ -37,7 +37,7 @@ class PROJECT_TYPE(object):
 
     CHOICES = (
         (IMPLEMENTED, 'Implemented'),
-        (CONCEPT, 'Concept'),
+        (CONCEPT, 'Non Implemented'),
     )
 
 

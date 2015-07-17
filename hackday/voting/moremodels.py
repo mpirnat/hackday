@@ -49,7 +49,7 @@ class Category(models.Model):
 
     @property
     def is_concept(self):
-        return "concept" in self.name.lower()
+        return "non implemented" in self.name.lower()
 
     @property
     def is_implemented(self):
