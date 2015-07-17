@@ -145,6 +145,11 @@ def profile_redirect(request):
     return HttpResponseRedirect(reverse('users-profile',
                                         args=[request.user.username]))
 
+@login_required
+def edit_profile_redirect(request):
+    return HttpResponseRedirect(reverse('users-edit-profile',
+                                        args=[request.user.username]))
+
 def profile(request, username):
     user = User.objects.get(username=username)
     user_profile = UserProfile.objects.get(user=user)
