@@ -9,6 +9,13 @@ admin.autodiscover()
 # Serve uploaded media during development
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+# Enable debug toolbar in debug mode
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )
+
 urlpatterns += patterns('',
     # Examples:
     # url(r'^$', 'hackday.views.home', name='home'),
@@ -72,3 +79,4 @@ urlpatterns += patterns('',
 handler403 = 'hackday.common.forbidden'
 handler404 = 'hackday.common.not_found'
 handler500 = 'hackday.common.server_error'
+
