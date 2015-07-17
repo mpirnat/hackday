@@ -5,7 +5,6 @@ arise.
 """
 from django.db import models
 
-
 class TYPE(object):
     """
     Differentiate categories by type; some categories may be decided by
@@ -17,6 +16,22 @@ class TYPE(object):
     CHOICES = (
         (JUDGED, 'Judged'),
         (VOTED, 'Voted'),
+    )
+
+
+class PROJECT_TYPE(object):
+    """
+    Type of project -- 'implemented' (working code) or 'concept' (smoke and
+    Powerpoint mirrors)
+    """
+    # I honestly came really close to calling these 'SMOKE' and 'MIRRORS' but
+    # couldn't decide which to assign to which. - mpirnat
+    IMPLEMENTED = 'I'
+    CONCEPT = 'C'
+
+    CHOICES = (
+        (IMPLEMENTED, 'Implemented'),
+        (CONCEPT, 'Non Implemented'),
     )
 
 
@@ -40,6 +55,8 @@ class Category(models.Model):
     description = models.TextField('description of category')
     type = models.CharField('type of category', max_length=1, db_index=True,
             choices=TYPE.CHOICES)
+    project_type = models.CharField('type of project', max_length=1,
+                choices=PROJECT_TYPE.CHOICES, blank=True)
 
     create_date = models.DateTimeField('date created', auto_now_add=True)
     mod_date = models.DateTimeField('date modified', auto_now=True)
@@ -49,11 +66,11 @@ class Category(models.Model):
 
     @property
     def is_concept(self):
-        return "non implemented" in self.name.lower()
+        return self.project_type is not None and self.project_type == PROJECT_TYPE.CONCEPT
 
     @property
     def is_implemented(self):
-        return "implementation" in self.name.lower()
+        return self.project_type is not None and self.project_type == PROJECT_TYPE.IMPLEMENTED
 
     class Meta:
         verbose_name_plural = "Categories"
