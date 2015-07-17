@@ -68,6 +68,7 @@ def sign_up(request):
                         description=form.cleaned_data['description'],
                         notify_by_email=form.cleaned_data['notify_by_email'],
                         dinner_required=form.cleaned_data['dinner_required'])
+                        breakfast_required=form.cleaned_data['breakfast_required'])
                 try:
                     user_profile.save()
                 except IntegrityError:
@@ -192,6 +193,7 @@ def edit_profile(request, username):
 #            user_profile.notes = form.cleaned_data['notes']
             user_profile.notify_by_email = form.cleaned_data['notify_by_email']
             user_profile.dinner_required = form.cleaned_data['dinner_required']
+            user_profile.breakfast_required = form.cleaned_data['breakfast_required']
 
             user_profile.save()
 
@@ -211,6 +213,7 @@ def edit_profile(request, username):
 #                'notes': user_profile.notes,
                 'notify_by_email': user_profile.notify_by_email,
                 'dinner_required': user_profile.dinner_required,
+                'breakfast_required': user_profile.breakfast_required,
         })
 
     env = common_env()

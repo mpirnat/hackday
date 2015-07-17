@@ -46,6 +46,7 @@ class UserProfile(models.Model):
     alternate_email = models.EmailField('alternate email', blank=True)
     notify_by_email = models.BooleanField('send posts by email')
     dinner_required = models.BooleanField('staying for dinner')
+    breakfast_required = models.BooleanField('eating breakfast')
 
     tshirt = models.ForeignKey(Tshirt, verbose_name="t-shirt size")
     diet = models.ForeignKey(Diet, verbose_name="dietary choice")
