@@ -57,7 +57,9 @@ class ActiveDirectorySignUpForm(forms.Form):
     notify_by_email = forms.BooleanField(
             label="Email me when there's a new post", required=False)
     dinner_required = forms.BooleanField(
-            label="I will be staying for dinner on Thursday (don't worry if you're not sure yet - we'll let you know when you need to update this)", required=False)
+            label="I will be staying for dinner on Thursday", required=False)
+    breakfast_required = forms.BooleanField(
+            label="I will be having breakfast on Friday", required=False)
 
 
 class ActiveDirectoryUserProfileForm(forms.Form):
@@ -83,7 +85,9 @@ class ActiveDirectoryUserProfileForm(forms.Form):
     notify_by_email = forms.BooleanField(
             label="Email me when there's a new post", required=False)
     dinner_required = forms.BooleanField(
-            label="I will be staying for dinner on Thursday (don't worry if you're not sure yet - we'll let you know when you need to update this)", required=False)
+            label="I will be staying for dinner on Thursday", required=False)
+    breakfast_required = forms.BooleanField(
+            label="I will be having breakfast on Friday", required=False)
 
 
 class ActiveDirectorySignInForm(forms.Form):
@@ -127,7 +131,9 @@ class SignUpForm(forms.Form):
     notify_by_email = forms.BooleanField(
             label="Email me when there's a new post", required=False)
     dinner_required = forms.BooleanField(
-            label="I will be staying for dinner on Thursday (don't worry if you're not sure yet - we'll let you know when you need to update this)", required=False)
+            label="I will be staying for dinner on Thursday", required=False)
+    breakfast_required = forms.BooleanField(
+            label="I will be having breakfast on Friday", required=False)
 
 
 class SignInForm(forms.Form):
@@ -169,6 +175,8 @@ class UserProfileForm(forms.Form):
     notify_by_email = forms.BooleanField(
             label="Email me when there's a new post", required=False)
     dinner_required = forms.BooleanField(
-            label="I will be staying for dinner on Thursday (don't worry if you're not sure yet - we'll let you know when you need to update this)", required=False)
+            label="I will be staying for dinner on Thursday", required=False)
+    breakfast_required = forms.BooleanField(
+            label="I will be having breakfast on Friday", required=False)
     password = forms.CharField(label='Password', widget=forms.PasswordInput,
                                error_messages=PASSWORD_MESSAGES, required=False)

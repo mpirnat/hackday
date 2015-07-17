@@ -3,8 +3,9 @@ from django.contrib import admin
 
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'location', 'diet', 'tshirt', 'notify_by_email',
-                    'dinner_required', 'create_date')
-    list_filter = ('location', 'tshirt', 'diet', 'dinner_required', 'create_date')
+                    'dinner_required', 'breakfast_required', 'create_date')
+    list_filter = ('location', 'tshirt', 'diet', 'dinner_required',
+                   'breakfast_required', 'create_date')
 
 admin.site.register(Tshirt)
 admin.site.register(Diet)
