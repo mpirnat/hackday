@@ -67,7 +67,7 @@ def sign_up(request):
                         location=form.cleaned_data['location'],
                         description=form.cleaned_data['description'],
                         notify_by_email=form.cleaned_data['notify_by_email'],
-                        dinner_required=form.cleaned_data['dinner_required']),
+                        dinner_required=form.cleaned_data['dinner_required'],
                         breakfast_required=form.cleaned_data['breakfast_required'])
                 try:
                     user_profile.save()
