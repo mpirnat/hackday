@@ -8,5 +8,5 @@ tweepy
 beautifulsoup
 https://github.com/versae/qbe/archive/0.2.0.tar.gz
 python-ldap==2.4.10
-requests==2.2.1
+requests==2.20.0
 python-memcached
