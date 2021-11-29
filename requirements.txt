@@ -7,6 +7,6 @@ docutils
 tweepy
 beautifulsoup
 https://github.com/versae/qbe/archive/0.2.0.tar.gz
-python-ldap==2.4.10
+python-ldap==3.4.0
 requests==2.2.1
 python-memcached
